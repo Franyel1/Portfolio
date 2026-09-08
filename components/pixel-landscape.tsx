@@ -7,12 +7,13 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-    const context = canvas.getContext('2d', { alpha: false });
+    const context = canvas.getContext('2d', { alpha: true });
     if (!context) return;
     let width = 0,
       height = 0,
       tick = 0,
-      visible = true;
+      visible = true,
+      scrollProgress = 0;
     const scale = 4;
     const random = (n: number) => {
       const value = Math.sin(n * 127.1 + 311.7) * 43758.5453;
@@ -21,6 +22,7 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
     const draw = () => {
       if (!width || !height) return;
       const ctx = context;
+      ctx.clearRect(0, 0, width, height);
       const box = (
         x: number,
         y: number,
@@ -55,7 +57,7 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       for (let i = 0; i < Math.max(40, width / 2); i++) {
         const x = Math.floor(random(i + 1) * width);
         const y = Math.floor(random(i + 450) * height * 0.55);
-        const bright = (i + tick) % 11 === 0;
+        const bright = (i + Math.floor(tick / 8)) % 11 === 0;
         box(x, y, 1, 1, bright ? '#f8d4ad' : '#6c87b5');
         if (bright && i % 5 === 0) {
           box(x - 1, y, 3, 1, '#b8cbed');
@@ -143,6 +145,40 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
             box(personX + x, personY + y, 1, 1, palette[pixel]);
         }),
       );
+      // The sky itself forms the fire: cut its upper edge into animated tongues.
+      // Everything below the edge is the same canvas, palette, and coordinate system.
+      const time = tick * 0.08;
+      const base = 58 - scrollProgress * 12;
+      for (let x = 0; x < width; x++) {
+        const tongue = Math.pow(
+          Math.max(0, Math.sin(x * 0.115 + Math.sin(time * 0.8) * 0.6)),
+          5,
+        );
+        const smallTongue = Math.pow(
+          Math.max(0, Math.sin(x * 0.24 - time * 0.9)),
+          7,
+        );
+        const flicker = Math.sin(time * 2.1 + x * 0.17) * 3;
+        const edge = Math.max(
+          7,
+          Math.round(
+            base -
+              tongue * (24 + Math.sin(time + x * 0.08) * 8) -
+              smallTongue * 10 +
+              flicker,
+          ),
+        );
+        ctx.clearRect(x, 0, 1, edge);
+        box(x, edge, 1, 1, '#30466c');
+        if (tongue > 0.8) box(x, edge + 1, 1, 2, '#23375d');
+      }
+      // Detached sky pixels drift upward like embers, retaining the night palette.
+      for (let i = 0; i < Math.floor(width / 20); i++) {
+        const life = (time * 0.18 + random(i + 1700)) % 1;
+        const x = Math.round(random(i + 1800) * width + Math.sin(time + i) * 2);
+        const y = Math.round(35 - life * 29);
+        box(x, y, 1, life < 0.5 ? 2 : 1, life > 0.75 ? '#182944' : '#344b75');
+      }
     };
     const resize = new ResizeObserver((entries) => {
       const rect = entries[0].contentRect;
@@ -160,6 +196,15 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       visible = entries[0].isIntersecting;
     });
     observer.observe(canvas);
+    const onScroll = () => {
+      const top = canvas.parentElement!.getBoundingClientRect().top;
+      scrollProgress = Math.max(
+        0,
+        Math.min(1, (innerHeight - top) / innerHeight),
+      );
+    };
+    onScroll();
+    if (!paused) window.addEventListener('scroll', onScroll, { passive: true });
     const timer = paused
       ? undefined
       : window.setInterval(() => {
@@ -167,8 +212,9 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
             tick++;
             draw();
           }
-        }, 700);
+        }, 80);
     return () => {
+      window.removeEventListener('scroll', onScroll);
       resize.disconnect();
       observer.disconnect();
       if (timer) clearInterval(timer);

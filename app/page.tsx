@@ -402,9 +402,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div className="material-transition sketch-paint" aria-hidden="true">
-          <div className="paint-wipe" />
-        </div>
         <section className="canvas-chapter" id="canvas" data-chapter>
           <div className="canvas-texture" aria-hidden="true" />
           <div className="wrap canvas-content">
@@ -486,9 +483,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div className="material-transition paint-glass" aria-hidden="true">
-          <div className="glass-wipe" />
-        </div>
         <section className="glass-chapter dark" id="glass" data-chapter>
           <div className="glass-light" aria-hidden="true" />
           <div className="wrap glass-content">
@@ -649,17 +643,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <div className="material-transition glass-pixel" aria-hidden="true">
-          {Array.from({ length: 48 }, (_, i) => (
-            <span
-              key={i}
-              style={{ '--step': String((i * 7) % 8) } as React.CSSProperties}
-            />
-          ))}
-        </div>
         <section className="pixel-chapter" id="pixel" data-chapter>
           <PixelLandscape paused={paused} />
-          <div className="pixel-shade" />
           <div className="wrap pixel-content">
             <span className="eyebrow">04 / A new level</span>
             <span className="pixel-small">YOU MADE IT.</span>

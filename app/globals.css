@@ -1975,3 +1975,115 @@ footer > a {
     animation: none;
   }
 }
+/* Boundary surfaces belong to their chapter, not to separate divider strips. */
+.name-study {
+  container-type: inline-size;
+  overflow: visible;
+}
+.sketched-name {
+  width: max-content;
+  max-width: none;
+  font-size: clamp(64px, 20cqw, 235px);
+  line-height: 1.35;
+  padding: 0 0.13em 0.07em;
+  margin: 0 0 0 -0.08em;
+  overflow: visible;
+  white-space: nowrap;
+}
+.sketched-name .name-outline {
+  inset: 0;
+  padding: inherit;
+  pointer-events: none;
+}
+.sketched-name .name-ink {
+  clip-path: none;
+  animation: name-arrive 1.1s ease both;
+}
+@keyframes name-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.canvas-chapter {
+  padding-top: 210px;
+  padding-bottom: 245px;
+  background: linear-gradient(
+    var(--paper) 0%,
+    var(--paper) 35%,
+    #101b29 65%,
+    #101b29 100%
+  );
+}
+.canvas-texture {
+  inset: 0;
+  opacity: 1;
+  mix-blend-mode: normal;
+  background-color: #eb603e;
+  background-image:
+    linear-gradient(#eb603ece, #eb603ece), url('/images/canvas.png');
+  background-size: cover;
+  background-position: center;
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 160' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 86L20 91L25 70L30 90L53 86L59 78L66 89L90 81L108 84L114 62L119 78L143 80L162 68L171 76L187 65L192 45L199 69L223 64L240 75L257 60L273 64L286 39L290 56L315 59L341 48L356 54L371 28L377 51L408 44L430 51L447 36L471 43L490 22L496 39L520 33L539 42L550 24L575 28L594 18L614 26L636 14L645 29L671 20L690 26L711 12L734 18L752 7L766 22L790 16L815 9L840 16L855 5L880 10L898 4L920 13L949 7L970 1L985 9L1000 4V160H0Z'/%3E%3C/svg%3E"),
+    linear-gradient(
+      to bottom,
+      transparent 159px,
+      #000 160px,
+      #000 calc(100% - 220px),
+      transparent 100%
+    );
+  mask-size:
+    100% 160px,
+    100% 100%;
+  mask-position: top, top;
+  mask-repeat: no-repeat;
+}
+.glass-chapter {
+  padding-bottom: 50px;
+}
+.pixel-chapter {
+  background: #101b29;
+  min-height: 1040px;
+}
+.pixel-content {
+  padding-top: 340px;
+}
+@media (max-width: 760px) {
+  .sketched-name {
+    font-size: clamp(54px, 20cqw, 144px);
+    margin-left: -0.08em;
+  }
+  .name-study {
+    padding-bottom: 30px;
+  }
+  .canvas-chapter {
+    padding-top: 180px;
+    padding-bottom: 200px;
+  }
+  .pixel-content {
+    padding-top: 310px;
+  }
+  .pixel-chapter {
+    min-height: 1040px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sketched-name .name-ink {
+    animation: none;
+  }
+}
+/* Let the adjoining glass base meet the paint fade without a lighting seam. */
+.glass-light {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 180px,
+    #000 calc(100% - 120px),
+    transparent
+  );
+}
