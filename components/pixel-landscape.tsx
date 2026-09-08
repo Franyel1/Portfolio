@@ -118,9 +118,9 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       }
       // Tiny explorer sprite, drawn directly on the same integer grid.
       const sprite = [
-        '..hhh..',
-        '..hsh..',
-        '...s...',
+        '..hh...',
+        '.hssh..',
+        '..ss...',
         '..rkr..',
         '.bkrk..',
         '.brkr..',
@@ -131,7 +131,7 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       ];
       const palette: Record<string, string> = {
         h: '#372b3c',
-        s: '#e5b79c',
+        s: '#ba8059',
         r: '#b52f3b',
         k: '#4b2331',
         b: '#824c55',
@@ -229,3 +229,4 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
     />
   );
 }
+
