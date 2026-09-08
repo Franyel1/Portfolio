@@ -21,7 +21,7 @@
   --muted: #e9e7df;
   --muted-foreground: #66645c;
   --border: #cbc8bd;
-  --ring: #ee643c;
+  --ring: #182d55;
   --primary: #272723;
   --primary-foreground: #fff;
   --accent: #e6e2d6;
@@ -29,7 +29,7 @@
   --radius: 0.5rem;
   --paper: #f5f3ec;
   --ink: #272723;
-  --orange: #ea5836;
+  --navy: #182d55;
 }
 .dark {
   --background: #101b29;
@@ -69,11 +69,11 @@ a {
 }
 button:focus-visible,
 a:focus-visible {
-  outline: 3px solid var(--orange);
+  outline: 3px solid var(--navy);
   outline-offset: 6px;
 }
 ::selection {
-  background: #ffb893;
+  background: #c1cee3;
   color: #272723;
 }
 .skip {
@@ -172,7 +172,7 @@ a:focus-visible {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--orange);
+  background: var(--navy);
 }
 h1 {
   font-family: Georgia, 'Times New Roman', serif;
@@ -183,7 +183,7 @@ h1 {
   margin: 0 0 26px -7px;
 }
 h1 span {
-  color: var(--orange);
+  color: var(--navy);
 }
 .hero-subtitle {
   font-size: 25px;
@@ -1768,5 +1768,210 @@ footer > a {
   .paint-wipe,
   .glass-pixel span {
     transform: none !important;
+  }
+}
+/* The opening is a typographic sketch of the name itself. */
+.typography-hero {
+  display: block;
+  min-height: 710px;
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
+.typography-hero .hero-kicker {
+  margin-bottom: 45px;
+  color: var(--navy);
+}
+.name-study {
+  position: relative;
+  padding: 22px 0 40px;
+  margin: 0 0 38px;
+}
+.sketched-name {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(95px, 17.5vw, 235px);
+  line-height: 1.06;
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  margin: 0 0 0 -9px;
+}
+.sketched-name .name-ink {
+  display: block;
+  color: var(--navy);
+  position: relative;
+  animation: ink-reveal 1.5s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+}
+.sketched-name .name-outline {
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  -webkit-text-stroke: 1px #182d5570;
+  transform: translate(5px, -5px);
+}
+.sketched-name .name-period {
+  color: var(--navy);
+}
+.type-guides {
+  position: absolute;
+  top: 28px;
+  bottom: 38px;
+  left: -20px;
+  right: -20px;
+  border-inline: 1px solid #182d5524;
+  pointer-events: none;
+}
+.type-guides i {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  left: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #182d5533 0 6px,
+    transparent 6px 11px
+  );
+}
+.type-guides i:nth-child(1) {
+  top: 12%;
+}
+.type-guides i:nth-child(2) {
+  top: 53%;
+  opacity: 0.6;
+}
+.type-guides i:nth-child(3) {
+  bottom: 9%;
+}
+.name-note {
+  position: absolute;
+  top: -26px;
+  right: 8%;
+  color: var(--navy);
+  transform: rotate(-7deg);
+  font-size: 26px;
+}
+.name-measure {
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  font-size: 10px;
+  color: #56647c;
+  letter-spacing: 0.12em;
+}
+.name-signoff {
+  position: absolute;
+  bottom: -12px;
+  right: 4%;
+  font-size: 25px;
+  color: var(--navy);
+  transform: rotate(-6deg);
+}
+.hero-introduction {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+.hero-introduction .hero-subtitle {
+  font-family: Georgia, serif;
+  font-size: 35px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: var(--navy);
+}
+.hero-introduction .hero-description {
+  max-width: 415px;
+  margin: 0;
+}
+.hero-introduction .hero-actions {
+  margin-top: 25px;
+}
+.sketch .brand,
+.sketch .nav-contact,
+.sketch .text-link {
+  color: var(--navy);
+}
+.sketch .ink-button {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.pixel-canvas {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  image-rendering: pixelated;
+  transform: none !important;
+}
+.pixel-chapter .pixel-shade {
+  background: linear-gradient(#101c4300 0%, #101c4326 50%, transparent 80%);
+}
+@keyframes ink-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@media (min-width: 1500px) {
+  .typography-hero {
+    min-height: 740px;
+  }
+}
+@media (max-width: 760px) {
+  .typography-hero {
+    min-height: 0;
+    padding-top: 38px;
+    padding-bottom: 35px;
+  }
+  .typography-hero .hero-kicker {
+    font-size: 9px;
+    margin-bottom: 52px;
+  }
+  .name-study {
+    padding: 10px 0 40px;
+    margin-bottom: 32px;
+  }
+  .sketched-name {
+    font-size: clamp(80px, 19vw, 144px);
+    margin-left: -4px;
+  }
+  .type-guides {
+    left: -7px;
+    right: -7px;
+    top: 10px;
+    bottom: 40px;
+  }
+  .name-note {
+    top: -30px;
+    right: 0;
+    font-size: 22px;
+  }
+  .name-measure {
+    font-size: 8px;
+    bottom: 9px;
+  }
+  .name-signoff {
+    display: none;
+  }
+  .hero-introduction {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .hero-introduction .hero-subtitle {
+    font-size: 30px;
+  }
+  .hero-introduction .hero-description {
+    font-size: 15px;
+  }
+  .hero-introduction .hero-actions {
+    margin-top: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sketched-name .name-ink {
+    animation: none;
   }
 }

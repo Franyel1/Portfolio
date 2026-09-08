@@ -18,6 +18,7 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import GlassSculpture from '@/components/glass-sculpture';
+import PixelLandscape from '@/components/pixel-landscape';
 const projects = [
   {
     id: 'sail',
@@ -335,48 +336,55 @@ export default function Home() {
                 </a>
               </nav>
             </header>
-            <div className="hero">
-              <div className="hero-copy">
-                <div className="eyebrow hero-kicker">
-                  <span className="status-dot" />
-                  Developer. Visual thinker. Always curious.
+            <div className="hero typography-hero">
+              <div className="eyebrow hero-kicker">
+                <span className="status-dot" /> Developer. Visual thinker.
+                Always curious.
+              </div>
+              <div className="name-study">
+                <span className="name-note hand" aria-hidden="true">
+                  a name. a starting point.
+                </span>
+                <div className="type-guides" aria-hidden="true">
+                  <i />
+                  <i />
+                  <i />
                 </div>
-                <h1>
-                  Franyel<span>.</span>
+                <h1 className="sketched-name" aria-label="Franyel">
+                  <span className="name-outline" aria-hidden="true">
+                    Franyel.
+                  </span>
+                  <span className="name-ink" aria-hidden="true">
+                    Franyel<span className="name-period">.</span>
+                  </span>
                 </h1>
+                <span className="name-measure eyebrow" aria-hidden="true">
+                  F / D / R — a study in becoming
+                </span>
+                <span className="name-signoff hand" aria-hidden="true">
+                  never quite finished.
+                </span>
+              </div>
+              <div className="hero-introduction">
                 <p className="hero-subtitle">
                   A little logic.
                   <br />A lot of imagination.
                 </p>
-                <p className="hero-description">
-                  I’m Franyel Diaz Rodriguez. I build for the web, get lost in
-                  the details, and follow ideas from their first scribble to
-                  something real.
-                </p>
-                <div className="hero-actions">
-                  <a className="ink-button" href="#glass">
-                    Explore my work <ArrowUpRight size={18} />
-                  </a>
-                  <a className="text-link" href="#canvas">
-                    The creative side
-                  </a>
+                <div>
+                  <p className="hero-description">
+                    I’m Franyel Diaz Rodriguez. I build for the web, get lost in
+                    the details, and follow ideas from their first scribble to
+                    something real.
+                  </p>
+                  <div className="hero-actions">
+                    <a className="ink-button" href="#glass">
+                      Explore my work <ArrowUpRight size={18} />
+                    </a>
+                    <a className="text-link" href="#canvas">
+                      The creative side
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <div className="hero-visual">
-                <span className="sketch-annotation hand">
-                  it starts with a scribble…
-                </span>
-                <img
-                  src="/images/sketch.png"
-                  width="1024"
-                  height="1024"
-                  alt="A graphite study of a looping ribbon with pencil construction lines"
-                  fetchPriority="high"
-                  data-parallax
-                />
-                <span className="hero-note hand">
-                  a work in progress. just like me.
-                </span>
               </div>
             </div>
             <div className="sketch-bottom">
@@ -471,7 +479,7 @@ export default function Home() {
                 Making room for the things I haven’t made yet.
               </span>
               <span className="asset-note">
-                Decorative chapter artwork is AI-generated.
+                Painted chapter texture is AI-generated.
                 <br />
                 Personal artwork will be labeled separately.
               </span>
@@ -650,15 +658,7 @@ export default function Home() {
           ))}
         </div>
         <section className="pixel-chapter" id="pixel" data-chapter>
-          <img
-            className="pixel-landscape"
-            src="/images/pixel.png"
-            alt=""
-            width="1536"
-            height="1024"
-            loading="lazy"
-            data-parallax
-          />
+          <PixelLandscape paused={paused} />
           <div className="pixel-shade" />
           <div className="wrap pixel-content">
             <span className="eyebrow">04 / A new level</span>
