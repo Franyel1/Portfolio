@@ -10,15 +10,15 @@ The project is in this `site` directory so the original parent repository remain
 
 ## Content
 
-- `app/page.tsx`: projects, experience, creative study briefs, navigation and dialogs.
+- `app/page.tsx`: projects, experience, and links into the project library.
 - `app/globals.css`: navy typographic opening, section themes, responsive layouts and material transitions.
 - `components/glass-sculpture.tsx`: interactive WebGL glass loop.
 - `components/pixel-landscape.tsx`: original code-drawn canvas landscape. Integer four-CSS-pixel grid, no image smoothing, responsive dimensions and visibility-aware star animation. Respects the motion control.
-- `public/resume.pdf`: a one-page résumé prepared from the supplied LaTeX content.
+- `public/resume.pdf`: the original PDF supplied by Franyel, copied unchanged.
 
 The opening is live typography, with outline layers, construction guides, and an ink reveal. It uses no generated image. The pixel scene is drawn entirely in canvas, with no raster backdrop.
 
-Creative studies are explicitly planned work, not completed artwork. Project visuals are labeled workflow illustrations, not screenshots. No performance metrics are invented.
+The library contains eight Drawing on the Web projects and eight Interactive Computing projects copied from the supplied C:\dev folders, plus three web application links. Original coursework assets and code are preserved; hosting adaptations localize dependencies and repair asset paths. Cards open a project player with controls, restart, and a separate-window link. Course thumbnails come from the supplied work.
 
 ## Decorative asset provenance
 
@@ -26,4 +26,5 @@ Only the painted chapter texture is AI-generated. `public/images/canvas.png` was
 
 ## Validation
 
-TypeScript check and production build pass. Résumé rendered and visually reviewed. Local site response checked. No automated browser interaction or cross-device visual testing has been performed.
+TypeScript check and production build pass. Original résumé verified byte-for-byte against the supplied PDF. Local site response checked. No automated browser interaction or cross-device visual testing has been performed.
+

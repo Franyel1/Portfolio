@@ -11,14 +11,10 @@ import {
   Code2,
   Mail,
 } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-} from '@/components/ui/dialog';
 import GlassSculpture from '@/components/glass-sculpture';
 import PixelLandscape from '@/components/pixel-landscape';
+import SiteNav from '@/components/site-nav';
+import { libraryItems } from '@/lib/library-data';
 const projects = [
   {
     id: 'sail',
@@ -79,39 +75,6 @@ const projects = [
       'Used Flask and MongoDB for the application and data model, Jinja for the interface, and Docker to keep the environment consistent.',
     result:
       'Built and deployed the application, with CI/CD pipelines configured for automatic deployment. The repository shows the implementation.',
-  },
-];
-const studies = [
-  {
-    n: '01',
-    title: 'A mark of my own',
-    type: 'Identity / SVG',
-    description:
-      'From loose F + D sketches to one small, recognizable signature.',
-    brief:
-      'Sketch 12 monograms in black and white. Choose three to refine, test them at favicon size, and turn one into a clean SVG. Keep the rough pages: the decisions are part of the story.',
-    deliverable: 'A sketch sheet, a final SVG mark, and a short logo reveal.',
-  },
-  {
-    n: '02',
-    title: 'One idea, three lives',
-    type: 'Drawing / Materials',
-    description:
-      'The same character, explored in pixels, glossy light, and painted color.',
-    brief:
-      'Choose a simple character silhouette. Draw it three times using the same pose and palette: a 32 × 32 pixel sprite, a smooth digital rendering, and a textured painting. Compare how each medium changes its personality.',
-    deliverable: 'Three finished studies and a side-by-side process sheet.',
-  },
-  {
-    n: '03',
-    title: 'A pantry with personality',
-    type: 'Illustration / kitchIn',
-    description:
-      'An expressive little cast of ingredients for a shared kitchen.',
-    brief:
-      'Draw six pantry ingredients with distinct silhouettes and expressions. Keep one brush style and a small palette. Arrange them into a poster, then explore how they could appear in kitchIn.',
-    deliverable:
-      'Six illustrations, a small poster, and one interface application.',
   },
 ];
 function ProjectVisual({ id }: { id: string }) {
@@ -196,11 +159,7 @@ function ProjectVisual({ id }: { id: string }) {
   );
 }
 export default function Home() {
-  const [project, setProject] = useState<(typeof projects)[number] | null>(
-      null,
-    ),
-    [study, setStudy] = useState<(typeof studies)[number] | null>(null),
-    [paused, setPaused] = useState(false),
+  const [paused, setPaused] = useState(false),
     [copied, setCopied] = useState(false),
     [copyError, setCopyError] = useState(false),
     [active, setActive] = useState('sketch');
@@ -298,19 +257,7 @@ export default function Home() {
       <a className="skip" href="#main">
         Skip to content
       </a>
-      <aside className="journey-nav" aria-label="Jump to chapter">
-        {['sketch', 'canvas', 'glass', 'pixel'].map((id, i) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            aria-label={`${i + 1}. ${id}`}
-            aria-current={active === id ? 'location' : undefined}
-          >
-            <span>{String(i + 1).padStart(2, '0')}</span>
-            <i />
-          </a>
-        ))}
-      </aside>
+      <SiteNav current={active} />
       <button
         className="motion-control"
         onClick={() => setPaused(!paused)}
@@ -323,28 +270,11 @@ export default function Home() {
       <main id="main">
         <section className="sketch" id="sketch" data-chapter>
           <div className="wrap">
-            <header className="nav">
-              <a className="brand" href="#sketch" aria-label="Franyel, home">
-                fd.
-              </a>
-              <nav className="navlinks" aria-label="Main navigation">
-                <a href="#canvas">Sketchbook</a>
-                <a href="#glass">Work</a>
-                <a href="#about">About</a>
-                <a className="nav-contact" href="#pixel">
-                  Say hello ↗
-                </a>
-              </nav>
-            </header>
             <div className="hero typography-hero">
               <div className="eyebrow hero-kicker">
-                <span className="status-dot" /> Developer. Visual thinker.
-                Always curious.
+                <span className="status-dot" /> Developer & creative coder
               </div>
               <div className="name-study">
-                <span className="name-note hand" aria-hidden="true">
-                  a name. a starting point.
-                </span>
                 <div className="type-guides" aria-hidden="true">
                   <i />
                   <i />
@@ -358,128 +288,103 @@ export default function Home() {
                     Franyel<span className="name-period">.</span>
                   </span>
                 </h1>
-                <span className="name-measure eyebrow" aria-hidden="true">
-                  F / D / R — a study in becoming
-                </span>
-                <span className="name-signoff hand" aria-hidden="true">
-                  never quite finished.
-                </span>
               </div>
               <div className="hero-introduction">
                 <p className="hero-subtitle">
-                  A little logic.
-                  <br />A lot of imagination.
+                  Web development.
+                  <br />
+                  Interactive work.
                 </p>
                 <div>
                   <p className="hero-description">
-                    I’m Franyel Diaz Rodriguez. I build for the web, get lost in
-                    the details, and follow ideas from their first scribble to
-                    something real.
+                    I’m Franyel Diaz Rodriguez, a computer science graduate from
+                    NYU. I build web applications, canvas experiments, and
+                    games.
                   </p>
                   <div className="hero-actions">
                     <a className="ink-button" href="#glass">
                       Explore my work <ArrowUpRight size={18} />
                     </a>
-                    <a className="text-link" href="#canvas">
-                      The creative side
+                    <a className="text-link" href="/library">
+                      Browse the library
                     </a>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="sketch-bottom">
-              <a className="scroll-note" href="#canvas">
-                <ArrowDown size={16} /> Follow the thread
-              </a>
-              <div className="chapter-index eyebrow">
-                <span>01 Sketch</span>
-                <i />
-                <span>04 Pixel</span>
-              </div>
-              <span className="eyebrow bottom-motto">
-                Code + color + curiosity
-              </span>
             </div>
           </div>
         </section>
         <section className="canvas-chapter" id="canvas" data-chapter>
           <div className="canvas-texture" aria-hidden="true" />
           <div className="wrap canvas-content">
-            <div className="intro-row" data-reveal>
+            <div className="intro-row">
               <div>
-                <span className="eyebrow">02 / The canvas</span>
-                <h2 className="chapter-title">
-                  Room to
-                  <br />
-                  <em>make a mess.</em>
-                </h2>
+                <span className="eyebrow">Creative work</span>
+                <h2 className="chapter-title">The library.</h2>
               </div>
-              <div>
-                <span className="hand canvas-note">
-                  less undo. more discovery.
-                </span>
-                <p>
-                  I’m building a practice in digital drawing and design. This is
-                  the space for experiments, happy accidents, and finding my own
-                  visual voice.
-                </p>
-              </div>
+              <a className="text-link" href="/library">
+                Browse all work ↗
+              </a>
             </div>
-            <div className="studio-banner" data-reveal>
-              <span className="eyebrow">The sketchbook</span>
-              <span className="studio-status">
-                <i /> Personal studies coming soon
-              </span>
-            </div>
-            <div className="study-grid">
-              {studies.map((s, i) => (
-                <button
+            <div className="study-grid collection-grid">
+              {[
+                {
+                  id: 'canvas',
+                  n: '01',
+                  title: 'Drawing on the Web',
+                  type: 'JavaScript / Canvas / SVG',
+                  mark: 'Canvas',
+                },
+                {
+                  id: 'games',
+                  n: '02',
+                  title: 'Interactive',
+                  type: 'p5.js / Interactive work',
+                  mark: 'Play',
+                },
+                {
+                  id: 'web',
+                  n: '03',
+                  title: 'Web applications',
+                  type: 'Frontend / Full-stack',
+                  mark: 'Web',
+                },
+              ].map((item, i) => (
+                <a
                   className={`study-card study-${i}`}
-                  key={s.n}
-                  onClick={() => setStudy(s)}
-                  data-reveal
+                  href={`/library#${item.id}`}
+                  key={item.id}
                 >
                   <div className="study-top">
-                    <span className="eyebrow">Study {s.n}</span>
+                    <span className="eyebrow">{item.n}</span>
                     <ArrowUpRight size={22} />
                   </div>
-                  <div className="study-type-art" aria-hidden="true">
-                    {i === 0 ? (
-                      <span className="monogram-type">
-                        f<span>d.</span>
-                      </span>
-                    ) : i === 1 ? (
-                      <div className="material-type">
-                        <span>Aa</span>
-                        <span>Aa</span>
-                        <span>Aa</span>
-                      </div>
+                  <div className="collection-preview">
+                    {i < 2 ? (
+                      <img
+                        src={
+                          i === 0
+                            ? '/projects/thumbs/i.png'
+                            : '/projects/interactive/franyelFinal/media/images/background.png'
+                        }
+                        alt=""
+                        loading="lazy"
+                      />
                     ) : (
-                      <span className="pantry-type">
-                        a little
-                        <br />
-                        <em>good taste.</em>
-                      </span>
+                      <span className="collection-word">{item.mark}</span>
                     )}
                   </div>
-                  <span className="eyebrow study-medium">{s.type}</span>
-                  <h3>{s.title}</h3>
-                  <p>{s.description}</p>
+                  <span className="eyebrow study-medium">{item.type}</span>
+                  <h3>{item.title}</h3>
                   <span className="study-open">
-                    Read the study brief <span>↗</span>
+                    {
+                      libraryItems.filter((work) => work.category === item.id)
+                        .length
+                    }{' '}
+                    projects <ArrowUpRight size={16} />
                   </span>
-                </button>
+                </a>
               ))}
-            </div>
-            <div className="canvas-bottom">
-              <span className="hand">
-                Making room for the things I haven’t made yet.
-              </span>
-              <span className="asset-note">
-                Painted chapter texture is AI-generated.
-                <br />
-                Personal artwork will be labeled separately.
-              </span>
             </div>
           </div>
         </section>
@@ -488,16 +393,13 @@ export default function Home() {
           <div className="wrap glass-content">
             <div className="glass-intro" data-reveal>
               <div>
-                <span className="eyebrow">03 / The glass</span>
+                <span className="eyebrow">Selected projects</span>
                 <h2 className="chapter-title">
-                  Ideas, made
+                  Selected
                   <br />
-                  <em>tangible.</em>
+                  <em>projects.</em>
                 </h2>
-                <p>
-                  Thoughtful interfaces. Useful systems.
-                  <br />A few things I’ve brought to life.
-                </p>
+                <p>Web development and product work.</p>
                 <a href="#selected-work" className="glass-down">
                   <ArrowDown size={18} /> Selected work
                 </a>
@@ -506,7 +408,7 @@ export default function Home() {
             </div>
             <div className="work-heading" id="selected-work">
               <span className="eyebrow">Selected work / 2025—2026</span>
-              <span className="eyebrow">Design meets development</span>
+              <span className="eyebrow"></span>
             </div>
             <div className="project-list">
               {projects.map((p) => (
@@ -515,13 +417,13 @@ export default function Home() {
                   key={p.id}
                   data-reveal
                 >
-                  <button
+                  <a
                     className="project-visual-button"
                     aria-label={`Read ${p.name} case study`}
-                    onClick={() => setProject(p)}
+                    href={`/library#${p.id}`}
                   >
                     <ProjectVisual id={p.id} />
-                  </button>
+                  </a>
                   <div className="project-copy">
                     <div className="project-meta eyebrow">
                       <span>
@@ -536,20 +438,20 @@ export default function Home() {
                         <span key={t}>{t}</span>
                       ))}
                     </div>
-                    <button className="case-link" onClick={() => setProject(p)}>
-                      Behind the build <ArrowUpRight size={19} />
-                    </button>
+                    <a className="case-link" href={`/library#${p.id}`}>
+                      Open project <ArrowUpRight size={19} />
+                    </a>
                   </div>
                 </article>
               ))}
             </div>
             <div className="about-section" id="about">
               <div className="about-heading" data-reveal>
-                <span className="eyebrow">The person behind the pixels</span>
+                <span className="eyebrow">About</span>
                 <h2 className="chapter-title">
-                  Curious by nature.
+                  Franyel Diaz
                   <br />
-                  <em>Builder by practice.</em>
+                  <em>Rodriguez.</em>
                 </h2>
                 <p>
                   My work moves between the technical and the visual: web
@@ -578,7 +480,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="experience" data-reveal>
-                <span className="eyebrow">Along the way</span>
+                <span className="eyebrow">Experience</span>
                 <article>
                   <span className="experience-date">JUN — AUG 2026</span>
                   <h3>SAIL (SAIL GTX)</h3>
@@ -613,7 +515,7 @@ export default function Home() {
               </div>
             </div>
             <div className="toolbox" data-reveal>
-              <span className="eyebrow">Things I work with</span>
+              <span className="eyebrow">Skills</span>
               <div className="toolbox-grid">
                 <div>
                   <h3>Interfaces</h3>
@@ -646,18 +548,14 @@ export default function Home() {
         <section className="pixel-chapter" id="pixel" data-chapter>
           <PixelLandscape paused={paused} />
           <div className="wrap pixel-content">
-            <span className="eyebrow">04 / A new level</span>
-            <span className="pixel-small">YOU MADE IT.</span>
+            <span className="eyebrow">Contact</span>
+            <span className="pixel-small">CONTACT</span>
             <h2>
-              Let’s make
+              Get in
               <br />
-              something <span>good.</span>
+              <span>touch.</span>
             </h2>
-            <p>
-              Have an idea, a project, or just a good hello?
-              <br />
-              There’s always room for one more conversation.
-            </p>
+            <p>Get in touch about projects and opportunities.</p>
             <div className="pixel-actions">
               <a href="mailto:fd2190@nyu.edu" className="pixel-button">
                 <Mail size={18} /> Say hello <ArrowUpRight size={18} />
@@ -688,9 +586,6 @@ export default function Home() {
             </div>
             <footer>
               <span>© {new Date().getFullYear()} Franyel Diaz Rodriguez</span>
-              <span className="pixel-signature">
-                Still exploring<span className="blink">_</span>
-              </span>
               <a href="#sketch">
                 Back to the sketch <ArrowUp size={15} />
               </a>
@@ -698,90 +593,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Dialog
-        open={!!project}
-        onOpenChange={(open) => {
-          if (!open) setProject(null);
-        }}
-      >
-        <DialogContent className="case-dialog">
-          {project && (
-            <>
-              <span className="eyebrow">Selected work / {project.tag}</span>
-              <DialogTitle className="dialog-title">{project.name}</DialogTitle>
-              <DialogDescription className="dialog-description">
-                {project.summary}
-              </DialogDescription>
-              <div className="dialog-tags">
-                {project.stack.map((t) => (
-                  <span key={t}>{t}</span>
-                ))}
-              </div>
-              <dl>
-                <div>
-                  <dt>My role</dt>
-                  <dd>{project.role}</dd>
-                </div>
-                <div>
-                  <dt>The problem</dt>
-                  <dd>{project.problem}</dd>
-                </div>
-                <div>
-                  <dt>What I built</dt>
-                  <dd>{project.contribution}</dd>
-                </div>
-                <div>
-                  <dt>Key decisions</dt>
-                  <dd>{project.decision}</dd>
-                </div>
-                <div>
-                  <dt>The result</dt>
-                  <dd>{project.result}</dd>
-                </div>
-              </dl>
-              <a
-                className="ink-button"
-                href={project.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {project.link}
-                <ArrowUpRight size={18} />
-              </a>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
-      <Dialog
-        open={!!study}
-        onOpenChange={(open) => {
-          if (!open) setStudy(null);
-        }}
-      >
-        <DialogContent className="case-dialog study-dialog">
-          {study && (
-            <>
-              <span className="eyebrow">
-                Upcoming personal study / {study.n}
-              </span>
-              <DialogTitle className="dialog-title">{study.title}</DialogTitle>
-              <DialogDescription className="dialog-description">
-                {study.description}
-              </DialogDescription>
-              <div className="study-brief">
-                <h3>The exploration</h3>
-                <p>{study.brief}</p>
-                <h3>What to make</h3>
-                <p>{study.deliverable}</p>
-                <p className="brief-note">
-                  This is a planned study. Finished artwork and process images
-                  will be added here as the practice grows.
-                </p>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </div>
   );
 }

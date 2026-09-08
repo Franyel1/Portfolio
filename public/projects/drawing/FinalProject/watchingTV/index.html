@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watching TV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a id="back" href="../index.html">< BACK</a>
+    <canvas id="backgroundStatic"></canvas>
+    <div class="scene">
+        <div class="tv">
+            <div class="frontBox">
+                <div class="frontFace frontBoxFront">
+                    <div class="screen">
+
+                        <canvas></canvas>
+                        <img class="eyes" src="media/eyes.gif">
+
+                        <div class="button"></div>
+                        <div class="button"></div>
+                        <div class="button"></div>
+                    </div>          
+                </div>
+                <div class="frontFace frontBoxBack"></div>
+                <div class="frontFace frontBoxLeft"></div>
+                <div class="frontFace frontBoxRight"></div>
+                <div class="frontFace frontBoxTop"></div>
+                <div class="frontFace frontBoxBottom"></div>
+            </div>
+    
+            <div class="face back"></div>
+            <div class="face left"></div>
+            <div class="face right"></div>
+            <div class="face top"></div>
+            <div class="face bottom"></div>
+
+            <div class="stand">
+                <div class="standpane1"></div>
+                <div class="standpane2"></div>
+                <div class="standbottom"></div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <!-- <img class="spotlight" src="media/spotlight.png"> -->
+
+    <div class="person">
+        <img src="media/person.gif">
+        <img id="spotlight" src="media/spotlight.png">
+    </div>
+
+    <audio id="bgMusic" src="media/sound.mp3" loop></audio>
+
+    <script src="person.js"></script>
+    <script src="tv.js"></script>
+    <script src="background.js"></script>
+</body>
+</html>

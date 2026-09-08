@@ -1,0 +1,63 @@
+canvas {
+    border: 5px solid white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: max-content;
+    background: rgb(10, 0, 70);
+    min-height: 99.1vh;
+    padding-top: 50px;
+}
+
+#canvasContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    height: 100%;
+}
+
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+    line-height: 100px;
+
+    font-weight: 9000;
+    font-size: 70px;
+    color: white;
+    padding-bottom: 20px;
+}
+
+#instructions {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: sans-serif;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+}
+
+h2 {
+    background-color: white;
+    margin-bottom: 20px;
+    color: black;
+    width: 280px;
+    text-align: center;
+    font-size: 40px;
+    font-family:sans-serif;
+}
+
+#instructions ul li {
+    margin-top: 10px;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+}

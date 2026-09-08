@@ -1,0 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+    overflow:visible;
+    border: .5px solid rgba(0, 0, 0, 0.234);
+    overflow: hidden;
+}
+
+body{
+    background-image: url(media/img.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.icon{
+    width: 200px;
+    height: 200px;
+    padding: 15px;
+
+    background: rgba(255, 0, 0, 0.081);
+        border-radius: 46px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(5px);
+        border: .5px solid rgba(255, 0, 0, 0.392);
+}
+
+#container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 79vh;
+    padding-bottom: 20vh;
+    padding-right: 100px;
+    padding-left: 100px;
+    
+}
+
+
+#ticket{
+    fill: #FF4500;
+    margin-top: 20vh;
+}
+#star{
+    fill: #FFD700;
+    margin-top: -20vh;
+}
+#camera {
+    fill: rgb(43, 43, 43);
+    margin-top: -20vh;
+}
+#clapperboard {
+    fill: #2b2b2b;
+    margin-top: 20vh;
+}
+#popcorn{
+    fill: #FF6347;
+    margin-top: 20vh;
+
+    clip-path: url(cleanedIcons/sprite.svg#star);
+}
+
+#paper1{
+    position: absolute;
+    width: 100vw;
+    height: 20vh;
+    transform: rotate(180deg);
+    top: 0;
+    mix-blend-mode:multiply;
+
+}
+#paper2 {
+    position:absolute;
+    width: 100vw;
+    height: 20vh;
+    bottom:0;
+    mix-blend-mode:multiply;
+}
+
+
+.icon:hover{
+    fill: red; 
+    transition: .6s ease-in-out;
+    /* transform: scale(1.2) translateY(-5px) rotate(15deg); */
+    backdrop-filter: blur(15px);
+}
+#camera:hover{
+    fill: rgb(212, 212, 212);
+    transform: scale(1.2) translateY(-5px) rotate(15deg);
+}
+#ticket:hover{
+    fill: red;
+    transform: scale(1.2) translateY(-5px) rotate(-15deg);
+}
+#star:hover{
+    fill: red;
+    transform: scale(1.2) translateY(-5px) rotate(15deg);
+}
+#popcorn:hover{
+    fill: red;
+    transform: scale(1.2) translateY(-5px) rotate(-15deg);
+}
+#clapperboard:hover{
+    fill: rgb(0, 56, 125);
+    transform: scale(1.2) translateY(-5px) rotate(-15deg);
+}

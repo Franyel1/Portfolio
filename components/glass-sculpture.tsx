@@ -110,9 +110,6 @@ export default function GlassSculpture({ paused }: { paused: boolean }) {
         aria-label="An interactive, rotating glass loop"
         role="img"
       />
-      <span className="sculpture-label eyebrow">
-        A different way to see things
-      </span>
     </div>
   );
 }
