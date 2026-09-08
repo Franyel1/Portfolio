@@ -2087,3 +2087,44 @@ footer > a {
     transparent
   );
 }
+/* Material boundaries use solid silhouettes, never opacity fades. */
+.canvas-chapter {
+  background: #101b29;
+}
+.canvas-chapter::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 50%;
+  background: var(--paper);
+}
+.canvas-texture {
+  background-image: url('/images/canvas.png');
+  mask-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 160' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 86L30 90L53 78L90 81L114 62L143 80L187 65L192 45L223 64L257 60L286 39L315 59L356 54L371 28L408 44L447 36L490 22L520 33L550 24L594 18L636 14L671 20L711 12L752 7L790 16L840 16L855 5L898 4L949 7L970 1L1000 4V160H0Z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H1V1H0Z'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 160' preserveAspectRatio='none'%3E%3Cpath fill='black' d='M0 0H1000V20L970 18L940 34L910 30L880 43L850 39L820 53L780 48L750 66L710 58L680 73L645 65L610 86L580 80L550 95L515 90L480 105L450 99L420 118L380 108L350 130L310 119L275 139L240 130L200 146L160 138L120 152L80 144L40 158L0 150Z'/%3E%3C/svg%3E");
+  mask-size:
+    100% 160px,
+    100% calc(100% - 318px),
+    100% 160px;
+  mask-position: top, center, bottom;
+  mask-repeat: no-repeat;
+}
+.canvas-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #eb603ece;
+}
+.glass-light {
+  display: none;
+}
+.sketched-name .name-ink {
+  animation: none;
+}
+[data-reveal],
+[data-reveal]:not(.is-visible) {
+  opacity: 1;
+  transition: translate 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+

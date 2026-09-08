@@ -45,9 +45,9 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
         '#152758',
         '#1c3066',
         '#324178',
-        '#675274',
-        '#b57c82',
-        '#e8ad98',
+        '#733e65',
+        '#b84b60',
+        '#ed716b',
       ].forEach((color, i) => {
         const top =
           i < 4 ? i * height * 0.14 : height * (0.56 + (i - 4) * 0.055);
@@ -121,9 +121,9 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
         '..hhh..',
         '..hsh..',
         '...s...',
-        '..jjj..',
-        '.bjjj..',
-        '.bjjj..',
+        '..rkr..',
+        '.bkrk..',
+        '.brkr..',
         '..lll..',
         '..l.l..',
         '..l.l..',
@@ -132,7 +132,8 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       const palette: Record<string, string> = {
         h: '#372b3c',
         s: '#e5b79c',
-        j: '#dfab74',
+        r: '#b52f3b',
+        k: '#4b2331',
         b: '#824c55',
         l: '#1c2341',
         d: '#8391ae',
@@ -158,13 +159,13 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
           Math.max(0, Math.sin(x * 0.24 - time * 0.9)),
           7,
         );
-        const flicker = Math.sin(time * 2.1 + x * 0.17) * 3;
+        const flicker = Math.sin(time * 2.1 + x * 0.17) * 2;
         const edge = Math.max(
           7,
           Math.round(
             base -
-              tongue * (24 + Math.sin(time + x * 0.08) * 8) -
-              smallTongue * 10 +
+              tongue * (17 + Math.sin(time + x * 0.08) * 5) -
+              smallTongue * 7 +
               flicker,
           ),
         );
