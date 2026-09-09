@@ -21,13 +21,13 @@
   padding-bottom: 4rem;
 }
 .project-studio {
-  grid-column: 1/9;
+  grid-column: 1/7;
   display: block;
 }
 .project-ink {
-  grid-column: 9/-1;
+  grid-column: 7/-1;
   display: block;
-  margin-top: 8rem;
+  margin-top: 0;
 }
 .project-visual-button {
   padding: 0;
@@ -82,7 +82,7 @@
   color: #6f849f;
 }
 .project-ink .actual-site-art {
-  aspect-ratio: 1;
+  aspect-ratio: 16/9;
 }
 .project-ink .ink-logo {
   font-size: clamp(4rem, 8vw, 8rem);
@@ -272,11 +272,11 @@ body:has(.motion-paused) .collection-dialog[data-open] {
     grid-template-columns: 1.2fr 1fr;
   }
   .project-studio {
-    grid-column: 1/8;
+    grid-column: 1/7;
   }
   .project-ink {
-    grid-column: 8/-1;
-    margin-top: 4rem;
+    grid-column: 7/-1;
+    margin-top: 0;
   }
   .collection-grid {
     gap: 1rem;
