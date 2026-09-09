@@ -27,14 +27,8 @@ const beachPaletteEnd =
 beach =
   beach.slice(0, beachPaletteStart) +
   `function sampleColors() {
-    // Keep the supplied beach study's motion while using a fixed, calm palette.
-    colors.push(
-        'rgba(58, 102, 118, 1)',
-        'rgba(225, 187, 157, 1)',
-        'rgba(229, 103, 74, 1)',
-        'rgba(150, 192, 207, 1)',
-        'rgba(54, 123, 76, 1)'
-    );
+    // Randomize complete color combinations, preserving the role of each color.
+    colors.push(...pickBeachPalette());
     waterColor = colors[0];
     sandColor = colors[1];
     sunColor = colors[2];
@@ -44,7 +38,7 @@ beach =
   beach.slice(beachPaletteEnd);
 writeFileSync(
   'lib/canvas-studies/beach.js',
-  `// Supplied assignments/HTMLCanvasObjects/canvas.js; isolated globals and a single animation loop.\nexport default function createStudy({window, document, requestAnimationFrame}) {\n${beach}\n}\n`,
+  `// Supplied assignments/HTMLCanvasObjects/canvas.js; isolated globals and a single animation loop.\nimport { pickBeachPalette } from '../beach-palettes.js';\nexport default function createStudy({window, document, requestAnimationFrame}) {\n${beach}\n}\n`,
 );
 let blossom = readFileSync(
   'public/projects/drawing/CanvasPair/pairJS.js',
@@ -99,6 +93,10 @@ for (const [name, [path, muted]] of Object.entries(sources)) {
   );
   if (name === 'background')
     code = code.slice(0, code.indexOf('const music ='));
+  if (name === 'particles')
+    code = code
+      .replace('i< 5000', 'i< 1400')
+      .replace('console.log(gColor);', '');
   for (const fn of muted) {
     const start = code.indexOf(`function ${fn}(`);
     const brace = code.indexOf('{', start);

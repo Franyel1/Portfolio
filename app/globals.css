@@ -2696,7 +2696,7 @@ footer > a {
 .drawing-composition canvas {
   display: block;
   width: 100%;
-  aspect-ratio: 1/1.3;
+  aspect-ratio: 1/1.85;
   margin-top: 1rem;
 }
 .creative-wip {
@@ -2819,7 +2819,7 @@ footer > a {
     padding: 1rem;
   }
   .drawing-composition canvas {
-    aspect-ratio: 1/3.7;
+    aspect-ratio: 1/5.65;
   }
   .web-entry {
     grid-template-columns: 1fr 2rem;
