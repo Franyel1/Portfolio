@@ -15,7 +15,8 @@ import GlassSculpture from '@/components/glass-sculpture';
 import PixelLandscape from '@/components/pixel-landscape';
 import SiteNav from '@/components/site-nav';
 import { libraryItems } from '@/lib/library-data';
-import { LibraryOverlay } from '@/components/project-library';
+import CollectionOverlay from '@/components/collection-overlay';
+import WebProjectArt from '@/components/web-project-art';
 const projects = [
   {
     id: 'sail',
@@ -64,7 +65,7 @@ const projects = [
     category: 'Personal project · Writing · Product',
     tag: 'PERSONAL',
     summary: 'A private feed for writing your life in ink.',
-    stack: ['React', 'Authentication', 'Writing'],
+    stack: ['Personal project', 'Writing'],
     url: 'https://ink-rouge.vercel.app/login',
     link: 'Open Ink',
     role: 'Product and frontend development',
@@ -267,7 +268,7 @@ export default function Home() {
         {paused ? <Play size={14} /> : <Pause size={14} />}
         <span>{paused ? 'Motion off' : 'Motion on'}</span>
       </button>
-      <LibraryOverlay />
+      <CollectionOverlay />
       <main id="main">
         <section className="sketch" id="sketch" data-chapter>
           <div className="wrap">
@@ -339,9 +340,9 @@ export default function Home() {
                 {
                   id: 'games',
                   n: '02',
-                  title: 'Interactive',
-                  type: 'p5.js / Interactive work',
-                  mark: 'Play',
+                  title: 'Creative work',
+                  type: 'Drawings / Design / Interactive',
+                  mark: 'WIP',
                 },
                 {
                   id: 'web',
@@ -361,7 +362,7 @@ export default function Home() {
                     <ArrowUpRight size={22} />
                   </div>
                   <div className="collection-preview">
-                    {i < 2 ? (
+                    {i === 0 ? (
                       <img
                         src={
                           i === 0
@@ -378,11 +379,21 @@ export default function Home() {
                   <span className="eyebrow study-medium">{item.type}</span>
                   <h3>{item.title}</h3>
                   <span className="study-open">
-                    {
-                      libraryItems.filter((work) => work.category === item.id)
-                        .length
-                    }{' '}
-                    projects <ArrowUpRight size={16} />
+                    {item.id === 'games' ? (
+                      'Work in progress'
+                    ) : item.id === 'canvas' ? (
+                      'Open canvas collage'
+                    ) : (
+                      <>
+                        {
+                          libraryItems.filter(
+                            (work) => work.category === item.id,
+                          ).length
+                        }{' '}
+                        websites
+                      </>
+                    )}{' '}
+                    <ArrowUpRight size={16} />
                   </span>
                 </a>
               ))}
@@ -420,12 +431,12 @@ export default function Home() {
                 >
                   <a
                     className="project-visual-button"
-                    aria-label={`Read ${p.name} case study`}
+                    aria-label={`Visit ${p.name}`}
                     href={p.url}
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <ProjectVisual id={p.id} />
+                    <WebProjectArt id={p.id} />
                   </a>
                   <div className="project-copy">
                     <div className="project-meta eyebrow">

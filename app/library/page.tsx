@@ -1,10 +1,4 @@
-import type { Metadata } from 'next';
-import Library from '@/components/project-library';
-export const metadata: Metadata = {
-  title: 'Library — Franyel',
-  description:
-    'Canvas experiments, interactive games, and web projects by Franyel Diaz Rodriguez.',
-};
+import { redirect } from 'next/navigation';
 export default function LibraryPage() {
-  return <Library />;
+  redirect('/#library');
 }

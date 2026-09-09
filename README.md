@@ -18,7 +18,9 @@ The project is in this `site` directory so the original parent repository remain
 
 The opening is live typography, with outline layers, construction guides, and an ink reveal. It uses no generated image. The pixel scene is drawn entirely in canvas, with no raster backdrop.
 
-The library contains eight Drawing on the Web projects and eight Interactive Computing projects copied from the supplied C:\dev folders, plus live links for SAIL, Antonio Jefferson Studio, and Ink. The library opens as a scrollable overlay on the homepage; coursework cards lead to the playable project view. Original coursework assets and code are preserved, with hosting adaptations limited to local dependency and asset paths. Drawing thumbnails are silent for now so the collage can stay easy to explore.
+The three homepage collections open in accessible, independently scrollable dialogs without changing the page URL or scroll position. Drawing on the Web composites eight actual canvas surfaces into one animated canvas; `scripts/adapt-canvas.mjs` wraps the supplied drawing functions in isolated modules, repairs implicit globals, and removes audio routines. The collage owns one animation scheduler and releases its video and callbacks on close. Creative Work is an empty WIP collection awaiting artwork. Web Applications links to SAIL, Antonio Jefferson Studio, and Ink, using verified assets from the first two websites. The old `/library` route redirects to the homepage collection chooser.
+
+The original imported coursework remains under `public/projects` for future use. It is no longer displayed as a populated interactive gallery. `scripts/check-canvas.mjs` renders all eight adapted surfaces with a native canvas implementation and checks for runtime errors and empty output.
 
 ## Decorative asset provenance
 
