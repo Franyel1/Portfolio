@@ -128,6 +128,15 @@
   line-height: 1.02;
   letter-spacing: -0.055em;
 }
+.collection-preview.preview-drawing {
+  background: #18191c;
+}
+.collection-preview.preview-drawing img {
+  object-fit: contain;
+}
+.study-card:hover .preview-drawing img {
+  scale: 1;
+}
 .collection-grid .study-1,
 .collection-grid .study-2 {
   display: grid;
