@@ -27,7 +27,8 @@ const projects = [
     name: 'SAIL',
     category: 'Frontend · Motion · Product storytelling',
     tag: '2026',
-    summary: 'Making complex trade workflows feel clear.',
+    summary:
+      'Rebuilt the marketing front end with interactive trade visualizations, canvas particles, and original motion content.',
     stack: ['React', 'Next.js', 'Canvas', 'DaVinci Resolve'],
     url: 'https://sailgtx.com',
     link: 'Visit live site',
@@ -47,7 +48,8 @@ const projects = [
     name: 'Antonio Jefferson Studio',
     category: 'Full-stack · Scheduling · Payments',
     tag: '2025',
-    summary: 'Less back-and-forth. More time to create.',
+    summary:
+      'A studio website and booking platform connecting availability, payments, and confirmations.',
     stack: ['Flask', 'MongoDB', 'Stripe', 'Google Calendar'],
     url: 'https://aj-studio-fdr.vercel.app/',
     link: 'Open studio',
@@ -67,7 +69,7 @@ const projects = [
     name: 'Ink.',
     category: 'Personal project · Writing · Product',
     tag: 'PERSONAL',
-    summary: 'A private feed for writing your life in ink.',
+    summary: 'A personal writing project built around a private feed.',
     stack: ['Personal project', 'Writing'],
     url: 'https://ink-rouge.vercel.app/login',
     link: 'Open Ink',
@@ -313,13 +315,15 @@ export default function Home() {
           <div className="wrap glass-content">
             <div className="glass-intro" data-reveal>
               <div>
-                <span className="eyebrow">Selected projects</span>
+                <span className="eyebrow">Web development / 2025—2026</span>
                 <h2 className="chapter-title">
                   Selected
                   <br />
                   <em>projects.</em>
                 </h2>
-                <p>Web development and product work.</p>
+                <p>
+                  Marketing websites, booking tools, and a personal writing app.
+                </p>
                 <a href="#selected-work" className="glass-down">
                   <ArrowDown size={18} /> Selected work
                 </a>
@@ -327,8 +331,8 @@ export default function Home() {
               <GlassSculpture paused={paused} />
             </div>
             <div className="work-heading" id="selected-work">
-              <span className="eyebrow">Selected work / 2025—2026</span>
-              <span className="eyebrow"></span>
+              <span className="eyebrow">Three projects</span>
+              <span className="eyebrow">Design · Development · Motion</span>
             </div>
             <div className="project-list">
               {projects.map((p) => (

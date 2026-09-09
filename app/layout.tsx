@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { DM_Sans, Caveat, Space_Mono, Pixelify_Sans } from 'next/font/google';
 import './globals.css';
 import './polish.css';
+import './editorial.css';
 const body = DM_Sans({ variable: '--font-body', subsets: ['latin'] });
 const hand = Caveat({ variable: '--font-hand', subsets: ['latin'] });
 const mono = Space_Mono({

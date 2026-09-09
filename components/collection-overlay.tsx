@@ -101,15 +101,10 @@ export default function CollectionOverlay() {
             {mode === 'games' && (
               <div className="creative-wip">
                 <span className="wip-stamp">Work in progress</span>
-                <h3>
-                  A space for
-                  <br />
-                  what comes next.
-                </h3>
+                <h3>Creative work.</h3>
                 <p>
-                  Drawings, designs, and interactive experiments.
-                  <br />
-                  New work will be added here.
+                  I’m preparing drawings, designs, and interactive experiments
+                  for this collection.
                 </p>
                 <span className="wip-index">Collection 02 / In progress</span>
               </div>

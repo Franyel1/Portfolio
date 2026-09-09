@@ -96,19 +96,19 @@ export default function AboutWorkbench() {
         <div>
           <span className="eyebrow">About / Franyel Diaz Rodriguez</span>
           <h2>
-            Curiosity,
+            Development
             <br />
-            <em>put to work.</em>
+            <em>& drawing.</em>
           </h2>
         </div>
         <div className="about-intro-copy">
           <p>
-            I’m a computer science graduate from NYU, working across web
-            development, interactive storytelling, and visual design.
+            I studied computer science at NYU. My work includes web
+            applications, motion content, and canvas experiments.
           </p>
           <p>
-            I like building things people can use—and giving them a reason to
-            explore. Digital drawing is the next part of that practice.
+            I’m now developing a digital drawing practice with a drawing tablet,
+            alongside the things I build with code.
           </p>
           <a
             href="/resume.pdf"
@@ -133,15 +133,8 @@ export default function AboutWorkbench() {
       </div>
       <div className="experience-layout">
         <div className="experience-label" data-reveal>
-          <span className="eyebrow">Experience</span>
-          <h3>
-            Places I’ve
-            <br />
-            contributed.
-          </h3>
-          <span className="experience-asterisk" aria-hidden="true">
-            ✳
-          </span>
+          <span className="eyebrow">2025—2026</span>
+          <h3>Experience.</h3>
         </div>
         <div className="experience-timeline">
           {[
@@ -180,7 +173,7 @@ export default function AboutWorkbench() {
         <div className="skills-heading">
           <div>
             <span className="eyebrow">Tools & skills</span>
-            <h3>Built with.</h3>
+            <h3>Tools I use.</h3>
           </div>
           <p>Select a tool to see how I use it.</p>
         </div>

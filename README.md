@@ -28,6 +28,8 @@ The SAIL and AJ Studio project thumbnails are browser captures of their live hom
 
 About is organized into an introduction, education facts, experience timeline, and interactive skills workbench. Pointer tilt, staggered entrances, and native scroll-linked image transforms respect reduced-motion preferences and the site's motion control. Native scroll-linked effects progressively enhance browsers supporting view timelines; the content and entrance effects remain usable without them.
 
+The editorial refinement follows NN/g's visual hierarchy and purposeful motion guidance: https://www.nngroup.com/articles/good-visual-design/ and https://www.nngroup.com/articles/animation-purpose-ux/. Applied decisions: factual project descriptions, a featured drawing collection, a lead web project with supporting projects, fewer nested panels and pill tags, real site captures, and interaction-focused motion. The requested sketch → canvas → glass → pixel sequence remains the visual foundation.
+
 Only the painted chapter texture is AI-generated. `public/images/canvas.png` was made with the built-in image-generation tool: landscape 3:2 abstract impasto painting, ultramarine dominant with coral orange, butter yellow and magenta; tactile bristles; no text. It is decorative and not attributed to Franyel as an original drawing.
 
 ## Validation

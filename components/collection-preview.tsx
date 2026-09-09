@@ -13,9 +13,9 @@ export default function CollectionPreview({ category }: { category: string }) {
     return (
       <div className="collection-preview preview-creative">
         <span className="creative-preview-word">
-          In the
+          Creative
           <br />
-          <em>making.</em>
+          <em>studies.</em>
         </span>
         <span className="creative-preview-stamp">WORK IN PROGRESS</span>
         <i aria-hidden="true" />
