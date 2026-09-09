@@ -56,7 +56,7 @@ export default function CanvasCollage() {
             callbacks.forEach((callback) => callback(now));
             const width = target.clientWidth,
               narrow = width < 650;
-            const height = width * (narrow ? 3.3 : 1.15),
+            const height = width * (narrow ? 3.7 : 1.3),
               dpr = Math.min(devicePixelRatio, 2);
             if (
               target.width !== Math.round(width * dpr) ||
@@ -104,7 +104,7 @@ export default function CanvasCollage() {
       {status && <p role="status">{status}</p>}
       <canvas
         ref={ref}
-        aria-label="Collage of selected drawings: animated beach, television color bars, geometric forms, and moving static, with gradient flower decorations"
+        aria-label="Collage of selected drawings: animated beach, television color bars, geometric forms, colored waves, and moving static, with gradient flower decorations"
       />
     </div>
   );

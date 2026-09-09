@@ -33,8 +33,8 @@ for (let i = 0; i < 90; i++) {
   queue.clear();
   callbacks.forEach((fn) => fn(start + i * 33));
 }
-if (queue.size !== 4)
-  throw Error(`Expected four animated studies, found ${queue.size}`);
+if (queue.size !== 5)
+  throw Error(`Expected five animated studies, found ${queue.size}`);
 artwork.surfaces.forEach((c, i) => {
   if (
     !c
@@ -45,8 +45,8 @@ artwork.surfaces.forEach((c, i) => {
     throw Error(`Empty artwork ${i}`);
 });
 for (const [name, width, height, narrow] of [
-  ['desktop', 1200, 1380, false],
-  ['mobile', 400, 1320, true],
+  ['desktop', 1200, 1560, false],
+  ['mobile', 400, 1480, true],
 ]) {
   const c = createCanvas(width, height),
     ctx = c.getContext('2d');
@@ -61,5 +61,5 @@ for (const [name, width, height, narrow] of [
     );
 }
 console.log(
-  'Four selected canvas artworks and five gradient SVG decorations rendered at desktop and mobile; four isolated animation loops; no video or audio.',
+  'Five selected canvas artworks and five gradient SVG decorations rendered at desktop and mobile; five isolated animation loops; no video or audio.',
 );
