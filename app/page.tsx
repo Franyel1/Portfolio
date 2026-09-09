@@ -17,6 +17,9 @@ import SiteNav from '@/components/site-nav';
 import { libraryItems } from '@/lib/library-data';
 import CollectionOverlay from '@/components/collection-overlay';
 import WebProjectArt from '@/components/web-project-art';
+import AboutWorkbench from '@/components/about-workbench';
+import CollectionPreview from '@/components/collection-preview';
+import SiteMotion from '@/components/site-motion';
 const projects = [
   {
     id: 'sail',
@@ -78,87 +81,6 @@ const projects = [
       'A live personal project, ready to evolve as the writing system grows.',
   },
 ];
-function ProjectVisual({ id }: { id: string }) {
-  if (id === 'sail')
-    return (
-      <div
-        className="project-art sail-art"
-        aria-label="Conceptual illustration of SAIL’s classification workflow"
-      >
-        <div className="art-top">
-          <span className="sail-word">
-            SAIL<span>↗</span>
-          </span>
-          <span className="mini-label">TRADE INTELLIGENCE</span>
-        </div>
-        <div className="sail-flow">
-          <div className="signal-lines">
-            {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-              <span key={i} style={{ width: `${50 + i * 7}%` }} />
-            ))}
-          </div>
-          <div className="flow-core">S</div>
-          <div className="flow-out">
-            <span>
-              CLASSIFY <Check size={12} />
-            </span>
-            <span>
-              VERIFY <Check size={12} />
-            </span>
-            <span>
-              AUDIT <Check size={12} />
-            </span>
-          </div>
-        </div>
-        <span className="art-caption">Workflow illustration</span>
-      </div>
-    );
-  if (id === 'studio')
-    return (
-      <div className="project-art studio-art">
-        <div className="art-top">
-          <span className="studio-word">
-            Antonio
-            <br />
-            Jefferson <i>Studio.</i>
-          </span>
-          <span className="mini-label">BOOKING PLATFORM</span>
-        </div>
-        <div className="booking-flow">
-          <span>
-            01 <b>Select a time</b>
-          </span>
-          <span>
-            02 <b>Make it yours</b>
-          </span>
-          <span>
-            03 <b>Ready to create ↗</b>
-          </span>
-        </div>
-        <span className="art-caption">Booking flow overview</span>
-      </div>
-    );
-  return (
-    <div className="project-art ink-art">
-      <div className="art-top">
-        <span className="ink-word">
-          Ink<span>.</span>
-        </span>
-        <span className="mini-label">PERSONAL WRITING</span>
-      </div>
-      <div className="ink-flow">
-        <span>private</span>
-        <i>·</i>
-        <div>
-          <span>write</span>
-          <span>remember</span>
-          <span>return</span>
-        </div>
-      </div>
-      <span className="art-caption">A quiet place for a life in words</span>
-    </div>
-  );
-}
 export default function Home() {
   const [paused, setPaused] = useState(false),
     [copied, setCopied] = useState(false),
@@ -269,6 +191,7 @@ export default function Home() {
         <span>{paused ? 'Motion off' : 'Motion on'}</span>
       </button>
       <CollectionOverlay />
+      <SiteMotion paused={paused} />
       <main id="main">
         <section className="sketch" id="sketch" data-chapter>
           <div className="wrap">
@@ -319,14 +242,11 @@ export default function Home() {
         <section className="canvas-chapter" id="canvas" data-chapter>
           <div className="canvas-texture" aria-hidden="true" />
           <div className="wrap canvas-content">
-            <div className="intro-row">
+            <div className="intro-row" data-reveal>
               <div>
                 <span className="eyebrow">Creative work</span>
                 <h2 className="chapter-title">The library.</h2>
               </div>
-              <a className="text-link" href="#library">
-                Open the library ↗
-              </a>
             </div>
             <div className="study-grid collection-grid">
               {[
@@ -353,6 +273,8 @@ export default function Home() {
                 },
               ].map((item, i) => (
                 <a
+                  data-reveal
+                  data-tilt
                   className={`study-card study-${i}`}
                   href={`#library-${item.id}`}
                   key={item.id}
@@ -361,21 +283,7 @@ export default function Home() {
                     <span className="eyebrow">{item.n}</span>
                     <ArrowUpRight size={22} />
                   </div>
-                  <div className="collection-preview">
-                    {i === 0 ? (
-                      <img
-                        src={
-                          i === 0
-                            ? '/projects/thumbs/i.png'
-                            : '/projects/interactive/franyelFinal/media/images/background.png'
-                        }
-                        alt=""
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span className="collection-word">{item.mark}</span>
-                    )}
-                  </div>
+                  <CollectionPreview category={item.id} />
                   <span className="eyebrow study-medium">{item.type}</span>
                   <h3>{item.title}</h3>
                   <span className="study-open">
@@ -425,6 +333,7 @@ export default function Home() {
             <div className="project-list">
               {projects.map((p) => (
                 <article
+                  data-tilt
                   className={`project-card project-${p.id}`}
                   key={p.id}
                   data-reveal
@@ -464,109 +373,12 @@ export default function Home() {
                 </article>
               ))}
             </div>
-            <div className="about-section" id="about">
-              <div className="about-heading" data-reveal>
-                <span className="eyebrow">About</span>
-                <h2 className="chapter-title">
-                  Franyel Diaz
-                  <br />
-                  <em>Rodriguez.</em>
-                </h2>
-                <p>
-                  My work moves between the technical and the visual: web
-                  applications, interactive storytelling, motion, and now
-                  digital drawing. I like understanding how things work—and
-                  imagining how they could feel.
-                </p>
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="resume-link"
-                >
-                  Read my résumé <ArrowUpRight size={17} />
-                </a>
-                <div className="education">
-                  <span className="eyebrow">
-                    New York University · 2022—2026
-                  </span>
-                  <p>
-                    BA, Computer Science
-                    <br />
-                    Minor in Web Programming and Applications
-                  </p>
-                  <span>HSF Scholar · English & Spanish</span>
-                </div>
-              </div>
-              <div className="experience" data-reveal>
-                <span className="eyebrow">Experience</span>
-                <article>
-                  <span className="experience-date">JUN — AUG 2026</span>
-                  <h3>SAIL (SAIL GTX)</h3>
-                  <span className="role">Web development & motion content</span>
-                  <p>
-                    Rebuilt the marketing front end, created interactive product
-                    visuals and video content, and built an automated
-                    intelligence pipeline.
-                  </p>
-                </article>
-                <article>
-                  <span className="experience-date">SEP 2025 — MAY 2026</span>
-                  <h3>New York University</h3>
-                  <span className="role">Web Development Tutor & Grader</span>
-                  <p>
-                    Helped students debug, build responsive interfaces, and
-                    understand accessible web design through one-on-one support
-                    and project feedback.
-                  </p>
-                </article>
-                <article>
-                  <span className="experience-date">MAY — AUG 2025</span>
-                  <h3>Antonio Jefferson Studio</h3>
-                  <span className="role">
-                    Studio internship · Full-stack development
-                  </span>
-                  <p>
-                    Connected scheduling, payments, and automated confirmations
-                    in a responsive booking platform.
-                  </p>
-                </article>
-              </div>
-            </div>
-            <div className="toolbox" data-reveal>
-              <span className="eyebrow">Skills</span>
-              <div className="toolbox-grid">
-                <div>
-                  <h3>Interfaces</h3>
-                  <p>
-                    React · Next.js · JavaScript
-                    <br />
-                    HTML / CSS · Canvas · SVG
-                  </p>
-                </div>
-                <div>
-                  <h3>Under the hood</h3>
-                  <p>
-                    Python / Flask · Node / Express
-                    <br />
-                    Java · REST APIs · MongoDB · SQL
-                  </p>
-                </div>
-                <div>
-                  <h3>Making & shipping</h3>
-                  <p>
-                    Git · Docker · Figma
-                    <br />
-                    DaVinci Resolve · Digital drawing
-                  </p>
-                </div>
-              </div>
-            </div>
+            <AboutWorkbench />
           </div>
         </section>
         <section className="pixel-chapter" id="pixel" data-chapter>
           <PixelLandscape paused={paused} />
-          <div className="wrap pixel-content">
+          <div className="wrap pixel-content" data-reveal>
             <span className="eyebrow">Contact</span>
             <span className="pixel-small">CONTACT</span>
             <h2>

@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { ArrowUpRight, X } from 'lucide-react';
 import CanvasCollage from '@/components/canvas-collage';
+import WebProjectArt from '@/components/web-project-art';
 import { libraryItems } from '@/lib/library-data';
 
 type Collection = 'canvas' | 'games' | 'web' | 'index';
@@ -127,19 +128,7 @@ export default function CollectionOverlay() {
                     >
                       <span className="web-entry-number">0{i + 1}</span>
                       <div className="web-entry-mark">
-                        {item.id === 'sail' ? (
-                          <img
-                            src="https://www.sailgtx.com/brand/sail-wordmark.png"
-                            alt="SAIL"
-                          />
-                        ) : item.id === 'studio' ? (
-                          <img
-                            src="https://aj-studio-fdr.vercel.app/static/images/shopIMG.png"
-                            alt="Antonio Jefferson Studio"
-                          />
-                        ) : (
-                          <span className="ink-logo">Ink.</span>
-                        )}
+                        <WebProjectArt id={item.id} />
                       </div>
                       <div>
                         <span className="eyebrow">

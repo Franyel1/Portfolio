@@ -2,11 +2,16 @@ export default function WebProjectArt({ id }: { id: string }) {
   return (
     <div className={`project-art actual-site-art actual-site-${id}`}>
       {id === 'sail' ? (
-        <img src="https://www.sailgtx.com/brand/sail-wordmark.png" alt="SAIL" />
+        <img
+          src="/images/projects/sail-home.png"
+          alt="First screen of the SAIL website"
+          loading="lazy"
+        />
       ) : id === 'studio' ? (
         <img
-          src="https://aj-studio-fdr.vercel.app/static/images/shopIMG.png"
-          alt="Antonio Jefferson Studio"
+          src="/images/projects/aj-studio-home.png"
+          alt="First screen of Antonio Jefferson Studio’s website"
+          loading="lazy"
         />
       ) : (
         <span className="ink-logo">Ink.</span>

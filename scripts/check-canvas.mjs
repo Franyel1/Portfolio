@@ -21,3 +21,7 @@ const out=createCanvas(1200,1600),ctx=out.getContext('2d');
 all.forEach((c,i)=>ctx.drawImage(c,(i%2)*600,Math.floor(i/2)*400,600,400));
 writeFileSync('work/canvas-contact-sheet.png',out.toBuffer('image/png'));
 console.log('All 8 supplied canvas surfaces rendered without runtime errors.');
+const thumbnail=createCanvas(1200,720),tc=thumbnail.getContext('2d');
+tc.fillStyle='#11204a';tc.fillRect(0,0,1200,720);
+[[0,-30,-30,650,-.08],[1,650,-20,620,.06],[2,280,150,660,-.035],[5,760,365,450,.08],[6,-30,440,600,.045]].forEach(([i,x,y,w,a])=>{tc.save();tc.translate(x+w/2,y+w/3);tc.rotate(a);tc.shadowColor='#0009';tc.shadowBlur=24;tc.drawImage(all[i],-w/2,-w/3,w,w*2/3);tc.restore();});
+writeFileSync('public/images/projects/canvas-collage.png',thumbnail.toBuffer('image/png'));
