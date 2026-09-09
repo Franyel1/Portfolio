@@ -22,7 +22,7 @@ const skills = [
     name: 'JavaScript',
     group: 'interface',
     use: 'Turning drawings into motion: particles, canvas compositions, and playful interactions.',
-    project: 'Drawing on the Web',
+    project: 'Living Sketchbook',
   },
   {
     id: 'html5',

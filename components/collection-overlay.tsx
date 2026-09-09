@@ -16,7 +16,7 @@ import { libraryItems } from '@/lib/library-data';
 
 type Collection = 'canvas' | 'games' | 'web' | 'index';
 const titles = {
-  canvas: 'Drawing on the Web',
+  canvas: 'Living Sketchbook',
   games: 'Creative work',
   web: 'Web applications',
   index: 'The library',

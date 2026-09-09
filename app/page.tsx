@@ -255,7 +255,7 @@ export default function Home() {
                 {
                   id: 'canvas',
                   n: '01',
-                  title: 'Drawing on the Web',
+                  title: 'Living Sketchbook',
                   type: 'JavaScript / Canvas / SVG',
                   mark: 'Canvas',
                 },
