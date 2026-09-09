@@ -2630,10 +2630,11 @@ footer > a {
   position: fixed;
   inset: 0;
   z-index: 80;
-  background: #f4f0e7;
+  background: rgba(4, 7, 15, 0.88);
+  backdrop-filter: blur(12px);
   overflow: auto;
   padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 6vw, 6rem);
-  color: #111b3a;
+  color: #f5f2ea;
 }
 .library-overlay-inner {
   max-width: 1200px;
@@ -2672,7 +2673,7 @@ footer > a {
   justify-content: flex-end;
   position: relative;
   overflow: hidden;
-  color: #111b3a;
+  color: #f5f2ea;
 }
 .overlay-tile:nth-child(3n) {
   background: #d8b9a9;
@@ -2686,7 +2687,31 @@ footer > a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  mix-blend-mode: multiply;
+  mix-blend-mode: screen;
+  opacity: 0.78;
+  pointer-events: none;
+}
+.overlay-tile iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  pointer-events: none;
+}
+.canvas-collage .overlay-tile {
+  background: #101a33;
+  min-height: 240px;
+}
+.canvas-collage .overlay-tile small {
+  color: #b8c6e9;
+}
+.library-wip {
+  max-width: 36rem;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin: -1.5rem 0 3rem;
+  color: #ccd2df;
 }
 .overlay-tile span {
   font-size: clamp(1.4rem, 3vw, 3rem);

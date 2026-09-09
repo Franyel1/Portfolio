@@ -237,17 +237,31 @@ export default function Library() {
 }
 
 export function LibraryOverlay() {
-  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<'canvas' | 'games' | 'web' | 'all' | null>(
+    null,
+  );
   useEffect(() => {
-    const sync = () =>
-      setOpen(
-        location.hash === '#library' || location.hash.startsWith('#library-'),
+    const sync = () => {
+      const hash = location.hash.slice(1);
+      setMode(
+        hash === 'library'
+          ? 'all'
+          : hash.startsWith('library-')
+            ? (hash.slice(8) as 'canvas' | 'games' | 'web')
+            : null,
       );
+    };
     sync();
     addEventListener('hashchange', sync);
     return () => removeEventListener('hashchange', sync);
   }, []);
-  if (!open) return null;
+  if (!mode) return null;
+  const items =
+    mode === 'all'
+      ? libraryItems
+      : libraryItems.filter((item) => item.category === mode);
+  const isCanvas = mode === 'canvas';
+  const isWip = mode === 'games';
   return (
     <div
       className="library-overlay"
@@ -259,7 +273,7 @@ export function LibraryOverlay() {
         className="library-overlay-close"
         onClick={() => {
           history.replaceState(null, '', '#canvas');
-          setOpen(false);
+          setMode(null);
         }}
       >
         Close ×
@@ -267,10 +281,28 @@ export function LibraryOverlay() {
       <div className="library-overlay-inner">
         <span className="eyebrow">Franyel Diaz Rodriguez / Library</span>
         <h2>
-          Things I make<span>.</span>
+          {isCanvas ? (
+            <>
+              Drawing on the Web<span>.</span>
+            </>
+          ) : isWip ? (
+            <>
+              Interactive work<span>.</span>
+            </>
+          ) : (
+            <>
+              Things I make<span>.</span>
+            </>
+          )}
         </h2>
-        <div className="overlay-collage">
-          {libraryItems.map((item, i) => (
+        {isWip ? (
+          <p className="library-wip">
+            This shelf is still in progress. I’m collecting interactive
+            sketches, games, and experiments here as they take shape.
+          </p>
+        ) : null}
+        <div className={`overlay-collage ${isCanvas ? 'canvas-collage' : ''}`}>
+          {items.map((item, i) => (
             <a
               key={item.id}
               href={item.local ? `/library#${item.id}` : item.href}
@@ -278,7 +310,14 @@ export function LibraryOverlay() {
               rel={item.local ? undefined : 'noreferrer'}
               className={`overlay-tile tile-${i % 6}`}
             >
-              {item.image ? (
+              {isCanvas && item.local ? (
+                <iframe
+                  title={`${item.title} canvas`}
+                  src={item.href}
+                  sandbox="allow-scripts"
+                  tabIndex={-1}
+                />
+              ) : item.image ? (
                 <img src={item.image} alt="" />
               ) : (
                 <span>{item.title}</span>
