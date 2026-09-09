@@ -235,3 +235,65 @@ export default function Library() {
     </div>
   );
 }
+
+export function LibraryOverlay() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const sync = () =>
+      setOpen(
+        location.hash === '#library' || location.hash.startsWith('#library-'),
+      );
+    sync();
+    addEventListener('hashchange', sync);
+    return () => removeEventListener('hashchange', sync);
+  }, []);
+  if (!open) return null;
+  return (
+    <div
+      className="library-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Project library"
+    >
+      <button
+        className="library-overlay-close"
+        onClick={() => {
+          history.replaceState(null, '', '#canvas');
+          setOpen(false);
+        }}
+      >
+        Close ×
+      </button>
+      <div className="library-overlay-inner">
+        <span className="eyebrow">Franyel Diaz Rodriguez / Library</span>
+        <h2>
+          Things I make<span>.</span>
+        </h2>
+        <div className="overlay-collage">
+          {libraryItems.map((item, i) => (
+            <a
+              key={item.id}
+              href={item.local ? `/library#${item.id}` : item.href}
+              target={item.local ? undefined : '_blank'}
+              rel={item.local ? undefined : 'noreferrer'}
+              className={`overlay-tile tile-${i % 6}`}
+            >
+              {item.image ? (
+                <img src={item.image} alt="" />
+              ) : (
+                <span>{item.title}</span>
+              )}
+              <small>
+                {item.category === 'games'
+                  ? 'Interactive'
+                  : item.category === 'canvas'
+                    ? 'Drawing on the Web'
+                    : 'Web application'}
+              </small>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

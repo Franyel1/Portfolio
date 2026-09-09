@@ -18,7 +18,7 @@ The project is in this `site` directory so the original parent repository remain
 
 The opening is live typography, with outline layers, construction guides, and an ink reveal. It uses no generated image. The pixel scene is drawn entirely in canvas, with no raster backdrop.
 
-The library contains eight Drawing on the Web projects and eight Interactive Computing projects copied from the supplied C:\dev folders, plus three web application links. Original coursework assets and code are preserved; hosting adaptations localize dependencies and repair asset paths. Cards open a project player with controls, restart, and a separate-window link. Course thumbnails come from the supplied work.
+The library contains eight Drawing on the Web projects and eight Interactive Computing projects copied from the supplied C:\dev folders, plus live links for SAIL, Antonio Jefferson Studio, and Ink. The library opens as a scrollable overlay on the homepage; coursework cards lead to the playable project view. Original coursework assets and code are preserved, with hosting adaptations limited to local dependency and asset paths. Drawing thumbnails are silent for now so the collage can stay easy to explore.
 
 ## Decorative asset provenance
 
@@ -27,4 +27,3 @@ Only the painted chapter texture is AI-generated. `public/images/canvas.png` was
 ## Validation
 
 TypeScript check and production build pass. Original résumé verified byte-for-byte against the supplied PDF. Local site response checked. No automated browser interaction or cross-device visual testing has been performed.
-

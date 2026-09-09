@@ -999,6 +999,41 @@ h1 span {
   font-style: italic;
   font-weight: 400;
 }
+.ink-art {
+  background: #d7c7b7;
+  color: #241d27;
+}
+.ink-word {
+  font-family: Georgia, serif;
+  font-size: clamp(3rem, 7vw, 7rem);
+  font-style: italic;
+  line-height: 0.75;
+}
+.ink-word span {
+  color: #b43d3d;
+}
+.ink-flow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 5rem;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.ink-flow > i {
+  font-style: normal;
+  font-size: 2rem;
+}
+.ink-flow > div {
+  display: flex;
+  gap: 1.5rem;
+  border-left: 1px solid currentColor;
+  padding-left: 1rem;
+}
+.ink-flow > div span {
+  font-size: 0.75rem;
+}
 .pantry-flow {
   margin: 17px auto 20px;
   text-align: center;
@@ -2590,6 +2625,108 @@ footer > a {
   color: #e3d3b5;
   border: 0;
   margin: 0;
+}
+.library-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: #f4f0e7;
+  overflow: auto;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.25rem, 6vw, 6rem);
+  color: #111b3a;
+}
+.library-overlay-inner {
+  max-width: 1200px;
+  margin: auto;
+}
+.library-overlay h2 {
+  font-size: clamp(3rem, 8vw, 8rem);
+  line-height: 0.9;
+  margin: 1rem 0 3rem;
+}
+.library-overlay h2 span {
+  color: #d65b44;
+}
+.library-overlay-close {
+  position: fixed;
+  right: 2rem;
+  top: 2rem;
+  z-index: 2;
+  border: 1px solid currentColor;
+  background: transparent;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  font: inherit;
+}
+.overlay-collage {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+.overlay-tile {
+  min-height: 190px;
+  background: #dfe4f0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  overflow: hidden;
+  color: #111b3a;
+}
+.overlay-tile:nth-child(3n) {
+  background: #d8b9a9;
+}
+.overlay-tile:nth-child(4n) {
+  background: #b7c7d7;
+}
+.overlay-tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+}
+.overlay-tile span {
+  font-size: clamp(1.4rem, 3vw, 3rem);
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
+.overlay-tile small {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.tile-0,
+.tile-5 {
+  grid-column: span 5;
+}
+.tile-1,
+.tile-4 {
+  grid-column: span 4;
+}
+.tile-2,
+.tile-3 {
+  grid-column: span 3;
+}
+@media (max-width: 700px) {
+  .overlay-collage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .overlay-tile,
+  .tile-0,
+  .tile-1,
+  .tile-2,
+  .tile-3,
+  .tile-4,
+  .tile-5 {
+    grid-column: span 1;
+    min-height: 170px;
+  }
 }
 .library-card-image img {
   object-position: center;

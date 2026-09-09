@@ -15,6 +15,7 @@ import GlassSculpture from '@/components/glass-sculpture';
 import PixelLandscape from '@/components/pixel-landscape';
 import SiteNav from '@/components/site-nav';
 import { libraryItems } from '@/lib/library-data';
+import { LibraryOverlay } from '@/components/project-library';
 const projects = [
   {
     id: 'sail',
@@ -44,8 +45,8 @@ const projects = [
     tag: '2025',
     summary: 'Less back-and-forth. More time to create.',
     stack: ['Flask', 'MongoDB', 'Stripe', 'Google Calendar'],
-    url: 'https://ajstudiosite.onrender.com/',
-    link: 'Open demo',
+    url: 'https://aj-studio-fdr.vercel.app/',
+    link: 'Open studio',
     role: 'Full-stack development',
     problem:
       'A studio booking flow needs to connect client choices, live availability, payments, and appointment management.',
@@ -57,24 +58,23 @@ const projects = [
       'Delivered an integrated booking platform and deployed a test instance on Render. The demo is a test deployment and may take a moment to start.',
   },
   {
-    id: 'kitchin',
+    id: 'ink',
     number: '03',
-    name: 'kitchIn',
-    category: 'Full-stack · Shared living · Everyday tools',
-    tag: 'PROJECT',
-    summary: 'A shared home. A pantry on the same page.',
-    stack: ['Flask', 'MongoDB', 'Jinja', 'Docker'],
-    url: 'https://github.com/Franyel1/kitchIn',
-    link: 'Explore repository',
-    role: 'Full-stack development',
-    problem:
-      'People sharing a household need a common place to manage pantry items and grocery requests.',
+    name: 'Ink.',
+    category: 'Personal project · Writing · Product',
+    tag: 'PERSONAL',
+    summary: 'A private feed for writing your life in ink.',
+    stack: ['React', 'Authentication', 'Writing'],
+    url: 'https://ink-rouge.vercel.app/login',
+    link: 'Open Ink',
+    role: 'Product and frontend development',
+    problem: 'Writing deserves a quieter, more personal place to live.',
     contribution:
-      'Built a shared pantry application with user authentication, item requests, household roles, and dynamic server-rendered templates.',
+      'Built a private writing experience centered on a feed, identity, and the small ritual of returning to the page.',
     decision:
-      'Used Flask and MongoDB for the application and data model, Jinja for the interface, and Docker to keep the environment consistent.',
+      'Kept the interface focused on reading and writing, with authentication protecting the personal space.',
     result:
-      'Built and deployed the application, with CI/CD pipelines configured for automatic deployment. The repository shows the implementation.',
+      'A live personal project, ready to evolve as the writing system grows.',
   },
 ];
 function ProjectVisual({ id }: { id: string }) {
@@ -138,23 +138,23 @@ function ProjectVisual({ id }: { id: string }) {
       </div>
     );
   return (
-    <div className="project-art kitchin-art">
+    <div className="project-art ink-art">
       <div className="art-top">
-        <span className="kitchin-word">
-          kitch<span>In</span>
+        <span className="ink-word">
+          Ink<span>.</span>
         </span>
-        <span className="mini-label">YOUR SHARED PANTRY</span>
+        <span className="mini-label">PERSONAL WRITING</span>
       </div>
-      <div className="pantry-flow">
-        <span>Household</span>
-        <i>↓</i>
+      <div className="ink-flow">
+        <span>private</span>
+        <i>·</i>
         <div>
-          <span>Pantry</span>
-          <span>Requests</span>
-          <span>Roles</span>
+          <span>write</span>
+          <span>remember</span>
+          <span>return</span>
         </div>
       </div>
-      <span className="art-caption">Application overview</span>
+      <span className="art-caption">A quiet place for a life in words</span>
     </div>
   );
 }
@@ -267,6 +267,7 @@ export default function Home() {
         {paused ? <Play size={14} /> : <Pause size={14} />}
         <span>{paused ? 'Motion off' : 'Motion on'}</span>
       </button>
+      <LibraryOverlay />
       <main id="main">
         <section className="sketch" id="sketch" data-chapter>
           <div className="wrap">
@@ -305,7 +306,7 @@ export default function Home() {
                     <a className="ink-button" href="#glass">
                       Explore my work <ArrowUpRight size={18} />
                     </a>
-                    <a className="text-link" href="/library">
+                    <a className="text-link" href="#library">
                       Browse the library
                     </a>
                   </div>
@@ -322,8 +323,8 @@ export default function Home() {
                 <span className="eyebrow">Creative work</span>
                 <h2 className="chapter-title">The library.</h2>
               </div>
-              <a className="text-link" href="/library">
-                Browse all work ↗
+              <a className="text-link" href="#library">
+                Open the library ↗
               </a>
             </div>
             <div className="study-grid collection-grid">
@@ -352,7 +353,7 @@ export default function Home() {
               ].map((item, i) => (
                 <a
                   className={`study-card study-${i}`}
-                  href={`/library#${item.id}`}
+                  href={`#library-${item.id}`}
                   key={item.id}
                 >
                   <div className="study-top">
@@ -420,7 +421,9 @@ export default function Home() {
                   <a
                     className="project-visual-button"
                     aria-label={`Read ${p.name} case study`}
-                    href={`/library#${p.id}`}
+                    href={p.url}
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <ProjectVisual id={p.id} />
                   </a>
@@ -438,8 +441,13 @@ export default function Home() {
                         <span key={t}>{t}</span>
                       ))}
                     </div>
-                    <a className="case-link" href={`/library#${p.id}`}>
-                      Open project <ArrowUpRight size={19} />
+                    <a
+                      className="case-link"
+                      href={p.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {p.link} <ArrowUpRight size={19} />
                     </a>
                   </div>
                 </article>

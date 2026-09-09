@@ -11,7 +11,7 @@ export default function SiteNav({ current = 'home' }: { current?: string }) {
   const [open, setOpen] = useState(false);
   const items = [
     { label: 'Work', href: '/#glass', active: current === 'glass' },
-    { label: 'Library', href: '/library', active: current === 'library' },
+    { label: 'Library', href: '/#library', active: current === 'library' },
     { label: 'About', href: '/#about', active: false },
     { label: 'Contact', href: '/#pixel', active: current === 'pixel' },
   ];

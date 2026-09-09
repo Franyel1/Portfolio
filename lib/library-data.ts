@@ -251,17 +251,16 @@ export const libraryItems: LibraryItem[] = [
     medium: 'Flask / MongoDB / Stripe',
     description:
       'Studio booking platform with calendar integration, payments, and automated confirmations.',
-    href: 'https://ajstudiosite.onrender.com/',
-    sourceLabel: 'Live demo',
+    href: 'https://aj-studio-fdr.vercel.app/',
+    sourceLabel: 'Open AJ Studio',
   },
   {
-    id: 'kitchin',
-    title: 'kitchIn',
+    id: 'ink',
+    title: 'Ink.',
     category: 'web',
-    medium: 'Flask / MongoDB / Docker',
-    description:
-      'Shared household pantry management with requests, authentication, and household roles.',
-    href: 'https://github.com/Franyel1/kitchIn',
-    sourceLabel: 'GitHub repository',
+    medium: 'Personal project / Writing',
+    description: 'A private feed for writing your life in ink.',
+    href: 'https://ink-rouge.vercel.app/login',
+    sourceLabel: 'Open Ink',
   },
 ];
