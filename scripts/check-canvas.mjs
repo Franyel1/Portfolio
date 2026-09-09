@@ -18,7 +18,7 @@ const images = await Promise.all(
   artworkAssets.map((src) => loadImage(`public${src}`)),
 );
 const queue = new Set();
-const surfaces = createArtwork(
+const artwork = createArtwork(
   (w, h) => {
     const c = createCanvas(w, h);
     c.style = {};
@@ -33,9 +33,9 @@ for (let i = 0; i < 90; i++) {
   queue.clear();
   callbacks.forEach((fn) => fn(start + i * 33));
 }
-if (queue.size !== 3)
-  throw Error(`Expected three animated studies, found ${queue.size}`);
-surfaces.forEach((c, i) => {
+if (queue.size !== 4)
+  throw Error(`Expected four animated studies, found ${queue.size}`);
+artwork.surfaces.forEach((c, i) => {
   if (
     !c
       .getContext('2d')
@@ -52,7 +52,7 @@ for (const [name, width, height, narrow] of [
     ctx = c.getContext('2d');
   ctx.fillStyle = '#18191c';
   ctx.fillRect(0, 0, width, height);
-  paintCollage(ctx, surfaces, width, height, narrow);
+  paintCollage(ctx, artwork, width, height, narrow);
   writeFileSync(`work/curated-${name}.png`, c.toBuffer('image/png'));
   if (!narrow)
     writeFileSync(
@@ -61,5 +61,5 @@ for (const [name, width, height, narrow] of [
     );
 }
 console.log(
-  'Five selected artworks rendered on desktop and mobile; three isolated animation loops; no video or audio.',
+  'Four selected canvas artworks and five gradient SVG decorations rendered at desktop and mobile; four isolated animation loops; no video or audio.',
 );

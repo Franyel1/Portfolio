@@ -43,7 +43,7 @@ export default function CanvasCollage() {
     Promise.all(images.map((image) => image.decode()))
       .then(() => {
         if (disposed) return;
-        const surfaces = createArtwork(makeCanvas, images, request);
+        const artwork = createArtwork(makeCanvas, images, request);
         const tick = (now: number) => {
           if (disposed) return;
           if (
@@ -67,7 +67,7 @@ export default function CanvasCollage() {
             }
             context.setTransform(dpr, 0, 0, dpr, 0, 0);
             context.clearRect(0, 0, width, height);
-            paintCollage(context, surfaces, width, height, narrow);
+            paintCollage(context, artwork, width, height, narrow);
             painted = true;
             last = now;
           }
@@ -104,7 +104,7 @@ export default function CanvasCollage() {
       {status && <p role="status">{status}</p>}
       <canvas
         ref={ref}
-        aria-label="Collage of five selected drawings: animated beach, orchid, cherry-blossom landscape, daisies, and television signal"
+        aria-label="Collage of selected drawings: animated beach, television color bars, geometric forms, and moving static, with gradient flower decorations"
       />
     </div>
   );
