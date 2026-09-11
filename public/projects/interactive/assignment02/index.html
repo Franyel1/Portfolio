@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <!-- load in the p5 core library -->
+    <script src="p5/p5.min.js"></script>
+
+    <!-- load in the p5 sound library -->
+    <script src="p5/p5.sound.min.js"></script>
+
+    <!-- your custom sketch code -->
+    <script src="sketch.js"></script>
+
+    <!-- custom CSS styles for this page -->
+    <style>
+      *{
+        margin:0;
+        padding: 0;
+      }
+      body{
+        height: max-content;
+        background: black;
+        border: dashed grey 4px;
+        min-height: 99.1vh;    
+      }
+      #canvasContainer{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 70px;
+        padding-bottom: 50px;
+        height: 100%; 
+      }
+      h1{
+        font-family: sans-serif;
+        text-align: center;
+        line-height: 100px;
+        border-bottom: dashed grey 4px;  
+        font-weight: 9000;
+        font-size: 36px; 
+        color: white;
+      }
+      #instructions{
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: sans-serif;
+        border-top: dashed grey 4px;
+        padding-top: 30px; 
+        padding-bottom: 30px;
+
+      }
+      h2{
+        background-color: white;
+        margin-bottom: 20px;
+        color: black;
+        width: 200px;
+        text-align: center;
+      }
+      #instructions ul li{
+        margin-top: 10px;
+        font-size: 18px;
+      }
+
+    </style>
+
+  </head>
+  <body>
+    <h1>Breakout!</h1>
+    <div id="canvasContainer"></div>
+    <div id="instructions"> 
+      <h2>Intructions</h2>
+       <ul>
+          <li>Press the screen to send ball off!</li>
+          <li>Use A and D to make the paddle left and right</li>
+          <li>Try to hit the ball to make it bounce into the green treasures!</li>
+          <li>Careful: ball get faster with every hit</li>
+          <li>The edges of the paddle make the bal bounce faster</li>
+          
+       </ul>
+    </div>
+  </body>
+</html>
+
