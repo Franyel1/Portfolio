@@ -11,7 +11,7 @@ import {
   Code2,
   Mail,
 } from 'lucide-react';
-import ProjectIndexArt from '@/components/project-index-art';
+import GlassSculpture from '@/components/glass-sculpture';
 import PixelLandscape from '@/components/pixel-landscape';
 import SiteNav from '@/components/site-nav';
 import { libraryItems } from '@/lib/library-data';
@@ -332,7 +332,7 @@ export default function Home() {
                   <ArrowDown size={18} /> Selected work
                 </a>
               </div>
-              <ProjectIndexArt />
+              <GlassSculpture paused={paused} />
             </div>
             <div className="work-heading" id="selected-work">
               <span className="eyebrow">Three projects</span>
