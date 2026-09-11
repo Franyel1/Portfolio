@@ -28,19 +28,19 @@ const projects = [
     category: 'Frontend · Motion · Product storytelling',
     tag: '2026',
     summary:
-      'Rebuilt the marketing front end with interactive trade visualizations, canvas particles, and original motion content.',
+      'Rebuilt the marketing site with interactive trade visualizations, canvas particles, and original motion content.',
     stack: ['React', 'Next.js', 'Canvas', 'DaVinci Resolve'],
     url: 'https://sailgtx.com',
     link: 'Visit live site',
     role: 'Frontend development & motion content',
     problem:
-      'SAIL’s classification and audit workflows needed a visual story that visitors could understand.',
+      'SAIL’s classification and audit tools needed a clearer way to show visitors what the product does.',
     contribution:
-      'Rebuilt the marketing front end and redesigned the homepage. Created a canvas-based particle system, custom SVG charts, and a four-tab decision workspace to explain the product.',
+      'Rebuilt the marketing site and redesigned the homepage. Made a canvas particle system, custom SVG charts, and a four-tab decision workspace to explain the product.',
     decision:
-      'Paired interactive product visualizations with original video and motion content edited in DaVinci Resolve. Each format explains a different part of the platform.',
+      'Used interactive product visuals alongside video and motion pieces edited in DaVinci Resolve. Each one covers a different part of the platform.',
     result:
-      'Delivered a redesigned marketing experience with interactive feature showcases. Also built an intelligence pipeline to surface ICP-fit leads, competitor activity, and relevant regulatory events.',
+      'Shipped a redesigned marketing site with interactive feature demos. I also built a pipeline for finding ICP-fit leads, competitor activity, and relevant regulatory updates.',
   },
   {
     id: 'studio',
@@ -49,40 +49,40 @@ const projects = [
     category: 'Full-stack · Scheduling · Payments',
     tag: '2025',
     summary:
-      'A studio website and booking platform connecting availability, payments, and confirmations.',
+      'A studio site and booking platform that handles availability, payments, and confirmations.',
     stack: ['Flask', 'MongoDB', 'Stripe', 'Google Calendar'],
     url: 'https://aj-studio-fdr.vercel.app/',
     link: 'Open studio',
     role: 'Full-stack development',
     problem:
-      'A studio booking flow needs to connect client choices, live availability, payments, and appointment management.',
+      'The booking flow needed to bring together client choices, live availability, payments, and appointment management.',
     contribution:
-      'Built a responsive platform with start and end time selection, add-ons, dynamic pricing, and a live availability view. Integrated Stripe payments, Google Calendar, and automated email confirmations.',
+      'Built a responsive platform with start and end times, add-ons, dynamic pricing, and live availability. Connected Stripe, Google Calendar, and automated email confirmations.',
     decision:
-      'Connected the booking interface to backend checks that prevent double bookings. Tested the end-to-end flow across scheduling, payment, and confirmation.',
+      'Added backend checks to prevent double bookings, then tested the flow from scheduling through payment and confirmation.',
     result:
-      'Delivered an integrated booking platform and deployed a test instance on Render. The demo is a test deployment and may take a moment to start.',
+      'Shipped the booking platform and deployed a test version on Render. It may take a moment to start.',
   },
   {
     id: 'ink',
     number: '03',
     name: 'Ink.',
-    category: 'AI-assisted journal · Full-stack · Product',
+    category: 'Private journal · Full-stack · Product',
     tag: 'PERSONAL',
     summary:
-      'A private, AI-assisted journal that turns everyday writing into a living, searchable record of your life.',
+      'A private journal that helps turn everyday writing into a searchable record of your life.',
     stack: ['Full-stack', 'AI', 'Offline-first', 'Semantic search'],
     url: 'https://ink-rouge.vercel.app/login',
     link: 'Open Ink',
     role: 'Product design & full-stack development',
     problem:
-      'Traditional journals preserve entries, but rarely help connect the people, goals, memories, and recurring themes that appear across years.',
+      'Traditional journals save entries but make it hard to trace the people, goals, memories, and recurring themes that build up over time.',
     contribution:
-      'Designed and built the full product: a timeline for text and photos, guided reflections, goals, future letters, people records, AI recaps and prompts, semantic search, offline writing, automatic sync, and memory controls.',
+      'Designed and built the full product: a timeline for text and photos, guided reflections, goals, future letters, people records, recaps, prompts, semantic search, offline writing, automatic sync, and memory controls.',
     decision:
-      'Made it feel like a personal social feed with no audience. AI works quietly in the background to organize context and reflect the writer’s story back without taking control away.',
+      'Made it feel like a personal social feed with no audience. The assistive features organize context and surface patterns while the writer stays in control.',
     result:
-      'A living notebook that remembers, connects, and resurfaces a personal story while giving the writer full control over what it keeps.',
+      'A notebook that helps people revisit their story while keeping them in control of what it remembers.',
   },
 ];
 export default function Home() {
@@ -319,15 +319,13 @@ export default function Home() {
           <div className="wrap glass-content">
             <div className="glass-intro" data-reveal>
               <div>
-                <span className="eyebrow">Web development / 2025—2026</span>
+                <span className="eyebrow">Web development / 2025 to 2026</span>
                 <h2 className="chapter-title">
                   Selected
                   <br />
                   <em>projects.</em>
                 </h2>
-                <p>
-                  Product websites, booking systems, and an AI-assisted journal.
-                </p>
+                <p>Product websites, booking systems, and a private journal.</p>
                 <a href="#selected-work" className="glass-down">
                   <ArrowDown size={18} /> Selected work
                 </a>
@@ -393,7 +391,7 @@ export default function Home() {
               <br />
               <span>touch.</span>
             </h2>
-            <p>Get in touch about projects and opportunities.</p>
+            <p>Have a project or opportunity in mind? Let’s talk.</p>
             <div className="pixel-actions">
               <a href="mailto:fd2190@nyu.edu" className="pixel-button">
                 <Mail size={18} /> Say hello <ArrowUpRight size={18} />

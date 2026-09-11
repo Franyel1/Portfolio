@@ -13,11 +13,29 @@ const mono = Space_Mono({
 });
 const pixel = Pixelify_Sans({ variable: '--font-pixel', subsets: ['latin'] });
 export const metadata: Metadata = {
-  title: 'Franyel — Code, color & curiosity',
+  title: 'Code / Color / Curiosity',
   description:
-    'Franyel Diaz Rodriguez. Developer, visual thinker, and an artist in progress. Explore selected web projects and a growing creative practice.',
+    'Franyel Diaz Rodriguez builds websites, canvas experiments, and games.',
   metadataBase: new URL('https://franyel-studio.franyel1.chatgpt.site'),
+  applicationName: 'Code / Color / Curiosity',
+  authors: [{ name: 'Franyel Diaz Rodriguez' }],
+  keywords: ['web development', 'creative coding', 'canvas', 'portfolio'],
   icons: { icon: '/favicon.svg' },
+  openGraph: {
+    title: 'Code / Color / Curiosity',
+    description:
+      'Portfolio of Franyel Diaz Rodriguez: websites, canvas experiments, and games.',
+    url: '/',
+    siteName: 'Franyel Diaz Rodriguez',
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Code / Color / Curiosity',
+    description:
+      'Portfolio of Franyel Diaz Rodriguez: websites, canvas experiments, and games.',
+  },
 };
 export default function RootLayout({
   children,

@@ -258,9 +258,9 @@ export const libraryItems: LibraryItem[] = [
     id: 'ink',
     title: 'Ink.',
     category: 'web',
-    medium: 'Full-stack / AI-assisted journal',
+    medium: 'Full-stack / Private journal',
     description:
-      'A private, offline-ready journal with a personal timeline, guided reflections, semantic search, AI recaps, and full control over what it remembers.',
+      'A private, offline-ready journal with a personal timeline, guided reflections, semantic search, recaps, and full control over what it remembers.',
     href: 'https://ink-rouge.vercel.app/login',
     sourceLabel: 'Open Ink',
   },

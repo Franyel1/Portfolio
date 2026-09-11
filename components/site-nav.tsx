@@ -39,7 +39,7 @@ export default function SiteNav({ current = 'sketch' }: { current?: string }) {
           <Link
             href="/#sketch"
             className="atelier-identity"
-            aria-label="Franyel Diaz Rodriguez — home"
+            aria-label="Franyel Diaz Rodriguez home"
           >
             <span className="atelier-monogram" aria-hidden="true">
               fd.

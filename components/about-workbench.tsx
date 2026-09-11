@@ -7,14 +7,14 @@ const skills = [
     id: 'react',
     name: 'React',
     group: 'interface',
-    use: 'Component-based interfaces, interactive product stories, and responsive web applications.',
+    use: 'Component-based interfaces, interactive product demos, and responsive web applications.',
     project: 'SAIL · Web development',
   },
   {
     id: 'nextjs',
     name: 'Next.js',
     group: 'interface',
-    use: 'Building structured web experiences with reusable layouts and application routing.',
+    use: 'Building websites with reusable layouts and application routing.',
     project: 'SAIL · Marketing website',
   },
   {
@@ -35,7 +35,7 @@ const skills = [
     id: 'css3',
     name: 'CSS',
     group: 'interface',
-    use: 'Typography, responsive composition, animation, and material transitions.',
+    use: 'Typography, responsive layouts, animation, and visual transitions.',
     project: 'Websites · Canvas studies',
   },
   {
@@ -70,7 +70,7 @@ const skills = [
     id: 'docker',
     name: 'Docker',
     group: 'tools',
-    use: 'Keeping application environments consistent from development to deployment.',
+    use: 'Keeping development and production environments consistent.',
     project: 'kitchIn',
   },
   {
@@ -107,8 +107,8 @@ export default function AboutWorkbench() {
             applications, motion content, and canvas experiments.
           </p>
           <p>
-            I’m now developing a digital drawing practice with a drawing tablet,
-            alongside the things I build with code.
+            I’m building a digital drawing practice with a tablet alongside the
+            things I make with code.
           </p>
           <a
             href="/resume.pdf"
@@ -133,25 +133,25 @@ export default function AboutWorkbench() {
       </div>
       <div className="experience-layout">
         <div className="experience-label" data-reveal>
-          <span className="eyebrow">2025—2026</span>
+          <span className="eyebrow">2025 to 2026</span>
           <h3>Experience.</h3>
         </div>
         <div className="experience-timeline">
           {[
             {
-              date: 'JUN — AUG 2026',
+              date: 'JUN to AUG 2026',
               name: 'SAIL',
               role: 'Web development & motion content',
               text: 'Rebuilt the marketing front end, created interactive product visuals and video content, and built an automated intelligence pipeline.',
             },
             {
-              date: 'SEP 2025 — MAY 2026',
+              date: 'SEP 2025 to MAY 2026',
               name: 'New York University',
               role: 'Web Development Tutor & Grader',
               text: 'Helped students debug, build responsive interfaces, and understand accessible web design through one-on-one support and project feedback.',
             },
             {
-              date: 'MAY — AUG 2025',
+              date: 'MAY to AUG 2025',
               name: 'Antonio Jefferson Studio',
               role: 'Studio internship · Full-stack development',
               text: 'Connected scheduling, payments, and automated confirmations in a responsive booking platform.',

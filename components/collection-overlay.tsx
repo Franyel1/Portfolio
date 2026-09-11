@@ -128,7 +128,7 @@ export default function CollectionOverlay() {
                       <div>
                         <span className="eyebrow">
                           {item.id === 'ink'
-                            ? 'AI-assisted journal'
+                            ? 'Private journal'
                             : 'Web development'}
                         </span>
                         <h3>{item.title}</h3>
