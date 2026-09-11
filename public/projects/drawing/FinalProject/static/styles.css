@@ -1,0 +1,49 @@
+@font-face {
+    font-family: parcel;
+    src: url(../pardell.woff2) format("woff2");
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: black;
+}
+
+html {
+    flex-direction: column;
+}
+
+img {
+    display: none;
+}
+
+
+
+#back {
+    background: linear-gradient(#ddd, #777);
+    border: 3px solid #111;
+    border-radius: 15px;
+    padding: 5px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #222;
+    text-decoration: none;
+    color: black;
+
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-family: parcel;
+
+}
+
+#back:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}

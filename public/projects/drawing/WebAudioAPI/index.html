@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>HTML CSS</title>
+</head>
+<body>
+    <div id="container">
+        <video autoplay muted loop playsinline> <!--mute vid to autoplay, remove controls to look better-->
+            <source media="(max-width: 853px) and (max-height: 480px)" src="media/street480p.mp4" type="video/mp4">
+            <source media="(max-width: 1280px) and (max-height: 720px)" src="media/street1280p.mp4" type="video/mp4">
+            <source src="media/street1080p.mp4" type="video/mp4">
+        </video>
+
+        <div id="invertBox">
+            <img src="media/cctv.png">
+        </div>
+
+        <div id="overlay"></div>
+
+        <img class="fire" id="left" src="media/fire.png">
+        <img class="fire" id="right" src="media/fire.png">
+
+        <img class="pigeon" id="a" src="media/pigeon.gif">
+        <img class="pigeon" id="b" src="media/pigeon.gif">
+
+        <img id="cctv" src="media/film.png">
+
+
+        <audio controls loop>
+            <source src="media/superRichKids.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="controls">
+            <button id="play">Play</button>
+            <input type="range" id="volume" orient="vertical" min="0" max="1" value="0.5" step="0.01">
+            <input type="range" id="panner" min="-1" max="1" value="0" step="0.01">
+        </div>
+    </div>
+</body>
+
+<script src="audio.js"></script>
+
+</html>

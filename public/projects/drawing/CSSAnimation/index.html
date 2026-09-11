@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Theatre Animation</title>
+</head>
+<body>
+    <!--ideas
+
+        * theater with red curtains opening and closing on hover
+            * curtains can be svg rectangles folding within itself accordion style
+            * someone in the middle performing, maybe a png being skewed and transformed on loop
+            * perspective can be used to use png of rows people (abstract) to represent an audience
+            * dark background
+    
+    -->
+    <div id="scene">
+        <div class="theater">
+            <div id="back"></div>
+            <div id="top"></div>
+            <div id="front"></div>
+            <div id="floor"></div>
+
+            <div id="person">
+                <div id="head"></div>
+                <div id="body"></div>
+                <div id="arm1">
+                    <div id="hand1"></div>
+                </div>
+                <div id="arm2">
+                    <div id="hand2"></div>
+                </div>
+                <div id="leg1"></div>
+                <div id="leg2"></div>
+            </div>
+
+            <div class="curtain left">
+                <div id="left1" class="c"></div>
+                <div id="left2"class="c"><div id="over1"></div></div>
+            </div>
+            <div class="curtain right">
+                <div id="right1"class="c"><div id="over2"></div></div>
+                <div id="right2"class="c"></div>
+            </div>
+            <div class="stage">
+                <div id="performer"></div>
+            </div>
+
+     
+        </div>
+
+
+
+        <div class="audience" id="ab"></div>
+
+    </div>
+</body>
+</html>

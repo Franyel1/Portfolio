@@ -1,0 +1,477 @@
+/* The same composition changes material with the chapter in view. */
+.atelier-nav,
+.atelier-drawer {
+  --nav-ink: #203352;
+  --nav-accent: #a63d28;
+  --nav-surface: #f5f2e9;
+  --nav-line: #20335230;
+  color: var(--nav-ink);
+}
+.atelier-nav {
+  position: fixed;
+  z-index: 45;
+  inset: 14px max(22px, calc((100vw - 1260px) / 2)) auto;
+  background: var(--nav-surface);
+  border: 1px solid var(--nav-line);
+  transition:
+    background 0.45s,
+    color 0.35s,
+    border-radius 0.45s,
+    box-shadow 0.45s;
+}
+.atelier-rail {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 68px;
+  padding: 0 24px;
+}
+.atelier-identity {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-right: auto;
+  flex-shrink: 0;
+}
+.atelier-monogram {
+  font:
+    italic bold 40px/1 Georgia,
+    serif;
+  letter-spacing: -4px;
+  padding-right: 4px;
+}
+.atelier-name {
+  font-size: 14px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+.atelier-name > span {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+}
+.atelier-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.atelier-links a {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 13px 14px;
+  isolation: isolate;
+}
+.atelier-label {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.atelier-mark {
+  position: absolute;
+  inset: auto 10% 3px;
+  width: 80%;
+  height: 9px;
+  fill: none;
+  stroke: var(--nav-accent);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 110;
+  stroke-dashoffset: 110;
+  transition: stroke-dashoffset 0.4s;
+  pointer-events: none;
+}
+.atelier-links a:is(:hover, [aria-current]) .atelier-mark {
+  stroke-dashoffset: 0;
+}
+.atelier-resume {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 15px;
+  min-height: 44px;
+  border: 1px solid var(--nav-line);
+  font-size: 14px;
+  white-space: nowrap;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.atelier-resume svg {
+  transition: transform 0.2s;
+}
+.atelier-resume:hover svg {
+  transform: translate(2px, -2px);
+}
+[data-material='sketch'] .atelier-resume,
+[data-material='canvas'] .atelier-resume,
+[data-material='glass'] .atelier-resume {
+  transform: translateY(1px);
+}
+.atelier-menu {
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--nav-line);
+  color: inherit;
+  background: transparent;
+}
+.atelier-nav :is(a, button):focus-visible,
+.atelier-drawer :is(a, button):focus-visible {
+  outline: 2px solid var(--nav-accent);
+  outline-offset: 4px;
+}
+
+/* Drafting paper: offset rules and a pencilled selection. */
+.atelier-nav[data-material='sketch'] {
+  border-radius: 2px 3px 1px 5px;
+  background-image: radial-gradient(#20335212 0.65px, transparent 0.65px);
+  background-size: 4px 4px;
+  box-shadow:
+    3px 4px 0 -1px #f5f2e9,
+    3px 4px 0 0 #20335240,
+    0 8px 20px #20335208;
+}
+[data-material='sketch'] .atelier-monogram {
+  font-family: var(--font-hand), cursive;
+  font-size: 47px;
+  letter-spacing: -3px;
+  transform: rotate(-7deg);
+}
+[data-material='sketch'] .atelier-label {
+  font:
+    25px/1 var(--font-hand),
+    cursive;
+}
+[data-material='sketch'] .atelier-links a:nth-child(even) .atelier-label {
+  transform: rotate(-3deg);
+}
+[data-material='sketch'] .atelier-resume {
+  border: 1px dashed #20335252;
+  border-radius: 48% 43% 46% 40%;
+  transform: rotate(-3deg);
+}
+[data-material='sketch'] .atelier-resume:hover {
+  transform: rotate(0);
+  background: #20335208;
+}
+
+/* Canvas weave and uneven pigment behind the selected chapter. */
+[data-material='canvas'] {
+  --nav-surface: #e4d6bc;
+  --nav-ink: #382d24;
+  --nav-accent: #9c3926;
+  --nav-line: #533b2a33;
+}
+.atelier-nav[data-material='canvas'],
+.atelier-drawer[data-material='canvas'] {
+  background-color: var(--nav-surface);
+  background-image:
+    repeating-linear-gradient(0deg, #75472009 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, #fff7de28 0 1px, transparent 1px 3px);
+  box-shadow:
+    inset 0 3px 0 #f7edd9,
+    0 4px 0 #a8977b,
+    0 9px 18px #39281b20;
+}
+[data-material='canvas'] .atelier-label {
+  font:
+    italic 19px/1.1 Georgia,
+    serif;
+}
+[data-material='canvas'] .atelier-links a::before {
+  content: '';
+  position: absolute;
+  inset: 5px 0;
+  z-index: -1;
+  background: #a63e29;
+  opacity: 0;
+  transform: scaleX(0.5) rotate(-2deg);
+  clip-path: polygon(
+    3% 7%,
+    24% 3%,
+    49% 9%,
+    75% 0,
+    97% 8%,
+    94% 27%,
+    100% 39%,
+    96% 65%,
+    98% 91%,
+    70% 95%,
+    48% 90%,
+    21% 100%,
+    0 92%,
+    3% 71%,
+    0 48%
+  );
+  transition:
+    opacity 0.2s,
+    transform 0.3s;
+}
+[data-material='canvas'] .atelier-links a:is(:hover, [aria-current]) {
+  color: #fff7e6;
+}
+[data-material='canvas'] .atelier-links a:is(:hover, [aria-current])::before {
+  opacity: 1;
+  transform: scaleX(1) rotate(-2deg);
+}
+[data-material='canvas'] .atelier-mark {
+  display: none;
+}
+[data-material='canvas'] .atelier-resume {
+  background: #382d24;
+  color: #fff4df;
+  border-radius: 2px 1px 4px 2px;
+  box-shadow: 2px 2px 0 #382d2425;
+}
+
+/* Optical glass: bright edges and a recessed translucent selection. */
+[data-material='glass'] {
+  --nav-surface: #142b47d9;
+  --nav-ink: #edf7ff;
+  --nav-accent: #b4e8fa;
+  --nav-line: #c9edff30;
+}
+.atelier-nav[data-material='glass'],
+.atelier-drawer[data-material='glass'] {
+  background:
+    linear-gradient(
+      115deg,
+      #effaff16,
+      transparent 36%,
+      #88b7dc10 72%,
+      #ffffff0a
+    ),
+    var(--nav-surface);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid #c9edff40;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 #ffffff60,
+    inset 0 -1px 0 #abc9e51f,
+    0 12px 32px #06142635;
+}
+[data-material='glass'] .atelier-links {
+  gap: 3px;
+}
+[data-material='glass'] .atelier-links a {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition:
+    background 0.25s,
+    border-color 0.25s;
+}
+[data-material='glass'] .atelier-links a:is(:hover, [aria-current]) {
+  background: linear-gradient(140deg, #ffffff24, #ffffff09);
+  border-color: #d7edff38;
+  box-shadow:
+    inset 0 1px 0 #ffffff20,
+    0 2px 5px #00000016;
+}
+[data-material='glass'] .atelier-mark {
+  display: none;
+}
+[data-material='glass'] .atelier-resume {
+  border-radius: 6px;
+  background: #c8e8fc0c;
+}
+[data-material='glass'] .atelier-resume:hover {
+  background: #c8e8fc22;
+}
+
+/* Pixel hardware: stepped corners and a selected game slot. */
+[data-material='pixel'] {
+  --nav-surface: #101d3a;
+  --nav-ink: #eff4db;
+  --nav-accent: #cce79a;
+  --nav-line: #92b5c653;
+}
+.atelier-nav[data-material='pixel'] {
+  border: 2px solid #7e9caf;
+  border-radius: 0;
+  box-shadow:
+    inset 3px 3px 0 #d9edff1a,
+    inset -3px -3px 0 #00000050,
+    4px 4px 0 #071025;
+}
+[data-material='pixel'] .atelier-monogram {
+  font-family: var(--font-pixel), monospace;
+  font-style: normal;
+  letter-spacing: -2px;
+}
+[data-material='pixel'] .atelier-label {
+  font:
+    21px/1.1 var(--font-pixel),
+    monospace;
+}
+[data-material='pixel'] .atelier-links a {
+  border: 2px solid transparent;
+  padding: 9px 12px;
+}
+[data-material='pixel'] .atelier-links a:is(:hover, [aria-current]) {
+  color: #142a26;
+  background: #cce79a;
+  border-color: #e7f7c6 #789359 #789359 #e7f7c6;
+  box-shadow: 3px 3px 0 #050e20;
+}
+[data-material='pixel'] .atelier-mark {
+  display: none;
+}
+[data-material='pixel'] .atelier-resume {
+  font:
+    18px var(--font-pixel),
+    monospace;
+  border: 2px solid #8da8bd;
+  box-shadow: 3px 3px 0 #050e20;
+}
+[data-material='pixel'] .atelier-resume:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #050e20;
+}
+
+/* The mobile sheet owns its theme across the portal boundary. */
+.atelier-drawer[data-slot='sheet-content'] {
+  width: min(92vw, 440px);
+  max-width: none;
+  padding: 30px 26px;
+  overflow-y: auto;
+  background-color: var(--nav-surface);
+  color: var(--nav-ink);
+  border-radius: 0;
+}
+.atelier-drawer-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 0 20px;
+}
+.atelier-drawer [data-slot='sheet-title'] {
+  color: inherit;
+  font-size: 14px;
+  font-weight: 400;
+}
+.atelier-drawer nav {
+  display: grid;
+}
+.atelier-drawer nav a {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 19px 4px;
+  border-bottom: 1px solid var(--nav-line);
+}
+.atelier-drawer-label {
+  font-size: 30px;
+  line-height: 1.15;
+}
+.atelier-drawer nav svg {
+  margin-left: auto;
+  opacity: 0.45;
+}
+.atelier-drawer nav a[aria-current] {
+  color: var(--nav-accent);
+}
+.atelier-drawer nav a[aria-current] svg {
+  opacity: 1;
+}
+.atelier-drawer nav a:hover {
+  background: var(--nav-line);
+}
+.atelier-drawer-resume {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 28px;
+  font-size: 14px;
+}
+.atelier-drawer [data-slot='sheet-close'] {
+  color: inherit;
+}
+.atelier-drawer[data-material='sketch'] .atelier-drawer-label {
+  font:
+    38px/1 var(--font-hand),
+    cursive;
+}
+.atelier-drawer[data-material='canvas'] .atelier-drawer-label {
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+.atelier-drawer[data-material='pixel'] .atelier-drawer-label {
+  font-family: var(--font-pixel), monospace;
+}
+.atelier-drawer[data-material='pixel'] nav a[aria-current] {
+  padding-left: 12px;
+  box-shadow: inset 4px 0 var(--nav-accent);
+}
+
+@media (max-width: 1100px) {
+  .atelier-name {
+    display: none;
+  }
+  .atelier-rail {
+    gap: 20px;
+  }
+}
+@media (max-width: 900px) {
+  .atelier-nav {
+    inset: 10px 14px auto;
+  }
+  .atelier-rail {
+    min-height: 60px;
+    gap: 12px;
+    padding-inline: 15px;
+  }
+  .atelier-links {
+    display: none;
+  }
+  .atelier-name {
+    display: block;
+  }
+  .atelier-menu {
+    display: grid;
+  }
+  .atelier-monogram {
+    font-size: 34px;
+  }
+  .atelier-resume {
+    padding-inline: 12px;
+    gap: 8px;
+  }
+  .atelier-identity {
+    gap: 12px;
+  }
+  .site {
+    padding-top: 100px;
+  }
+}
+@media (max-width: 380px) {
+  .atelier-name {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .atelier-nav,
+  .atelier-nav *,
+  .atelier-nav *::before,
+  .atelier-drawer {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (forced-colors: active) {
+  .atelier-links a[aria-current],
+  .atelier-drawer nav a[aria-current] {
+    outline: 2px solid Highlight;
+  }
+}
+
+.motion-paused .atelier-nav,
+.motion-paused .atelier-nav *,
+.motion-paused .atelier-nav *::before {
+  animation: none !important;
+  transition: none !important;
+}

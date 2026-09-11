@@ -1,0 +1,93 @@
+#link {
+    position: fixed;
+    left: 90%;
+    top: 10%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    z-index: 10;
+    background-color: #484848;
+    padding: 5px 20px;
+
+}
+.below {
+    position: fixed;
+    inset: 0;
+    background: none center/cover no-repeat;
+    z-index: 0;
+}
+
+.spotlight {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+
+    background:
+        radial-gradient(circle at var(--clientX, 50%) var(--clientY, 50%),
+            transparent 20px,
+            rgba(6, 0, 9, 0.871) 250px);
+
+
+}
+
+body{
+    background-image: url(media/back.jpg);
+
+    background-repeat: no-repeat;
+
+    cursor:none;
+    overflow: hidden;
+}
+
+.bird {
+    position: absolute;
+
+    width: 250px;
+    height: auto;
+        top: 0%;
+        left: 0%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+}
+
+.scriptBox {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 80vw;
+
+    border-radius: 12px;
+    font-family: "Courier New", monospace;
+    font-size: 2vw;
+    line-height: 1.6;
+    white-space: pre-line;
+    text-align: center;
+
+    color: rgba(0, 0, 0, 0.9);
+
+    filter: blur(1px);
+
+
+    pointer-events: none;
+
+    will-change: transform; 
+}
+
+.bird {
+    transition: transform 1s ease-out;
+    will-change: transform;
+}
+
+.scriptBox {
+    transition: transform 180ms ease-out;
+    will-change: transform;
+}
+
+.spotlight {
+    transition: -webkit-mask-position 0.1s linear; 
+}
