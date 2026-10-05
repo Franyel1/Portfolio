@@ -1,0 +1,33 @@
+{
+  "generated": "2026-10-05",
+  "tool": "Built-in image_gen.imagegen",
+  "assets": [
+    {
+      "file": "public/materials/torn-paper-edge.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "transparent": true,
+      "prompt": "Use case: photorealistic-natural. Asset type: production website section boundary, a transparent horizontally seamless material strip. Generate a very wide panoramic 3:1 close-up scan of the BOTTOM TORN EDGE of one real sheet of warm ivory cotton-rag drawing paper. Camera perfectly overhead, orthographic flat scan, no perspective. Paper occupies the entire top of the image and touches top/left/right image borders; the space below the torn bottom edge is genuinely transparent alpha. The upper 35 percent is a perfectly uniform warm ivory color #f5f3ec, blending imperceptibly into faint authentic paper tooth toward the tear. Bottom boundary is broadly almost horizontal, with natural, uneven 10-30px tears, occasional longer exposed cotton fibers, feathered thin translucent fibers and layered irregular white ragged edges. It MUST unmistakably look like manually ripped real paper, not sawteeth, a line, scallops or a smooth cut. Tear runs across the image around 65 percent height; the lowest fibers stay above 90 percent. Soft natural local shading within the paper fibers only, NO cast shadow baked onto the transparent region. NO separate scraps, no multiple sheets, no curled corners, no frame, no border, no text, no logos, no backdrop, no checkerboard. Left and right edges of the material must match perfectly for seamless horizontal repetition: same tear height, paper tone and texture at the join. Material scale consistent throughout. This is a compositing asset, not a photograph of paper on a table. Aim for a high-resolution wide strip, ideally 3072x1024."
+    },
+    {
+      "file": "public/materials/painted-edge.png",
+      "dimensions": [
+        2172,
+        724
+      ],
+      "transparent": true,
+      "prompt": "Use case: photorealistic-natural. Asset type: real paint edge compositing asset for a portfolio section transition. A panoramic 3:1 flat overhead macro scan of the bottom boundary of genuine coral/terracotta gouache paint applied heavily with a broad bristle brush. The paint occupies the entire top of the image, bleeding off top/left/right image edges. Below its irregular lower boundary there is genuine transparent alpha. Upper 30 percent has an almost uniform warm dusty coral base #e98165 so it can blend with a solid website page. Below that, visible authentic pigment, subtle paint ridges, streaks from bristles, thick and thin areas, dragged dry-brush marks, a few small natural flecks attached to the edge, fine irregular transparent bristle gaps near the lower boundary. The paint's lower edge runs approximately horizontally around 65 percent image height, with organic uneven broad brush swipes and bristle tips. MUST look like a real painted surface, not digital vector curves, not liquid drips, not scallops, not slime, not flat cartoon. Color stays close to the coral base with restrained ochre/peach variations, no white paper behind it, no black, no navy. Soft overhead diffuse illumination; NO baked shadow in transparent region. Left and right ends must match tone, texture and exact boundary height for seamless horizontal repetition. No paintbrush object, no frame, no writing, no logo, no background checkerboard. Highest fidelity tangible hand-painted texture, high-resolution wide strip, ideally 3072x1024."
+    },
+    {
+      "file": "public/materials/painted-canvas.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "transparent": false,
+      "prompt": "Use case: photorealistic-natural. Asset type: seamless square repeatable painted texture for a portfolio website Library background. Perfectly flat overhead close-up scan of genuine matte gouache/acrylic paint on artist canvas, uniformly covered in warm dusty coral/terracotta #e98165. Authentic subtle broad horizontal brush strokes, fine bristle lines, small pigment grains, a few soft palette-knife ridges, delicate woven canvas tooth visible under paint. Keep the tonal range narrow, calm and approximately 90 percent close to the base coral tone so navy website lettering will remain readable over it. Slight richer reddish ochre and soft peach nuances only. No unpainted white areas, no framing, no objects, no brush, no splashes, no writing, no figures, no illustration, no glossy reflections, no vignetting, no fake gradient lighting. Even diffuse scan lighting. The tile MUST seamlessly repeat in both directions with perfectly matching colors, texture and directional strokes at all four borders, no visible seams. A tactile handmade painted field, not an abstract illustration or synthetic noise. High-resolution square texture."
+    }
+  ]
+}

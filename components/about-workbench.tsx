@@ -91,7 +91,7 @@ const skills = [
 export default function AboutWorkbench() {
   const [selected, setSelected] = useState(skills[0]);
   return (
-    <section className="about-redesign" id="about">
+    <section className="about-redesign">
       <div className="about-lead" data-reveal>
         <div>
           <span className="eyebrow">About me</span>

@@ -49,13 +49,14 @@ export default function GlassSculpture({ paused }: { paused: boolean }) {
     const size = gl.getUniformLocation(program, 'resolution'),
       clock = gl.getUniformLocation(program, 'time'),
       pointer = gl.getUniformLocation(program, 'pointer');
-    let frame = 0,
-      visible = true,
+    let frame: number | null = null;
+    let visible = false,
       last = 0,
       x = 0,
       y = 0;
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
     const render = (ms: number) => {
+      frame = null;
       if (visible && ms - last > 32) {
         last = ms;
         const s = Math.min(
@@ -68,15 +69,24 @@ export default function GlassSculpture({ paused }: { paused: boolean }) {
           gl.viewport(0, 0, s, s);
         }
         gl.uniform2f(size, s, s);
-        gl.uniform1f(clock, paused || reduced ? 0 : ms * 0.001);
+        gl.uniform1f(clock, paused || preference.matches ? 0 : ms * 0.001);
         gl.uniform2f(
           pointer,
-          paused || reduced ? 0 : x,
-          paused || reduced ? 0 : y,
+          paused || preference.matches ? 0 : x,
+          paused || preference.matches ? 0 : y,
         );
         gl.drawArrays(gl.TRIANGLES, 0, 6);
       }
-      if (!paused && !reduced) frame = requestAnimationFrame(render);
+      if (visible && !document.hidden && !paused && !preference.matches)
+        frame = requestAnimationFrame(render);
+    };
+    const sync = () => {
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+      if (visible && !document.hidden) {
+        last = 0;
+        render(performance.now());
+      }
     };
     const move = (event: PointerEvent) => {
       const r = canvas.getBoundingClientRect();
@@ -86,13 +96,16 @@ export default function GlassSculpture({ paused }: { paused: boolean }) {
     canvas.addEventListener('pointermove', move);
     const observer = new IntersectionObserver((entries) => {
       visible = entries[0].isIntersecting;
-      if (visible && (paused || reduced)) render(100);
+      sync();
     });
     observer.observe(canvas);
-    render(100);
+    document.addEventListener('visibilitychange', sync);
+    preference.addEventListener('change', sync);
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame !== null) cancelAnimationFrame(frame);
       observer.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+      preference.removeEventListener('change', sync);
       canvas.removeEventListener('pointermove', move);
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);

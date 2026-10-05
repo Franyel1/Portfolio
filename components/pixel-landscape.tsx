@@ -2,7 +2,13 @@
 import { useEffect, useRef } from 'react';
 
 /** Draw at an integer CSS-pixel scale; no resampling or painted image assets. */
-export default function PixelLandscape({ paused }: { paused: boolean }) {
+export default function PixelLandscape({
+  paused,
+  variant = 'landscape',
+}: {
+  paused: boolean;
+  variant?: 'landscape' | 'page-edge';
+}) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = ref.current;
@@ -38,6 +44,35 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
           Math.round(h),
         );
       };
+      if (variant === 'page-edge') {
+        // The outgoing sheet owns the cutout. The landscape beneath remains
+        // full bleed, so there is one moving boundary rather than two masks.
+        const time = tick * 0.08;
+        const base = height * 0.82 - scrollProgress * 4;
+        for (let x = 0; x < width; x++) {
+          const tongue = Math.pow(
+            Math.max(0, Math.sin(x * 0.115 + Math.sin(time * 0.8) * 0.6)),
+            5,
+          );
+          const smallTongue = Math.pow(
+            Math.max(0, Math.sin(x * 0.24 - time * 0.9)),
+            7,
+          );
+          const flicker = Math.sin(time * 2.1 + x * 0.17) * 2;
+          const edge = Math.max(
+            7,
+            Math.round(
+              base -
+                tongue * (17 + Math.sin(time + x * 0.08) * 5) -
+                smallTongue * 7 +
+                flicker,
+            ),
+          );
+          box(x, 0, 1, edge, '#101b29');
+          box(x, edge - 1, 1, 1, '#23375d');
+        }
+        return;
+      }
       // Flat color bands preserve the deliberately limited game palette.
       [
         '#101c43',
@@ -135,38 +170,11 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       const personX = Math.floor(width * 0.76),
         personY = Math.floor(height * 0.875) - 10;
       sprite.forEach((row, y) =>
-        [...row].forEach((pixel, x) => {
+        row.split('').forEach((pixel, x) => {
           if (palette[pixel])
             box(personX + x, personY + y, 1, 1, palette[pixel]);
         }),
       );
-      // The sky itself forms the fire: cut its upper edge into animated tongues.
-      // Everything below the edge is the same canvas, palette, and coordinate system.
-      const time = tick * 0.08;
-      const base = 58 - scrollProgress * 12;
-      for (let x = 0; x < width; x++) {
-        const tongue = Math.pow(
-          Math.max(0, Math.sin(x * 0.115 + Math.sin(time * 0.8) * 0.6)),
-          5,
-        );
-        const smallTongue = Math.pow(
-          Math.max(0, Math.sin(x * 0.24 - time * 0.9)),
-          7,
-        );
-        const flicker = Math.sin(time * 2.1 + x * 0.17) * 2;
-        const edge = Math.max(
-          7,
-          Math.round(
-            base -
-              tongue * (17 + Math.sin(time + x * 0.08) * 5) -
-              smallTongue * 7 +
-              flicker,
-          ),
-        );
-        ctx.clearRect(x, 0, 1, edge);
-        box(x, edge, 1, 1, '#30466c');
-        if (tongue > 0.8) box(x, edge + 1, 1, 2, '#23375d');
-      }
     };
     const resize = new ResizeObserver((entries) => {
       const rect = entries[0].contentRect;
@@ -191,8 +199,12 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
         Math.min(1, (innerHeight - top) / innerHeight),
       );
     };
-    onScroll();
-    if (!paused) window.addEventListener('scroll', onScroll, { passive: true });
+    // Only the outgoing edge uses scroll progress. The landscape has no mask.
+    if (variant === 'page-edge') {
+      onScroll();
+      if (!paused)
+        window.addEventListener('scroll', onScroll, { passive: true });
+    }
     const timer = paused
       ? undefined
       : window.setInterval(() => {
@@ -207,13 +219,16 @@ export default function PixelLandscape({ paused }: { paused: boolean }) {
       observer.disconnect();
       if (timer) clearInterval(timer);
     };
-  }, [paused]);
+  }, [paused, variant]);
   return (
     <canvas
       ref={ref}
-      className="pixel-landscape pixel-canvas"
+      className={
+        variant === 'page-edge'
+          ? 'pixel-page-edge'
+          : 'pixel-landscape pixel-canvas'
+      }
       aria-hidden="true"
     />
   );
 }
-

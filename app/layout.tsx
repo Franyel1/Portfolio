@@ -4,6 +4,7 @@ import './globals.css';
 import './polish.css';
 import './editorial.css';
 import './navigation.css';
+import './atelier.css';
 const body = DM_Sans({ variable: '--font-body', subsets: ['latin'] });
 const hand = Caveat({ variable: '--font-hand', subsets: ['latin'] });
 const mono = Space_Mono({

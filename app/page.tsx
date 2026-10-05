@@ -20,6 +20,8 @@ import WebProjectArt from '@/components/web-project-art';
 import AboutWorkbench from '@/components/about-workbench';
 import CollectionPreview from '@/components/collection-preview';
 import SiteMotion from '@/components/site-motion';
+import PageStack from '@/components/page-stack';
+import MaterialEdge from '@/components/material-edge';
 const projects = [
   {
     id: 'sail',
@@ -135,30 +137,6 @@ export default function Home() {
       )
         current = 'about';
       setActive(current);
-      if (!paused) {
-        el.querySelectorAll<HTMLElement>('[data-parallax]').forEach((item) => {
-          const r = item.parentElement!.getBoundingClientRect();
-          if (r.bottom > 0 && r.top < innerHeight)
-            item.style.setProperty(
-              '--parallax',
-              `${Math.max(-45, Math.min(45, (innerHeight * 0.5 - r.top - r.height * 0.5) * 0.075))}px`,
-            );
-        });
-        el.querySelectorAll<HTMLElement>('.material-transition').forEach(
-          (item) => {
-            const r = item.getBoundingClientRect();
-            item.style.setProperty(
-              '--phase',
-              String(
-                Math.max(
-                  0,
-                  Math.min(1, (innerHeight - r.top) / (innerHeight + r.height)),
-                ),
-              ),
-            );
-          },
-        );
-      }
     };
     const scroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -204,228 +182,278 @@ export default function Home() {
       </button>
       <CollectionOverlay />
       <SiteMotion paused={paused} />
+      <PageStack paused={paused} />
       <main id="main">
-        <section className="sketch" id="sketch" data-chapter>
-          <div className="wrap">
-            <div className="hero typography-hero">
-              <div className="name-study">
-                <div className="type-guides" aria-hidden="true">
-                  <i />
-                  <i />
-                  <i />
-                </div>
-                <h1 className="sketched-name" aria-label="Franyel">
-                  <span className="name-outline" aria-hidden="true">
-                    Franyel.
-                  </span>
-                  <span className="name-ink" aria-hidden="true">
-                    Franyel<span className="name-period">.</span>
-                  </span>
-                </h1>
-              </div>
-              <div className="hero-introduction">
-                <p className="hero-subtitle">
-                  Web development.
-                  <br />
-                  Interactive work.
-                </p>
-                <div>
-                  <p className="hero-description">
-                    I’m Franyel Diaz Rodriguez, a computer science graduate from
-                    NYU. I build web applications, canvas experiments, and
-                    games.
-                  </p>
-                  <div className="hero-actions">
-                    <a className="ink-button" href="#glass">
-                      Explore my work <ArrowUpRight size={18} />
+        <section className="chapter-page" id="sketch" data-chapter>
+          <div className="page-surface paper-sheet">
+            <div className="sketch" data-scene>
+              <div className="wrap">
+                <div className="hero typography-hero">
+                  <div className="hero-edition">
+                    <span className="eyebrow">Developer & creative coder</span>
+                    <span className="eyebrow">Code / Color / Curiosity</span>
+                  </div>
+                  <div className="hero-stage">
+                    <div className="name-study depth-layer" data-depth="-0.15">
+                      <div className="type-guides" aria-hidden="true">
+                        <i />
+                        <i />
+                        <i />
+                      </div>
+                      <h1 className="sketched-name" aria-label="Franyel">
+                        <span className="name-outline" aria-hidden="true">
+                          Franyel.
+                        </span>
+                        <span className="name-ink" aria-hidden="true">
+                          Franyel<span className="name-period">.</span>
+                        </span>
+                      </h1>
+                    </div>
+                  </div>
+                  <div className="hero-introduction">
+                    <p className="hero-subtitle">
+                      Web development.
+                      <br />
+                      Interactive work.
+                    </p>
+                    <div>
+                      <p className="hero-description">
+                        I’m Franyel Diaz Rodriguez, a computer science graduate
+                        from NYU. I build web applications, canvas experiments,
+                        and games.
+                      </p>
+                      <div className="hero-actions">
+                        <a className="ink-button" href="#glass">
+                          Explore my work <ArrowUpRight size={18} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="hero-colophon">
+                    <span>Built with code. Shaped by curiosity.</span>
+                    <a href="#canvas">
+                      Scroll to explore <ArrowDown size={15} />
                     </a>
                   </div>
                 </div>
               </div>
             </div>
+            <MaterialEdge material="paper" />
           </div>
         </section>
-        <section className="canvas-chapter" id="canvas" data-chapter>
-          <div className="canvas-texture" aria-hidden="true" />
-          <div className="wrap canvas-content">
-            <div className="intro-row" data-reveal>
-              <div>
-                <span className="eyebrow">Creative work</span>
-                <h2 className="chapter-title">The library.</h2>
-              </div>
-            </div>
-            <div className="study-grid collection-grid">
-              {[
-                {
-                  id: 'canvas',
-                  n: '01',
-                  title: 'Living Sketchbook',
-                  type: 'JavaScript / Canvas / SVG',
-                  mark: 'Canvas',
-                },
-                {
-                  id: 'games',
-                  n: '02',
-                  title: 'Creative work',
-                  type: 'Drawings / Design / Interactive',
-                  mark: 'WIP',
-                },
-                {
-                  id: 'web',
-                  n: '03',
-                  title: 'Web applications',
-                  type: 'Frontend / Full-stack',
-                  mark: 'Web',
-                },
-              ].map((item, i) => (
-                <a
-                  data-reveal
-                  data-tilt
-                  className={`study-card study-${i}`}
-                  href={`#library-${item.id}`}
-                  key={item.id}
-                >
-                  <div className="study-top">
-                    <span className="eyebrow">{item.n}</span>
-                    <ArrowUpRight size={22} />
+        <section className="chapter-page" id="canvas" data-chapter>
+          <div className="page-surface paint-sheet">
+            <div className="canvas-chapter" data-scene>
+              <div className="canvas-texture" aria-hidden="true" />
+              <div className="wrap canvas-content">
+                <div className="intro-row" data-reveal>
+                  <div>
+                    <span className="eyebrow">Creative work</span>
+                    <h2 className="chapter-title">The library.</h2>
+                    <p className="library-intro">
+                      A place for experiments.
+                      <br />
+                      And the things they turn into.
+                    </p>
                   </div>
-                  <CollectionPreview category={item.id} />
-                  <span className="eyebrow study-medium">{item.type}</span>
-                  <h3>{item.title}</h3>
-                  <span className="study-open">
-                    {item.id === 'games' ? (
-                      'Work in progress'
-                    ) : item.id === 'canvas' ? (
-                      'Open canvas collage'
-                    ) : (
-                      <>
-                        {
-                          libraryItems.filter(
-                            (work) => work.category === item.id,
-                          ).length
-                        }{' '}
-                        websites
-                      </>
-                    )}{' '}
-                    <ArrowUpRight size={16} />
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-        <section className="glass-chapter dark" id="glass" data-chapter>
-          <div className="glass-light" aria-hidden="true" />
-          <div className="wrap glass-content">
-            <div className="glass-intro" data-reveal>
-              <div>
-                <span className="eyebrow">Web development / 2025 to 2026</span>
-                <h2 className="chapter-title">
-                  Selected
-                  <br />
-                  <em>projects.</em>
-                </h2>
-                <p>Product websites, booking systems, and a private journal.</p>
-                <a href="#selected-work" className="glass-down">
-                  <ArrowDown size={18} /> Selected work
-                </a>
-              </div>
-              <GlassSculpture paused={paused} />
-            </div>
-            <div className="work-heading" id="selected-work">
-              <span className="eyebrow">Three projects</span>
-              <span className="eyebrow">Design · Development · Motion</span>
-            </div>
-            <div className="project-list">
-              {projects.map((p) => (
-                <article
-                  data-tilt
-                  className={`project-card project-${p.id}`}
-                  key={p.id}
-                  data-reveal
-                >
-                  <a
-                    className="project-visual-button"
-                    aria-label={`Visit ${p.name}`}
-                    href={p.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <WebProjectArt id={p.id} />
-                  </a>
-                  <div className="project-copy">
-                    <div className="project-meta eyebrow">
-                      <span>
-                        {p.number} / {p.category}
-                      </span>
-                      <span>{p.tag}</span>
-                    </div>
-                    <h3>{p.name}</h3>
-                    <p>{p.summary}</p>
-                    <div className="tags">
-                      {p.stack.map((t) => (
-                        <span key={t}>{t}</span>
-                      ))}
-                    </div>
+                </div>
+                <div className="study-grid collection-grid">
+                  {[
+                    {
+                      id: 'canvas',
+                      n: '01',
+                      title: 'Living Sketchbook',
+                      type: 'JavaScript / Canvas / SVG',
+                      mark: 'Canvas',
+                    },
+                    {
+                      id: 'games',
+                      n: '02',
+                      title: 'Creative work',
+                      type: 'Drawings / Design / Interactive',
+                      mark: 'WIP',
+                    },
+                    {
+                      id: 'web',
+                      n: '03',
+                      title: 'Web applications',
+                      type: 'Frontend / Full-stack',
+                      mark: 'Web',
+                    },
+                  ].map((item, i) => (
                     <a
-                      className="case-link"
-                      href={p.url}
-                      target="_blank"
-                      rel="noreferrer"
+                      data-reveal
+                      data-tilt
+                      className={`study-card study-${i}`}
+                      href={`#library-${item.id}`}
+                      key={item.id}
                     >
-                      {p.link} <ArrowUpRight size={19} />
+                      <div className="study-top">
+                        <span className="eyebrow">{item.n}</span>
+                        <ArrowUpRight size={22} />
+                      </div>
+                      <CollectionPreview category={item.id} />
+                      <span className="eyebrow study-medium">{item.type}</span>
+                      <h3>{item.title}</h3>
+                      <span className="study-open">
+                        {item.id === 'games' ? (
+                          'Work in progress'
+                        ) : item.id === 'canvas' ? (
+                          'Open canvas collage'
+                        ) : (
+                          <>
+                            {
+                              libraryItems.filter(
+                                (work) => work.category === item.id,
+                              ).length
+                            }{' '}
+                            websites
+                          </>
+                        )}{' '}
+                        <ArrowUpRight size={16} />
+                      </span>
                     </a>
-                  </div>
-                </article>
-              ))}
+                  ))}
+                </div>
+              </div>
             </div>
-            <AboutWorkbench />
+            <MaterialEdge material="paint" />
           </div>
         </section>
-        <section className="pixel-chapter" id="pixel" data-chapter>
-          <PixelLandscape paused={paused} />
-          <div className="wrap pixel-content" data-reveal>
-            <span className="pixel-small">CONTACT</span>
-            <h2>
-              Get in
-              <br />
-              <span>touch.</span>
-            </h2>
-            <p>Have a project or opportunity in mind? Let’s talk.</p>
-            <div className="pixel-actions">
-              <a href="mailto:fd2190@nyu.edu" className="pixel-button">
-                <Mail size={18} /> Say hello <ArrowUpRight size={18} />
-              </a>
-              <button className="copy-button" onClick={copy}>
-                {copied ? <Check size={18} /> : <Copy size={18} />}
-                <span aria-live="polite">
-                  {copied ? 'Email copied!' : 'Copy email'}
-                </span>
-              </button>
+        <section className="chapter-page" id="glass" data-chapter>
+          <div className="page-surface glass-sheet">
+            <div className="glass-chapter dark" data-scene>
+              <div className="glass-light" aria-hidden="true" />
+              <div className="wrap glass-content">
+                <div className="glass-intro" data-reveal>
+                  <div>
+                    <span className="eyebrow">
+                      Web development / 2025 to 2026
+                    </span>
+                    <h2 className="chapter-title">
+                      Selected
+                      <br />
+                      <em>projects.</em>
+                    </h2>
+                    <p>
+                      Product websites, booking systems, and a private journal.
+                    </p>
+                    <a href="#selected-work" className="glass-down">
+                      <ArrowDown size={18} /> Selected work
+                    </a>
+                  </div>
+                  <div className="glass-object depth-layer" data-depth="0.65">
+                    <GlassSculpture paused={paused} />
+                    <span className="sculpture-caption eyebrow">
+                      A study in light & motion
+                    </span>
+                  </div>
+                </div>
+                <div className="work-heading" id="selected-work">
+                  <span className="eyebrow">Projects</span>
+                  <span className="eyebrow">Design · Development · Motion</span>
+                </div>
+                <div className="project-list">
+                  {projects.map((p) => (
+                    <article
+                      data-tilt
+                      className={`project-card project-${p.id}`}
+                      key={p.id}
+                      data-reveal
+                    >
+                      <a
+                        className="project-visual-button"
+                        aria-label={`Visit ${p.name}`}
+                        href={p.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <WebProjectArt id={p.id} />
+                      </a>
+                      <div className="project-copy">
+                        <div className="project-meta eyebrow">
+                          <span>
+                            {p.number} / {p.category}
+                          </span>
+                          <span>{p.tag}</span>
+                        </div>
+                        <h3>{p.name}</h3>
+                        <p>{p.summary}</p>
+                        <div className="tags">
+                          {p.stack.map((t) => (
+                            <span key={t}>{t}</span>
+                          ))}
+                        </div>
+                        <a
+                          className="case-link"
+                          href={p.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {p.link} <ArrowUpRight size={19} />
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </div>
-            {copyError && (
-              <p className="copy-fallback" role="status">
-                Copy this address: fd2190@nyu.edu
-              </p>
-            )}
-            <div className="pixel-links">
-              <a
-                href="https://github.com/Franyel1"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Code2 size={17} /> GitHub ↗
-              </a>
-              <a href="/resume.pdf" target="_blank" rel="noreferrer">
-                Résumé ↗
-              </a>
+            <div className="about-page dark" id="about">
+              <div className="wrap">
+                <AboutWorkbench />
+              </div>
             </div>
-            <footer>
-              <span>© {new Date().getFullYear()} Franyel Diaz Rodriguez</span>
-              <a href="#sketch">
-                Back to the sketch <ArrowUp size={15} />
-              </a>
-            </footer>
+            <div className="pixel-page-tail" aria-hidden="true">
+              <PixelLandscape paused={paused} variant="page-edge" />
+            </div>
+          </div>
+        </section>
+        <section className="chapter-page" id="pixel" data-chapter>
+          <div className="pixel-chapter page-surface">
+            <PixelLandscape paused={paused} />
+            <div className="wrap pixel-content" data-reveal>
+              <span className="pixel-small">CONTACT</span>
+              <h2>
+                Get in
+                <br />
+                <span>touch.</span>
+              </h2>
+              <p>Have a project or opportunity in mind? Let’s talk.</p>
+              <div className="pixel-actions">
+                <a href="mailto:fd2190@nyu.edu" className="pixel-button">
+                  <Mail size={18} /> Say hello <ArrowUpRight size={18} />
+                </a>
+                <button className="copy-button" onClick={copy}>
+                  {copied ? <Check size={18} /> : <Copy size={18} />}
+                  <span aria-live="polite">
+                    {copied ? 'Email copied!' : 'Copy email'}
+                  </span>
+                </button>
+              </div>
+              {copyError && (
+                <output className="copy-fallback" aria-live="polite">
+                  Copy this address: fd2190@nyu.edu
+                </output>
+              )}
+              <div className="pixel-links">
+                <a
+                  href="https://github.com/Franyel1"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Code2 size={17} /> GitHub ↗
+                </a>
+                <a href="/resume.pdf" target="_blank" rel="noreferrer">
+                  Résumé ↗
+                </a>
+              </div>
+              <footer>
+                <span>© {new Date().getFullYear()} Franyel Diaz Rodriguez</span>
+                <a href="#sketch">
+                  Back to the sketch <ArrowUp size={15} />
+                </a>
+              </footer>
+            </div>
           </div>
         </section>
       </main>
