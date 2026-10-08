@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { ArrowUpRight, Pencil, Film, Braces } from 'lucide-react';
+import { Pencil, Film, Braces } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 const skills = [
   {
@@ -111,7 +111,7 @@ export default function AboutWorkbench() {
             rel="noreferrer"
             className="resume-link"
           >
-            Read my résumé <ArrowUpRight size={18} />
+            Read my résumé
           </a>
         </div>
       </div>
@@ -205,7 +205,6 @@ export default function AboutWorkbench() {
                             />
                           </span>
                           <span>{skill.name}</span>
-                          <ArrowUpRight size={15} />
                         </button>
                       ))}
                   </div>

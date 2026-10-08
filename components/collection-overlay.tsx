@@ -160,7 +160,6 @@ export default function CollectionOverlay() {
                           ? 'Live canvas collage'
                           : 'Selected websites'}
                     </span>
-                    <ArrowUpRight />
                   </button>
                 ))}
               </div>

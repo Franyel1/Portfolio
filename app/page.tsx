@@ -241,7 +241,7 @@ export default function Home() {
                       </p>
                       <div className="hero-actions">
                         <a className="ink-button" href="#glass">
-                          Explore my work <ArrowUpRight size={18} />
+                          Explore my work
                         </a>
                       </div>
                     </div>
@@ -295,9 +295,7 @@ export default function Home() {
                       href={`#library-${item.id}`}
                       key={item.id}
                     >
-                      <div className="study-top">
-                        <ArrowUpRight size={22} />
-                      </div>
+                      <div className="study-top" />
                       <CollectionPreview category={item.id} />
                       <span className="eyebrow study-medium">{item.type}</span>
                       <h3>{item.title}</h3>
@@ -315,8 +313,7 @@ export default function Home() {
                             }{' '}
                             websites
                           </>
-                        )}{' '}
-                        <ArrowUpRight size={16} />
+                        )}
                       </span>
                     </a>
                   ))}
@@ -404,7 +401,7 @@ export default function Home() {
               <h2>Contact</h2>
               <div className="pixel-actions">
                 <a href="mailto:fd2190@nyu.edu" className="pixel-button">
-                  <Mail size={18} /> Say hello <ArrowUpRight size={18} />
+                  <Mail size={18} /> Say hello
                 </a>
                 <button className="copy-button" onClick={copy}>
                   {copied ? <Check size={18} /> : <Copy size={18} />}
@@ -427,7 +424,7 @@ export default function Home() {
                   <Code2 size={17} /> GitHub ↗
                 </a>
                 <a href="/resume.pdf" target="_blank" rel="noreferrer">
-                  Résumé ↗
+                  Résumé
                 </a>
               </div>
               <footer>

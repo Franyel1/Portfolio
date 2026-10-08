@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Menu } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -74,7 +74,6 @@ export default function SiteNav({ current = 'sketch' }: { current?: string }) {
             rel="noreferrer"
           >
             <span>Résumé</span>
-            <ArrowUpRight size={17} aria-hidden="true" />
           </a>
           <SheetTrigger className="atelier-menu" aria-label="Open navigation">
             <Menu size={21} aria-hidden="true" />
@@ -100,7 +99,6 @@ export default function SiteNav({ current = 'sketch' }: { current?: string }) {
               onClick={() => setOpen(false)}
             >
               <span className="atelier-drawer-label">{item.label}</span>
-              <ArrowUpRight size={22} aria-hidden="true" />
             </Link>
           ))}
         </nav>
@@ -110,7 +108,7 @@ export default function SiteNav({ current = 'sketch' }: { current?: string }) {
           target="_blank"
           rel="noreferrer"
         >
-          Open résumé <ArrowUpRight size={18} aria-hidden="true" />
+          Open résumé
         </a>
       </SheetContent>
     </Sheet>
