@@ -401,7 +401,6 @@ export default function Home() {
           <div className="pixel-chapter page-surface">
             <PixelLandscape paused={paused} />
             <div className="wrap pixel-content" data-reveal>
-              <span className="pixel-small">CONTACT</span>
               <h2>Contact</h2>
               <div className="pixel-actions">
                 <a href="mailto:fd2190@nyu.edu" className="pixel-button">

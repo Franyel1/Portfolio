@@ -1729,6 +1729,12 @@ footer > a {
   .pixel-landscape {
     object-position: 65% bottom;
   }
+  .pixel-chapter .pixel-content {
+    padding-top: 335px;
+  }
+  .pixel-chapter .pixel-landscape {
+    transform: translateY(42px);
+  }
   .pixel-content footer {
     margin-top: 165px;
     flex-wrap: wrap;

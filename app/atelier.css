@@ -897,6 +897,12 @@ html:has(.motion-paused) {
   min-height: 100svh;
   background: #101b29;
 }
+.pixel-chapter .pixel-content {
+  padding-top: 280px;
+}
+.pixel-chapter .pixel-landscape {
+  transform: translateY(52px);
+}
 @media (max-width: 650px) {
   .typography-hero {
     min-height: 0;
