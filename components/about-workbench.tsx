@@ -94,12 +94,7 @@ export default function AboutWorkbench() {
     <section className="about-redesign">
       <div className="about-lead" data-reveal>
         <div>
-          <span className="eyebrow">About me</span>
-          <h2>
-            Development
-            <br />
-            <em>& drawing.</em>
-          </h2>
+          <h2>About me</h2>
         </div>
         <div className="about-intro-copy">
           <p>
@@ -156,9 +151,8 @@ export default function AboutWorkbench() {
               role: 'Studio internship · Full-stack development',
               text: 'Connected scheduling, payments, and automated confirmations in a responsive booking platform.',
             },
-          ].map((job, i) => (
+          ].map((job) => (
             <article key={job.name} data-reveal>
-              <span className="timeline-number">0{i + 1}</span>
               <div>
                 <span className="eyebrow">{job.date}</span>
                 <h4>{job.name}</h4>
@@ -172,7 +166,6 @@ export default function AboutWorkbench() {
       <div className="skills-workbench" data-reveal>
         <div className="skills-heading">
           <div>
-            <span className="eyebrow">Tools & skills</span>
             <h3>Tools I use.</h3>
           </div>
           <p>Select a tool to see how I use it.</p>
@@ -220,7 +213,6 @@ export default function AboutWorkbench() {
               ))}
             </div>
             <div className="skill-detail" aria-live="polite" key={selected.id}>
-              <span className="eyebrow">In practice</span>
               <img
                 src={`/images/skills/${selected.id}.svg`}
                 alt=""
@@ -245,6 +237,9 @@ export default function AboutWorkbench() {
             <Pencil />
             Digital drawing
           </span>
+          <span>Codex</span>
+          <span>Claude</span>
+          <span>Claude Design</span>
           <span>Java · SQL · REST APIs</span>
         </div>
       </div>

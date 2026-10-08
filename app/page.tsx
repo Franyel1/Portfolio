@@ -11,7 +11,7 @@ import {
   Code2,
   Mail,
 } from 'lucide-react';
-import GlassSculpture from '@/components/glass-sculpture';
+import MagicEightBall from '@/components/magic-eight-ball';
 import PixelLandscape from '@/components/pixel-landscape';
 import SiteNav from '@/components/site-nav';
 import { libraryItems } from '@/lib/library-data';
@@ -25,7 +25,6 @@ import MaterialEdge from '@/components/material-edge';
 const projects = [
   {
     id: 'sail',
-    number: '01',
     name: 'SAIL',
     category: 'Frontend · Motion · Product storytelling',
     tag: '2026',
@@ -46,7 +45,6 @@ const projects = [
   },
   {
     id: 'studio',
-    number: '02',
     name: 'Antonio Jefferson Studio',
     category: 'Full-stack · Scheduling · Payments',
     tag: '2025',
@@ -67,7 +65,6 @@ const projects = [
   },
   {
     id: 'ink',
-    number: '03',
     name: 'Ink.',
     category: 'Private journal · Full-stack · Product',
     tag: 'PERSONAL',
@@ -121,36 +118,57 @@ export default function Home() {
     );
     reveals.forEach((e) => observer.observe(e));
     let frame = 0;
+    let positions: number[] = [];
+    let aboutPosition = Infinity;
+    let needsMeasure = true;
+    let previous = '';
+    const about = el.querySelector<HTMLElement>('#about');
+    const glassIndex = sections.findIndex((section) => section.id === 'glass');
+    const pixelIndex = sections.findIndex((section) => section.id === 'pixel');
     const update = () => {
       frame = 0;
       let current = 'sketch';
-      sections.forEach((section) => {
-        const r = section.getBoundingClientRect();
-        if (r.top < innerHeight * 0.48) current = section.id;
+      if (needsMeasure) {
+        positions = sections.map(
+          (section) => section.getBoundingClientRect().top + scrollY,
+        );
+        // About is laid out inside the glass surface; ignore its reveal transform.
+        aboutPosition = about
+          ? positions[glassIndex] + about.offsetTop
+          : Infinity;
+        needsMeasure = false;
+      }
+      const threshold = scrollY + innerHeight * 0.48;
+      sections.forEach((section, index) => {
+        if (positions[index] < threshold) current = section.id;
       });
-      const about = el.querySelector<HTMLElement>('#about');
-      const pixel = sections.find((section) => section.id === 'pixel');
-      if (
-        about &&
-        about.getBoundingClientRect().top < innerHeight * 0.48 &&
-        (!pixel || pixel.getBoundingClientRect().top >= innerHeight * 0.48)
-      )
+      if (aboutPosition < threshold && positions[pixelIndex] >= threshold)
         current = 'about';
-      setActive(current);
+      if (previous !== current) {
+        previous = current;
+        setActive(current);
+      }
     };
     const scroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
+    const measure = () => {
+      needsMeasure = true;
+      scroll();
+    };
+    const resize = new ResizeObserver(measure);
+    resize.observe(el);
     update();
     addEventListener('scroll', scroll, { passive: true });
-    addEventListener('resize', scroll);
+    addEventListener('resize', measure);
     return () => {
       observer.disconnect();
+      resize.disconnect();
       cancelAnimationFrame(frame);
       removeEventListener('scroll', scroll);
-      removeEventListener('resize', scroll);
+      removeEventListener('resize', measure);
     };
-  }, [paused]);
+  }, []);
   const copy = async () => {
     try {
       await navigator.clipboard.writeText('fd2190@nyu.edu');
@@ -191,7 +209,6 @@ export default function Home() {
                 <div className="hero typography-hero">
                   <div className="hero-edition">
                     <span className="eyebrow">Developer & creative coder</span>
-                    <span className="eyebrow">Code / Color / Curiosity</span>
                   </div>
                   <div className="hero-stage">
                     <div className="name-study depth-layer" data-depth="-0.15">
@@ -230,7 +247,6 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="hero-colophon">
-                    <span>Built with code. Shaped by curiosity.</span>
                     <a href="#canvas">
                       Scroll to explore <ArrowDown size={15} />
                     </a>
@@ -248,34 +264,25 @@ export default function Home() {
               <div className="wrap canvas-content">
                 <div className="intro-row" data-reveal>
                   <div>
-                    <span className="eyebrow">Creative work</span>
-                    <h2 className="chapter-title">The library.</h2>
-                    <p className="library-intro">
-                      A place for experiments.
-                      <br />
-                      And the things they turn into.
-                    </p>
+                    <h2 className="chapter-title">Library</h2>
                   </div>
                 </div>
                 <div className="study-grid collection-grid">
                   {[
                     {
                       id: 'canvas',
-                      n: '01',
                       title: 'Living Sketchbook',
                       type: 'JavaScript / Canvas / SVG',
                       mark: 'Canvas',
                     },
                     {
                       id: 'games',
-                      n: '02',
                       title: 'Creative work',
                       type: 'Drawings / Design / Interactive',
                       mark: 'WIP',
                     },
                     {
                       id: 'web',
-                      n: '03',
                       title: 'Web applications',
                       type: 'Frontend / Full-stack',
                       mark: 'Web',
@@ -289,7 +296,6 @@ export default function Home() {
                       key={item.id}
                     >
                       <div className="study-top">
-                        <span className="eyebrow">{item.n}</span>
                         <ArrowUpRight size={22} />
                       </div>
                       <CollectionPreview category={item.id} />
@@ -327,33 +333,16 @@ export default function Home() {
               <div className="wrap glass-content">
                 <div className="glass-intro" data-reveal>
                   <div>
-                    <span className="eyebrow">
-                      Web development / 2025 to 2026
-                    </span>
-                    <h2 className="chapter-title">
-                      Selected
-                      <br />
-                      <em>projects.</em>
-                    </h2>
-                    <p>
-                      Product websites, booking systems, and a private journal.
-                    </p>
+                    <h2 className="chapter-title">Projects</h2>
                     <a href="#selected-work" className="glass-down">
                       <ArrowDown size={18} /> Selected work
                     </a>
                   </div>
                   <div className="glass-object depth-layer" data-depth="0.65">
-                    <GlassSculpture paused={paused} />
-                    <span className="sculpture-caption eyebrow">
-                      A study in light & motion
-                    </span>
+                    <MagicEightBall paused={paused} />
                   </div>
                 </div>
-                <div className="work-heading" id="selected-work">
-                  <span className="eyebrow">Projects</span>
-                  <span className="eyebrow">Design · Development · Motion</span>
-                </div>
-                <div className="project-list">
+                <div className="project-list" id="selected-work">
                   {projects.map((p) => (
                     <article
                       data-tilt
@@ -373,7 +362,7 @@ export default function Home() {
                       <div className="project-copy">
                         <div className="project-meta eyebrow">
                           <span>
-                            {p.number} / {p.category}
+                            {p.category}
                           </span>
                           <span>{p.tag}</span>
                         </div>
@@ -413,12 +402,7 @@ export default function Home() {
             <PixelLandscape paused={paused} />
             <div className="wrap pixel-content" data-reveal>
               <span className="pixel-small">CONTACT</span>
-              <h2>
-                Get in
-                <br />
-                <span>touch.</span>
-              </h2>
-              <p>Have a project or opportunity in mind? Let’s talk.</p>
+              <h2>Contact</h2>
               <div className="pixel-actions">
                 <a href="mailto:fd2190@nyu.edu" className="pixel-button">
                   <Mail size={18} /> Say hello <ArrowUpRight size={18} />

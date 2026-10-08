@@ -229,7 +229,7 @@
 
 /* Optical glass: bright edges and a recessed translucent selection. */
 [data-material='glass'] {
-  --nav-surface: #142b47d9;
+  --nav-surface: #142b47;
   --nav-ink: #edf7ff;
   --nav-accent: #b4e8fa;
   --nav-line: #c9edff30;
@@ -245,8 +245,6 @@
       #ffffff0a
     ),
     var(--nav-surface);
-  backdrop-filter: blur(24px) saturate(140%);
-  -webkit-backdrop-filter: blur(24px) saturate(140%);
   border: 1px solid #c9edff40;
   border-radius: 8px;
   box-shadow:

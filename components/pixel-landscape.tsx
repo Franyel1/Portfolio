@@ -199,11 +199,9 @@ export default function PixelLandscape({
         Math.min(1, (innerHeight - top) / innerHeight),
       );
     };
-    // Only the outgoing edge uses scroll progress. The landscape has no mask.
     if (variant === 'page-edge') {
       onScroll();
-      if (!paused)
-        window.addEventListener('scroll', onScroll, { passive: true });
+      if (!paused) window.addEventListener('scroll', onScroll, { passive: true });
     }
     const timer = paused
       ? undefined

@@ -10,11 +10,14 @@ import {
   DialogClose,
 } from '@/components/ui/dialog';
 import { ArrowUpRight, X } from 'lucide-react';
-import CanvasCollage from '@/components/canvas-collage';
+import dynamic from 'next/dynamic';
 import WebProjectArt from '@/components/web-project-art';
 import { libraryItems } from '@/lib/library-data';
 
 type Collection = 'canvas' | 'games' | 'web' | 'index';
+const CanvasCollage = dynamic(() => import('@/components/canvas-collage'), {
+  loading: () => <output>Loading drawings…</output>,
+});
 const titles = {
   canvas: 'Living Sketchbook',
   games: 'Creative work',
@@ -36,8 +39,10 @@ export default function CollectionOverlay() {
             : hash === '#library-web'
               ? 'web'
               : null;
-    const initial = parse(location.hash);
-    if (initial) setMode(initial);
+    const initialFrame = requestAnimationFrame(() => {
+      const initial = parse(location.hash);
+      if (initial) setMode(initial);
+    });
     const click = (event: MouseEvent) => {
       const link = (event.target as Element).closest<HTMLAnchorElement>(
         'a[href]',
@@ -59,7 +64,10 @@ export default function CollectionOverlay() {
       setMode(next);
     };
     document.addEventListener('click', click, true);
-    return () => document.removeEventListener('click', click, true);
+    return () => {
+      cancelAnimationFrame(initialFrame);
+      document.removeEventListener('click', click, true);
+    };
   }, []);
   useEffect(() => {
     if (scroller.current) scroller.current.scrollTop = 0;
@@ -106,14 +114,13 @@ export default function CollectionOverlay() {
                   I’m preparing drawings, designs, and interactive experiments
                   for this collection.
                 </p>
-                <span className="wip-index">Collection 02 / In progress</span>
               </div>
             )}
             {mode === 'web' && (
               <div className="web-collection">
                 {libraryItems
                   .filter((item) => item.category === 'web')
-                  .map((item, i) => (
+                  .map((item) => (
                     <a
                       key={item.id}
                       href={item.href}
@@ -121,7 +128,6 @@ export default function CollectionOverlay() {
                       rel="noreferrer"
                       className={`web-entry web-entry-${item.id}`}
                     >
-                      <span className="web-entry-number">0{i + 1}</span>
                       <div className="web-entry-mark">
                         <WebProjectArt id={item.id} />
                       </div>
@@ -144,9 +150,8 @@ export default function CollectionOverlay() {
             )}
             {mode === 'index' && (
               <div className="collection-index">
-                {(['canvas', 'games', 'web'] as const).map((category, i) => (
+                {(['canvas', 'games', 'web'] as const).map((category) => (
                   <button key={category} onClick={() => setMode(category)}>
-                    <span>0{i + 1}</span>
                     <h3>{titles[category]}</h3>
                     <span>
                       {category === 'games'

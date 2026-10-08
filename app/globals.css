@@ -2696,8 +2696,8 @@ footer > a {
 }
 .collection-backdrop[data-slot] {
   z-index: 100;
-  background: rgba(0, 0, 0, 0.76);
-  backdrop-filter: blur(4px);
+  background: #080d17f5;
+  backdrop-filter: none;
 }
 .collection-dialog {
   position: fixed;

@@ -13,10 +13,9 @@ export default function PageStack({ paused }: { paused: boolean }) {
     const surfaces = pages.map((page) =>
       page.querySelector<HTMLElement>('.page-surface')!,
     );
-    const anchors = surfaces.map((surface) =>
-      Array.from(surface.querySelectorAll<HTMLElement>('[id]')),
-    );
-    const native = CSS.supports('animation-timeline: --sheet-entry');
+    const native =
+      CSS.supports('animation-timeline: --sheet-entry') &&
+      CSS.supports('animation-range: entry 0% entry 100%');
     const preference = matchMedia('(prefers-reduced-motion: reduce)');
     let frame: number | null = null;
     let positions: number[] = [];
@@ -28,11 +27,9 @@ export default function PageStack({ paused }: { paused: boolean }) {
       site.classList.remove('pages-ready', 'pages-native');
       ready = false;
       offsets = [];
-      surfaces.forEach((surface, index) => {
+      surfaces.forEach((surface) => {
         surface.style.removeProperty('transform');
-        anchors[index].forEach((anchor) =>
-          anchor.style.removeProperty('scroll-margin-top'),
-        );
+        surface.style.removeProperty('rotate');
       });
     };
     const update = () => {
@@ -43,11 +40,10 @@ export default function PageStack({ paused }: { paused: boolean }) {
       }
       const height = window.innerHeight;
       const scroll = window.scrollY;
-      if (needsMeasure) {
+      if (needsMeasure && !native) {
         // Layout is stable during scrolling. Measure only after actual reflow.
-        positions = pages.map(
-          (page) => page.getBoundingClientRect().top + scroll,
-        );
+        const boxes = pages.map((page) => page.getBoundingClientRect());
+        positions = boxes.map((box) => box.top + scroll);
         needsMeasure = false;
       }
       if (!ready) {
@@ -55,6 +51,8 @@ export default function PageStack({ paused }: { paused: boolean }) {
         site.classList.toggle('pages-native', native);
         ready = true;
       }
+      // Native timelines need no JavaScript work while scrolling.
+      if (native) return;
       surfaces.forEach((surface, index) => {
         const top = positions[index] - scroll;
         const distance = Math.max(0, Math.min(height, top));
@@ -66,18 +64,13 @@ export default function PageStack({ paused }: { paused: boolean }) {
             : distance < height * 0.2
               ? -(distance * distance) / (height * 0.4)
               : height * 0.1 - distance;
-        const fallbackOffset = top >= height ? 0 : offset;
-        const nextOffset = native ? offset : fallbackOffset;
+        const nextOffset = top >= height ? 0 : offset;
         if (offsets[index] === nextOffset) return;
         offsets[index] = nextOffset;
         // Supported browsers animate transforms entirely through the timeline.
-        if (!native)
-          surface.style.transform = `translate3d(0, ${nextOffset}px, 0)`;
-        // Update only nested anchor margins, not inherited variables across
-        // every descendant. Root scroll-padding supplies navigation clearance.
-        anchors[index].forEach((anchor) => {
-          anchor.style.scrollMarginTop = `${nextOffset}px`;
-        });
+        surface.style.transform = nextOffset
+          ? `translateY(${nextOffset}px)`
+          : 'none';
       });
     };
     const schedule = () => {
@@ -104,20 +97,67 @@ export default function PageStack({ paused }: { paused: boolean }) {
         schedule();
       }
     };
-    const resize = new ResizeObserver(measure);
-    pages.forEach((page) => resize.observe(page));
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', measure);
+    // Resolve chapter links against layout, rather than a translated surface.
+    // This replaces per-scroll anchor-style writes, including for repeated links.
+    const navigate = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      )
+        return;
+      if (!(event.target instanceof Element)) return;
+      const link = event.target.closest<HTMLAnchorElement>('a[href]');
+      if (!link || link.target || link.hasAttribute('download')) return;
+      const url = new URL(link.href, location.href);
+      if (
+        url.origin !== location.origin ||
+        url.pathname !== location.pathname ||
+        !url.hash
+      )
+        return;
+      const target = document.getElementById(
+        decodeURIComponent(url.hash.slice(1)),
+      );
+      if (!target?.closest('.chapter-page')) return;
+      event.preventDefault();
+      let top = 0;
+      let node: HTMLElement | null = target;
+      while (node) {
+        top += node.offsetTop;
+        node = node.offsetParent as HTMLElement | null;
+      }
+      const padding =
+        parseFloat(
+          getComputedStyle(document.documentElement).scrollPaddingTop,
+        ) || 0;
+      if (location.hash !== url.hash) history.pushState(null, '', url.hash);
+      window.scrollTo({
+        top: top - padding,
+        behavior: enabled() ? 'smooth' : 'instant',
+      });
+    };
+    const resize = native ? null : new ResizeObserver(measure);
+    if (resize) {
+      pages.forEach((page) => resize.observe(page));
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', measure);
+    }
+    document.addEventListener('click', navigate, true);
     preference.addEventListener('change', schedule);
     site.addEventListener('focusin', focus);
     update();
     return () => {
       if (frame !== null) cancelAnimationFrame(frame);
-      resize.disconnect();
+      resize?.disconnect();
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', measure);
       preference.removeEventListener('change', schedule);
       site.removeEventListener('focusin', focus);
+      document.removeEventListener('click', navigate, true);
       reset();
     };
   }, [paused]);

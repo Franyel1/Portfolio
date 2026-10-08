@@ -145,11 +145,11 @@
 }
 .atelier-nav[data-material='sketch'] {
   border-color: #182d5520;
-  background: #f5f3eced;
+  background: #f5f3ec;
   background-image: none;
   box-shadow: none;
   border-radius: 0;
-  backdrop-filter: blur(16px);
+  backdrop-filter: none;
 }
 [data-material='sketch'] .atelier-label {
   font:
@@ -170,7 +170,7 @@
 }
 .motion-control {
   border-radius: 100px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: none;
 }
 /* The paint remains a material, with a cleaner edge and calmer saturation. */
 .canvas-chapter {
@@ -281,7 +281,46 @@
 .sculpture {
   width: min(100%, 480px);
   padding: 0;
+  perspective: 900px;
 }
+.sculpture canvas,
+.glass-loop-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.sculpture canvas {
+  opacity: 0;
+}
+.glass-loop-fallback {
+  transform: rotateX(23deg) rotateY(-18deg) rotateZ(-25deg);
+  animation: glass-loop-drift 16s ease-in-out infinite alternate;
+}
+.sculpture[data-renderer='webgl'] canvas {
+  opacity: 1;
+}
+.sculpture[data-renderer='webgl'] .glass-loop-fallback {
+  visibility: hidden;
+}
+.sculpture[data-active='false'] .glass-loop-fallback,
+.sculpture[data-renderer='webgl'] .glass-loop-fallback {
+  animation-play-state: paused;
+}
+@keyframes glass-loop-drift {
+  from {
+    transform: rotateX(23deg) rotateY(-18deg) rotateZ(-25deg);
+  }
+  to {
+    transform: rotateX(-14deg) rotateY(35deg) rotateZ(10deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .glass-loop-fallback {
+    animation: none;
+  }
+}
+
 .sculpture-halo {
   width: 85%;
   height: 85%;
@@ -302,6 +341,97 @@
   font-size: 9px;
   letter-spacing: 0.16em;
   margin-top: -15px;
+}
+/* A faceted retro 3D toy, rendered only while interacting. */
+.eight-ball {
+  width: min(100%, 480px);
+  margin-inline: auto;
+}
+.eight-ball-stage {
+  position: relative;
+  aspect-ratio: 1;
+  container-type: inline-size;
+}
+.eight-ball-toy {
+  position: absolute;
+  inset: 12.2%;
+  border: 0;
+  padding: 0;
+  border-radius: 50%;
+  background: none;
+  color: inherit;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transform: none;
+}
+.eight-ball-toy:active { cursor: grabbing; }
+.eight-ball-toy:focus-visible {
+  outline: 2px solid #d7ebff;
+  outline-offset: 12px;
+}
+.eight-ball-shell {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(25% 7%, 50% 0, 75% 7%, 93% 25%, 100% 50%, 93% 75%, 75% 93%, 50% 100%, 25% 93%, 7% 75%, 0 50%, 7% 25%);
+  background: conic-gradient(from 30deg, #394a65, #192337, #26344a, #394a65);
+}
+.eight-ball-sphere { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+.eight-ball-fallback { position: absolute; inset: 32%; display: grid; place-items: center; border-radius: 50%; background: #f5f1e5; color: #080b12; font: 600 15cqw/1 Arial, sans-serif; }
+.eight-ball-toy[data-rendered='true'] .eight-ball-sphere { opacity: 1; }
+.eight-ball-toy[data-rendered='true'] :is(.eight-ball-shell, .eight-ball-fallback) { display: none; }
+.eight-ball[data-answered='true'] .eight-ball-sphere {
+  animation: answer-spectrum 9s ease-in-out infinite alternate;
+}
+@keyframes answer-spectrum {
+  from { filter: hue-rotate(-18deg) saturate(1.05); }
+  to { filter: hue-rotate(28deg) saturate(1.2); }
+}
+.eight-ball-shadow {
+  position: absolute;
+  bottom: 2%;
+  left: 22%;
+  width: 56%;
+  height: 7.2%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, #0009, #0000 70%);
+}
+.eight-ball-controls { text-align: center; }
+.eight-ball-result {
+  display: block;
+  min-height: 42px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #c0cddd;
+}
+.eight-ball[data-answered='true'] .eight-ball-result { color: #eff5ff; }
+.eight-ball-shake {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  width: 216px;
+  padding: 10px 18px;
+  border: 1px solid #9cbbeb55;
+  border-radius: 4px;
+  color: #eff5ff;
+  background: #6b91d414;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+.eight-ball-shake:hover { background: #6b91d42a; border-color: #aac9ff; }
+.eight-ball-shake:disabled { cursor: wait; color: #a8b9d1; }
+.glass-intro .eight-ball-controls .eight-ball-hint {
+  margin: 13px 0 0;
+  color: #91a4bd;
+  font-size: 11px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .eight-ball-shake { transition: none; }
 }
 .project-list {
   row-gap: 72px;
@@ -590,7 +720,7 @@ html:has(.motion-paused) {
   background: #101b29;
   color: #edf3fa;
   padding-top: 64px;
-  padding-bottom: 110px;
+  padding-bottom: 56px;
 }
 .about-page .about-redesign {
   padding-top: 110px;
@@ -691,7 +821,6 @@ html:has(.motion-paused) {
   background-size: auto 320px;
   background-position: center bottom;
   background-repeat: repeat-x;
-  filter: drop-shadow(0 2px 1px #050e1924) drop-shadow(0 8px 10px #050e1914);
 }
 .material-edge::before {
   content: '';
@@ -726,7 +855,7 @@ html:has(.motion-paused) {
   image-rendering: pixelated;
 }
 /* Animate the sheet as one compositor layer; its edge is part of that layer. */
-@supports (animation-timeline: --sheet-entry) {
+@supports (animation-timeline: --sheet-entry) and (animation-range: entry 0% entry 100%) {
   .chapter-page {
     view-timeline: --sheet-entry block;
     view-timeline-inset: 0;
@@ -739,20 +868,21 @@ html:has(.motion-paused) {
 }
 @keyframes sheet-reveal {
   0% {
-    transform: translate3d(0, -90dvh, 0);
+    transform: translateY(-90dvh);
   }
   80% {
-    transform: translate3d(0, -10dvh, 0);
+    transform: translateY(-10dvh);
     /* Quadratic ease-out matches native scroll speed exactly at the exit. */
     animation-timing-function: cubic-bezier(0.333333, 0.666667, 0.666667, 1);
   }
   100% {
-    transform: translate3d(0, 0, 0);
+    transform: none;
   }
 }
 .motion-paused .chapter-page > .page-surface {
   animation: none;
   transform: none;
+  rotate: none;
 }
 .glass-chapter {
   padding-top: 140px;
@@ -816,6 +946,7 @@ html:has(.motion-paused) {
   .pages-ready .chapter-page > .page-surface {
     animation: none;
     transform: none;
+    rotate: none;
     box-shadow: none;
   }
 }
