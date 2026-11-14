@@ -198,7 +198,7 @@ export default function Home() {
         {paused ? <Play size={14} /> : <Pause size={14} />}
         <span>{paused ? 'Motion off' : 'Motion on'}</span>
       </button>
-      <CollectionOverlay />
+      <CollectionOverlay paused={paused} />
       <SiteMotion paused={paused} />
       <PageStack paused={paused} />
       <main id="main">
@@ -278,8 +278,8 @@ export default function Home() {
                     {
                       id: 'games',
                       title: 'Creative work',
-                      type: 'Drawings / Design / Interactive',
-                      mark: 'WIP',
+                      type: 'Games / Interactive',
+                      mark: 'Games',
                     },
                     {
                       id: 'web',
@@ -301,7 +301,7 @@ export default function Home() {
                       <h3>{item.title}</h3>
                       <span className="study-open">
                         {item.id === 'games' ? (
-                          'Work in progress'
+                          'Small Talk'
                         ) : item.id === 'canvas' ? (
                           'Open canvas collage'
                         ) : (

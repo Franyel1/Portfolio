@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { ArrowUpRight, X } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import WebProjectArt from '@/components/web-project-art';
 import { libraryItems } from '@/lib/library-data';
 
@@ -24,7 +25,7 @@ const titles = {
   web: 'Web applications',
   index: 'The library',
 };
-export default function CollectionOverlay() {
+export default function CollectionOverlay({ paused }: { paused: boolean }) {
   const [mode, setMode] = useState<Collection | null>(null);
   const trigger = useRef<HTMLElement | null>(null);
   const scroller = useRef<HTMLDivElement>(null);
@@ -107,14 +108,39 @@ export default function CollectionOverlay() {
             </DialogDescription>
             {mode === 'canvas' && <CanvasCollage />}
             {mode === 'games' && (
-              <div className="creative-wip">
-                <span className="wip-stamp">Work in progress</span>
-                <h3>Creative work.</h3>
-                <p>
-                  I’m preparing drawings, designs, and interactive experiments
-                  for this collection.
-                </p>
-              </div>
+              <a
+                className="small-talk-entry"
+                data-paused={paused}
+                href="https://franyel1.itch.io/small-talk"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="small-talk-cover">
+                  <Image
+                    src="/images/projects/small-talk/cover.png"
+                    alt=""
+                    width={630}
+                    height={500}
+                    unoptimized
+                  />
+                </div>
+                <div>
+                  <Image
+                    className="small-talk-logo"
+                    src="/images/projects/small-talk/logo.png"
+                    alt=""
+                    width={51}
+                    height={51}
+                    unoptimized
+                  />
+                  <span className="eyebrow">Playdate · In development</span>
+                  <h3>Small Talk</h3>
+                  <p>A quirky island life sim.</p>
+                  <span className="small-talk-link">
+                    View on itch.io <ArrowUpRight size={18} aria-hidden="true" />
+                  </span>
+                </div>
+              </a>
             )}
             {mode === 'web' && (
               <div className="web-collection">
@@ -155,7 +181,7 @@ export default function CollectionOverlay() {
                     <h3>{titles[category]}</h3>
                     <span>
                       {category === 'games'
-                        ? 'Work in progress'
+                        ? 'Small Talk'
                         : category === 'canvas'
                           ? 'Live canvas collage'
                           : 'Selected websites'}

@@ -250,11 +250,69 @@
 .collection-grid .study-card:hover .study-open svg {
   transform: translate(3px, -3px);
 }
-.preview-creative {
-  background: #f3dfc8;
+.preview-small-talk {
+  display: grid;
+  align-items: center;
+  padding: clamp(0.5rem, 2vw, 1.5rem);
+  background: #11104b;
 }
-.preview-creative i {
-  border-color: #16274845;
+.preview-small-talk img {
+  height: auto;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.small-talk-entry {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 4vw, 3rem);
+  padding-block: 1.5rem;
+  border-bottom: 1px solid #ffffff40;
+}
+.small-talk-cover {
+  position: relative;
+}
+.small-talk-cover img {
+  width: 100%;
+  height: auto;
+}
+.small-talk-logo {
+  display: block;
+  margin-bottom: 1rem;
+  image-rendering: pixelated;
+}
+.small-talk-entry h3 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-block: 0.35rem;
+}
+.small-talk-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .small-talk-entry[data-paused='false']:focus-visible .small-talk-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/images/projects/small-talk/cover-hover.gif') center / contain no-repeat;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .small-talk-entry[data-paused='false']:hover .small-talk-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('/images/projects/small-talk/cover-hover.gif') center / contain no-repeat;
+  }
+}
+@media (max-width: 640px) {
+  .small-talk-entry {
+    grid-template-columns: 1fr;
+  }
 }
 /* Each project gets an optical stage, while the text stays directly on the scene. */
 .glass-chapter {

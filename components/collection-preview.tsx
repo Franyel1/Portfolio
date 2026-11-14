@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function CollectionPreview({ category }: { category: string }) {
   if (category === 'canvas')
     return (
@@ -11,14 +13,14 @@ export default function CollectionPreview({ category }: { category: string }) {
     );
   if (category === 'games')
     return (
-      <div className="collection-preview preview-creative">
-        <span className="creative-preview-word">
-          Creative
-          <br />
-          <em>studies.</em>
-        </span>
-        <span className="creative-preview-stamp">WORK IN PROGRESS</span>
-        <i aria-hidden="true" />
+      <div className="collection-preview preview-small-talk">
+        <Image
+          src="/images/projects/small-talk/banner.png"
+          alt=""
+          width={884}
+          height={232}
+          unoptimized
+        />
       </div>
     );
   return (
