@@ -21,6 +21,12 @@ export default function CollectionPreview({ category }: { category: string }) {
           height={232}
           unoptimized
         />
+        <img
+          className="small-talk-hover"
+          src="/images/projects/small-talk/banner-hover.gif"
+          alt=""
+          loading="lazy"
+        />
       </div>
     );
   return (

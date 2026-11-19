@@ -87,6 +87,20 @@ const skills = [
     use: 'Exploring interface ideas, layout, and visual direction.',
     project: 'Design workflow',
   },
+  {
+    id: 'photoshop',
+    name: 'Photoshop',
+    group: 'tools',
+    use: 'Editing photos, building textures, and preparing images for the web.',
+    project: 'Design workflow',
+  },
+  {
+    id: 'illustrator',
+    name: 'Illustrator',
+    group: 'tools',
+    use: 'Vector illustrations, icons, and artwork that scales cleanly.',
+    project: 'Design workflow',
+  },
 ];
 export default function AboutWorkbench() {
   const [selected, setSelected] = useState(skills[0]);
@@ -111,7 +125,7 @@ export default function AboutWorkbench() {
             rel="noreferrer"
             className="resume-link"
           >
-            Read my résumé
+            Read my résumé (PDF)
           </a>
         </div>
       </div>
@@ -134,19 +148,19 @@ export default function AboutWorkbench() {
         <div className="experience-timeline">
           {[
             {
-              date: 'JUN to AUG 2026',
+              date: 'Jun – Aug 2026',
               name: 'SAIL',
               role: 'Web development & motion content',
               text: 'Rebuilt the marketing front end, created interactive product visuals and video content, and built an automated intelligence pipeline.',
             },
             {
-              date: 'SEP 2025 to MAY 2026',
+              date: 'Sep 2025 – May 2026',
               name: 'New York University',
               role: 'Web Development Tutor & Grader',
               text: 'Helped students debug, build responsive interfaces, and understand accessible web design through one-on-one support and project feedback.',
             },
             {
-              date: 'MAY to AUG 2025',
+              date: 'May – Aug 2025',
               name: 'Antonio Jefferson Studio',
               role: 'Studio internship · Full-stack development',
               text: 'Connected scheduling, payments, and automated confirmations in a responsive booking platform.',

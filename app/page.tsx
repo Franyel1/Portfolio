@@ -4,8 +4,6 @@ import {
   ArrowUpRight,
   ArrowDown,
   ArrowUp,
-  Pause,
-  Play,
   Copy,
   Check,
   Code2,
@@ -26,7 +24,7 @@ const projects = [
   {
     id: 'sail',
     name: 'SAIL',
-    category: 'Frontend · Motion · Product storytelling',
+    category: 'Frontend, motion, product storytelling',
     tag: '2026',
     summary:
       'Rebuilt the marketing site with interactive trade visualizations, canvas particles, and original motion content.',
@@ -46,7 +44,7 @@ const projects = [
   {
     id: 'studio',
     name: 'Antonio Jefferson Studio',
-    category: 'Full-stack · Scheduling · Payments',
+    category: 'Full-stack, scheduling, payments',
     tag: '2025',
     summary:
       'A studio site and booking platform that handles availability, payments, and confirmations.',
@@ -66,7 +64,7 @@ const projects = [
   {
     id: 'ink',
     name: 'Ink.',
-    category: 'Private journal · Full-stack · Product',
+    category: 'Private journal, full-stack, product',
     tag: 'PERSONAL',
     summary:
       'A private journal that helps turn everyday writing into a searchable record of your life.',
@@ -84,6 +82,73 @@ const projects = [
       'A notebook that helps people revisit their story while keeping them in control of what it remembers.',
   },
 ];
+// The same pencil underline the nav uses, drawn in on hover.
+function Scribble() {
+  return (
+    <svg
+      className="sb-scribble"
+      viewBox="0 0 100 12"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <path pathLength={1} d="M3 8 Q25 2 51 6 T97 4 M12 10 Q54 5 88 8" />
+    </svg>
+  );
+}
+
+const petalColors: Record<string, string[]> = {
+  sakura: ['#f19bbb', '#fbd0dd', '#e77fa5'],
+  daisy: ['#f6d365', '#fff3c4', '#e0a227'],
+  orchid: ['#b57ad8', '#e3c2f2', '#8e4fbf'],
+};
+
+// A few petals drift off the flower head and fall past the ruled line.
+function releasePetals(flower: HTMLElement, colors: string[]) {
+  const garden = flower.parentElement;
+  const now = performance.now();
+  if (
+    !garden ||
+    matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    now - Number(flower.dataset.shed ?? 0) < 700
+  )
+    return;
+  flower.dataset.shed = String(now);
+  const f = flower.getBoundingClientRect();
+  const g = garden.getBoundingClientRect();
+  for (let n = 0; n < 7; n++) {
+    const petal = document.createElement('span');
+    petal.className = 'sb-petal';
+    petal.style.background = colors[n % colors.length];
+    petal.style.left = `${f.left - g.left + f.width * (0.2 + Math.random() * 0.6)}px`;
+    petal.style.top = `${f.top - g.top + f.height * (0.1 + Math.random() * 0.35)}px`;
+    garden.appendChild(petal);
+    const drift = (Math.random() - 0.35) * 110;
+    const fall = 80 + Math.random() * 90;
+    const spin = (Math.random() - 0.5) * 540;
+    // One continuous arc: sideways first, then gravity takes over.
+    petal.animate(
+      [
+        { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+        {
+          transform: `translate(${drift * 0.7}px, ${fall * 0.25}px) rotate(${spin * 0.5}deg)`,
+          opacity: 1,
+          offset: 0.4,
+        },
+        {
+          transform: `translate(${drift}px, ${fall}px) rotate(${spin}deg)`,
+          opacity: 0,
+        },
+      ],
+      {
+        duration: 1100 + Math.random() * 600,
+        delay: n * 12,
+        easing: 'ease-out',
+        fill: 'backwards',
+      },
+    ).onfinish = () => petal.remove();
+  }
+}
+
 export default function Home() {
   const [paused, setPaused] = useState(false),
     [copied, setCopied] = useState(false),
@@ -189,15 +254,6 @@ export default function Home() {
         Skip to content
       </a>
       <SiteNav current={active} />
-      <button
-        className="motion-control"
-        onClick={() => setPaused(!paused)}
-        aria-label={paused ? 'Enable animation' : 'Pause animation'}
-        title={paused ? 'Enable animation' : 'Pause animation'}
-      >
-        {paused ? <Play size={14} /> : <Pause size={14} />}
-        <span>{paused ? 'Motion off' : 'Motion on'}</span>
-      </button>
       <CollectionOverlay paused={paused} />
       <SiteMotion paused={paused} />
       <PageStack paused={paused} />
@@ -206,50 +262,53 @@ export default function Home() {
           <div className="page-surface paper-sheet">
             <div className="sketch" data-scene>
               <div className="wrap">
-                <div className="hero typography-hero">
-                  <div className="hero-edition">
-                    <span className="eyebrow">Developer & creative coder</span>
-                  </div>
-                  <div className="hero-stage">
-                    <div className="name-study depth-layer" data-depth="-0.15">
-                      <div className="type-guides" aria-hidden="true">
-                        <i />
-                        <i />
-                        <i />
-                      </div>
-                      <h1 className="sketched-name" aria-label="Franyel">
-                        <span className="name-outline" aria-hidden="true">
-                          Franyel.
+                <div className="sb-hero">
+                  <div className="sb-line">
+                    <h1 className="sb-name" aria-label="Franyel.">
+                      {'Franyel'.split('').map((letter, i) => (
+                        <span className="sb-letter" aria-hidden="true" key={i}>
+                          {letter}
                         </span>
-                        <span className="name-ink" aria-hidden="true">
-                          Franyel<span className="name-period">.</span>
-                        </span>
-                      </h1>
+                      ))}
+                      <span className="sb-dot" aria-hidden="true" />
+                    </h1>
+                    <div className="sb-garden" aria-hidden="true">
+                      {Object.keys(petalColors).map((flower) => (
+                        <i
+                          key={flower}
+                          className={`sb-flower sb-${flower}`}
+                          onPointerEnter={(e) => {
+                            // Once a flower blooms it stays in colour.
+                            e.currentTarget.setAttribute('data-bloom', '');
+                            releasePetals(e.currentTarget, petalColors[flower]);
+                          }}
+                        />
+                      ))}
                     </div>
                   </div>
-                  <div className="hero-introduction">
-                    <p className="hero-subtitle">
-                      Web development.
-                      <br />
-                      Interactive work.
+                  <div className="sb-intro">
+                    <p className="sb-lead">
+                      I build websites, canvas sketches, and small games.
                     </p>
                     <div>
-                      <p className="hero-description">
-                        I’m Franyel Diaz Rodriguez, a computer science graduate
-                        from NYU. I build web applications, canvas experiments,
-                        and games.
+                      <p className="sb-body">
+                        I’m Franyel Diaz Rodriguez, an NYU computer science
+                        graduate, class of 2026. I draw, edit video, and write
+                        code. My favorite projects bring together the three
+                        words I live by: code, color, and curiosity. Mostly, I
+                        just love making new things.
                       </p>
-                      <div className="hero-actions">
-                        <a className="ink-button" href="#glass">
-                          Explore my work
+                      <div className="sb-actions">
+                        <a href="#glass">
+                          See projects
+                          <Scribble />
+                        </a>
+                        <a href="/resume.pdf" target="_blank" rel="noreferrer">
+                          Résumé
+                          <Scribble />
                         </a>
                       </div>
                     </div>
-                  </div>
-                  <div className="hero-colophon">
-                    <a href="#canvas">
-                      Scroll to explore <ArrowDown size={15} />
-                    </a>
                   </div>
                 </div>
               </div>
@@ -358,9 +417,7 @@ export default function Home() {
                       </a>
                       <div className="project-copy">
                         <div className="project-meta eyebrow">
-                          <span>
-                            {p.category}
-                          </span>
+                          <span>{p.category}</span>
                           <span>{p.tag}</span>
                         </div>
                         <h3>{p.name}</h3>

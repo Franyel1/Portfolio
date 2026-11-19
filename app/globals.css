@@ -93,10 +93,10 @@ a:focus-visible {
   padding-inline: 64px;
 }
 .eyebrow {
-  font-family: var(--font-mono), monospace;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 12px;
+  font-family: var(--font-body), sans-serif;
+  letter-spacing: 0;
+  font-size: 13px;
+  font-weight: 500;
 }
 .hand {
   font-family: var(--font-hand), cursive;
@@ -425,23 +425,6 @@ h1 span {
 .journey-nav a:hover span,
 .journey-nav a:focus-visible span {
   opacity: 1;
-}
-.motion-control {
-  position: fixed;
-  bottom: 20px;
-  right: 22px;
-  z-index: 40;
-  border: 1px solid #ffffff30;
-  border-radius: 30px;
-  padding: 10px 14px;
-  display: flex;
-  gap: 7px;
-  align-items: center;
-  color: #fff;
-  background: #282a2ddd;
-  backdrop-filter: blur(12px);
-  font-size: 12px;
-  box-shadow: 0 4px 20px #0001;
 }
 .material-transition {
   position: relative;
@@ -1095,7 +1078,7 @@ h1 span {
   border-top: 1px solid #c1d8e829;
 }
 .education .eyebrow {
-  font-size: 11px;
+  font-size: 13px;
 }
 .education p {
   font-size: 14px;
@@ -1630,7 +1613,7 @@ footer > a {
     margin-top: 25px;
   }
   .work-heading .eyebrow {
-    font-size: 10px;
+    font-size: 12px;
   }
   .work-heading > span:last-child {
     display: none;
@@ -1747,12 +1730,6 @@ footer > a {
   }
   .pixel-signature {
     font-size: 18px;
-  }
-  .motion-control {
-    bottom: 14px;
-    right: 14px;
-    font-size: 11px;
-    padding: 8px 11px;
   }
   .case-dialog {
     padding: 28px 24px;
@@ -2492,8 +2469,7 @@ footer > a {
   padding: 24px;
 }
 .library-card-copy .eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.04em;
+  font-size: 12px;
 }
 .library-card h2 {
   font-size: 23px;

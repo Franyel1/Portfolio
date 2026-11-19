@@ -29,8 +29,7 @@
   color: #4d5a71;
 }
 .hero-edition .eyebrow {
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 14px;
 }
 .hero-stage {
   position: relative;
@@ -168,10 +167,6 @@
 .atelier-nav .atelier-monogram {
   font-size: 39px;
 }
-.motion-control {
-  border-radius: 100px;
-  backdrop-filter: none;
-}
 /* The paint remains a material, with a cleaner edge and calmer saturation. */
 .canvas-chapter {
   padding-top: 130px;
@@ -254,7 +249,7 @@
   display: grid;
   align-items: center;
   padding: clamp(0.5rem, 2vw, 1.5rem);
-  background: #11104b;
+  background: #61b2d4;
 }
 .preview-small-talk img {
   height: auto;
@@ -595,7 +590,7 @@ html:has(.motion-paused) {
     min-height: 0;
   }
   .hero-edition .eyebrow {
-    font-size: 8px;
+    font-size: 13px;
   }
   .hero-edition > span:last-child {
     display: none;
@@ -697,8 +692,7 @@ html:has(.motion-paused) {
     font-size: 14px;
   }
   .work-heading .eyebrow {
-    font-size: 9px;
-    letter-spacing: 0.04em;
+    font-size: 12px;
   }
   .project-sail .project-copy h3 {
     font-size: 48px;
@@ -778,7 +772,8 @@ html:has(.motion-paused) {
   background: #101b29;
   color: #edf3fa;
   padding-top: 64px;
-  padding-bottom: 56px;
+  /* Short tail: the pixel sky already gives the ridge its breathing room. */
+  padding-bottom: 16px;
 }
 .about-page .about-redesign {
   padding-top: 110px;
@@ -988,7 +983,7 @@ html:has(.motion-paused) {
   }
   .about-page {
     padding-top: 40px;
-    padding-bottom: 80px;
+    padding-bottom: 16px;
   }
   .about-page .about-redesign {
     margin-top: 0;
@@ -1013,4 +1008,764 @@ html:has(.motion-paused) {
     rotate: none;
     box-shadow: none;
   }
+}
+
+/*
+ * Sketchbook hero: the name is written on a ruled line and Franyel's own
+ * flower drawings grow from the same line.
+ */
+.sb-hero {
+  --ink: #182d55;
+  min-height: min(740px, 100svh);
+  padding: 150px 0 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 56px;
+  color: var(--ink);
+}
+.sb-line {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(4px, 1vw, 14px);
+  padding-bottom: 3px;
+  /* Start the rule a little before the text so it runs under the italic F's foot. */
+  margin-left: -14px;
+  padding-left: 14px;
+}
+/* The rule is drawn on top so the stems tuck behind it. */
+.sb-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 3px;
+  background: var(--ink);
+  pointer-events: none;
+}
+.sb-name {
+  /* The name still crosses over the rule, only the flowers sit behind it. */
+  position: relative;
+  z-index: 2;
+  margin: 0 0 -0.13em;
+  font:
+    italic 400 clamp(88px, 17vw, 250px) / 1 Georgia,
+    'Times New Roman',
+    serif;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+/* The period is a little Pac-Man, mouth up and to the right like the logo's. */
+.sb-dot {
+  display: inline-block;
+  width: 0.135em;
+  height: 0.135em;
+  margin-left: 0.05em;
+  border-radius: 50%;
+  background: conic-gradient(
+    #c4553a 0 var(--jaw, 24deg),
+    transparent 0 calc(90deg - var(--jaw, 24deg)),
+    #c4553a 0
+  );
+}
+/* Registered so the jaw angle animates smoothly instead of swapping backgrounds. */
+@property --jaw {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 24deg;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .sb-name:hover .sb-dot {
+    animation: sb-chomp 0.18s ease-in-out infinite alternate;
+  }
+}
+@keyframes sb-chomp {
+  to {
+    --jaw: 45deg;
+  }
+}
+.sb-garden {
+  display: flex;
+  align-items: flex-end;
+  /* The drawings carry their own side margins; pull them into one cluster. */
+  gap: 0;
+  margin-bottom: -1px;
+  margin-left: -0.6vw;
+}
+.sb-flower {
+  position: relative;
+  display: block;
+  background: var(--ink);
+  mask: var(--src) center bottom / contain no-repeat;
+  transform-origin: 50% 100%;
+  /* Drop each drawing by its own empty bottom margin so the stems meet the line. */
+  translate: 0 calc(var(--gap) + 1px);
+}
+/* The colour layer sits under the same mask, so only the drawing fills in. */
+.sb-flower::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--bloom);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.sb-flower[data-bloom]::after {
+  opacity: 1;
+}
+.sb-sakura {
+  --bloom: linear-gradient(to top, #4f7a45 0 22%, #c2577e 40%, #f19bbb 70%, #fbd0dd);
+  --src: url('/projects/drawing-selected/sakura.svg');
+  --gap: 9.2%;
+  width: clamp(84px, 12vw, 168px);
+  aspect-ratio: 1;
+}
+.sb-daisy {
+  --bloom: linear-gradient(to top, #4f7a45 0 30%, #e0a227 50%, #f6d365);
+  margin-left: -1.4vw;
+  --src: url('/projects/drawing-selected/daisy.svg');
+  --gap: 17.3%;
+  width: clamp(60px, 8vw, 116px);
+  aspect-ratio: 1;
+}
+.sb-orchid {
+  --bloom: linear-gradient(to top, #4f7a45 0 24%, #7a3fa8 42%, #b57ad8 72%, #e3c2f2);
+  --src: url('/projects/drawing-selected/orchid.svg');
+  --gap: 5.4%;
+  width: clamp(64px, 8.5vw, 120px);
+  aspect-ratio: 1;
+  margin-left: -1.6vw;
+  scale: -1 1;
+}
+.sb-intro {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 8%;
+  align-items: start;
+}
+.sb-lead {
+  margin: 0;
+  max-width: 17ch;
+  font:
+    500 clamp(28px, 3.2vw, 44px) / 1.12 var(--font-body),
+    sans-serif;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+.sb-body {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #4a556b;
+}
+.sb-actions {
+  display: flex;
+  gap: 28px;
+  margin-top: 24px;
+  font-weight: 500;
+}
+.sb-actions a {
+  position: relative;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #182d5540;
+}
+.sb-scribble {
+  position: absolute;
+  left: -4%;
+  bottom: -4px;
+  width: 108%;
+  height: 10px;
+  fill: none;
+  stroke: #c4553a;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.4s ease;
+  pointer-events: none;
+}
+.sb-actions a:is(:hover, :focus-visible) .sb-scribble {
+  stroke-dashoffset: 0;
+}
+.sb-hero a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* One load moment: the drawings grow up out of the ruled line. */
+@media (prefers-reduced-motion: no-preference) {
+  .sb-flower {
+    animation: sb-grow 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .sb-daisy {
+    animation-delay: 0.12s;
+  }
+  .sb-orchid {
+    animation-delay: 0.24s;
+  }
+}
+@keyframes sb-grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .sb-intro {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+@media (max-width: 560px) {
+  .sb-hero {
+    min-height: 0;
+    padding: 120px 0 56px;
+    gap: 40px;
+  }
+  .sb-line {
+    gap: 8px;
+  }
+  .sb-name {
+    font-size: 17vw;
+  }
+  .sb-sakura {
+    width: 15vw;
+  }
+  .sb-daisy {
+    width: 11vw;
+    margin-left: -2vw;
+  }
+  .sb-orchid {
+    display: none;
+  }
+}
+@media (forced-colors: active) {
+  .sb-flower {
+    background: CanvasText;
+  }
+}
+
+/*
+ * Library folio. Wide: the sketchbook is the big spread and the two smaller
+ * collections stack beside it, picture over caption. Medium: the sketchbook
+ * runs full width and the other two sit side by side under it. Small: one column.
+ */
+.canvas-chapter .collection-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  grid-auto-rows: auto;
+  gap: 32px 36px;
+  align-items: stretch;
+}
+.canvas-chapter .collection-grid .study-card {
+  display: flex;
+  flex-direction: column;
+  grid-row: auto;
+  margin: 0;
+  padding: 18px 0 0;
+  border: 0;
+  border-top: 2px solid #182d55;
+  background: transparent;
+  color: #182d55;
+}
+.canvas-chapter .collection-grid .study-0 {
+  grid-row: span 2;
+}
+.canvas-chapter .collection-grid .study-top {
+  display: none;
+}
+.canvas-chapter .collection-grid .collection-preview {
+  order: -1;
+  grid-column: auto;
+  grid-row: auto;
+  width: 100%;
+  min-height: 0;
+  margin: 0 0 16px;
+  aspect-ratio: 2 / 1;
+  border-radius: 2px;
+  box-shadow: 0 2px 0 #182d5533;
+}
+.canvas-chapter .collection-grid .study-0 .collection-preview {
+  flex: 1;
+  aspect-ratio: auto;
+  min-height: 360px;
+}
+.canvas-chapter .collection-grid .study-medium {
+  font-size: 13px;
+  color: #33405c;
+}
+.canvas-chapter .collection-grid .study-card h3 {
+  margin: 4px 0 10px;
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+.canvas-chapter .collection-grid .study-0 h3 {
+  font-size: clamp(34px, 3.6vw, 56px);
+}
+.canvas-chapter .collection-grid .study-open {
+  align-self: flex-start;
+  margin: 0;
+  padding-bottom: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid #182d5566;
+}
+.canvas-chapter .collection-grid .study-card:hover .study-open {
+  border-color: #182d55;
+}
+.canvas-chapter .collection-grid .study-card:focus-visible {
+  outline: 2px solid #182d55;
+  outline-offset: 6px;
+}
+
+@media (max-width: 1100px) {
+  .canvas-chapter .collection-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 28px;
+  }
+  .canvas-chapter .collection-grid .study-0 {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .canvas-chapter .collection-grid .study-0 .collection-preview {
+    flex: none;
+    min-height: 0;
+    aspect-ratio: 16 / 8;
+  }
+}
+@media (max-width: 650px) {
+  .canvas-chapter .collection-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .canvas-chapter .collection-grid .study-0 .collection-preview {
+    aspect-ratio: 4 / 3;
+  }
+  .canvas-chapter .collection-grid .study-medium {
+    font-size: 12px;
+  }
+}
+
+/* Small Talk screenshots: the Playdate screens, two across. */
+.small-talk-shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  margin: 0;
+  padding: 1.5rem 0 2rem;
+  list-style: none;
+}
+.small-talk-shots img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  image-rendering: pixelated;
+}
+@media (max-width: 640px) {
+  .small-talk-shots {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-flower::after {
+    transition: none;
+  }
+}
+
+/* Small Talk card: the animated title takes over on hover. */
+.preview-small-talk {
+  position: relative;
+}
+/* Scoped under the preview so it beats the older `.collection-preview img` rules. */
+.preview-small-talk .small-talk-hover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: inherit;
+  object-fit: contain;
+  image-rendering: pixelated;
+  opacity: 0;
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .study-card:hover .preview-small-talk .small-talk-hover,
+  .study-card:focus-visible .preview-small-talk .small-talk-hover {
+    opacity: 1;
+  }
+  .study-card:hover .preview-small-talk > img:first-child,
+  .study-card:focus-visible .preview-small-talk > img:first-child {
+    opacity: 0;
+  }
+}
+
+/* Each letter of the name lifts a little under the pointer. */
+.sb-letter {
+  display: inline-block;
+  transition: translate 0.25s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .sb-letter:hover {
+    translate: 0 -0.06em;
+  }
+}
+
+.sb-garden {
+  position: relative;
+}
+.sb-petal {
+  position: absolute;
+  z-index: 2;
+  width: 9px;
+  height: 6px;
+  border-radius: 80% 10% 80% 10%;
+  pointer-events: none;
+}
+
+/*
+ * About: drop the faint dividers. Spacing already separates the blocks, and the
+ * remaining lines are the ones that mean something: links, active tab, selected tool.
+ */
+#about .about-redesign,
+#about .skills-workbench,
+#about .creative-tools {
+  border-top: 0;
+}
+#about .about-facts {
+  border-block: 0;
+}
+#about .skill-filters {
+  border-bottom: 0;
+}
+#about .skill-tile:not(.selected) {
+  border-bottom-color: transparent;
+}
+
+/*
+ * About, refined. One column grid shared by every block, clear type steps,
+ * and quiet glass panels instead of rules, so it reads like a résumé page.
+ */
+/*
+ * Palette: deep navy ground with warm paper surfaces set on it for contrast
+ * (kept off blue so tool logos like React don't blend in); ice blue accents.
+ */
+#about {
+  --a-ink: #f6f8fc;
+  --a-muted: #c3cfdf;
+  --a-faint: #8496ad;
+  --a-accent: #b4e8fa;
+  --a-light: #e2dccd;
+  --a-on-light: #172b45;
+  --a-panel: #ffffff0a;
+  --a-edge: #ffffff1f;
+}
+#about .about-redesign {
+  display: grid;
+  gap: clamp(72px, 9vw, 120px);
+  padding-top: clamp(40px, 6vw, 80px);
+}
+
+/* Intro: heading and copy share a top edge. */
+#about .about-lead {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(24px, 6vw, 96px);
+  align-items: start;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+#about .about-lead h2 {
+  margin: 0;
+  font-size: clamp(48px, 6.4vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+}
+#about .about-intro-copy {
+  max-width: 34em;
+}
+#about .about-intro-copy p {
+  margin: 0 0 18px;
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.55;
+  color: var(--a-ink);
+}
+#about .about-intro-copy p + p {
+  color: var(--a-muted);
+}
+#about .about-lead h2 {
+  color: var(--a-ink);
+}
+#about .resume-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 10px;
+  padding: 11px 18px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--a-light);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--a-on-light);
+  transition: background 0.2s;
+}
+#about .resume-link:hover {
+  background: #ece7da;
+}
+
+/* Facts: one glass strip, three cells. */
+/* Facts: three open columns, the label carries the accent. */
+#about .about-facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  margin: calc(clamp(72px, 9vw, 120px) * -0.35) 0 0;
+  padding: 0;
+  background: none;
+  border: 0;
+}
+#about .about-facts span {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  padding: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--a-muted);
+}
+#about .about-facts strong {
+  display: block;
+  margin: 0;
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--a-accent);
+}
+
+/* Experience: dates in their own column, like a résumé. */
+#about .experience-layout {
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(24px, 6vw, 96px);
+  margin: 0;
+}
+#about .experience-label .eyebrow {
+  color: var(--a-faint);
+  font-size: 14px;
+}
+#about .experience-label h3,
+#about .skills-heading h3 {
+  margin: 8px 0 0;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  color: var(--a-ink);
+}
+#about .experience-timeline {
+  display: grid;
+  gap: 44px;
+  border: 0;
+}
+#about .experience-timeline article {
+  padding: 0;
+}
+#about .experience-timeline article::before {
+  display: none;
+}
+#about .experience-timeline article > div {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 32px;
+}
+#about .experience-timeline .eyebrow {
+  grid-row: 1 / span 3;
+  padding-top: 6px;
+  font-size: 14px;
+  color: var(--a-faint);
+  font-variant-numeric: tabular-nums;
+}
+#about .experience-timeline h4 {
+  margin: 0 0 4px;
+  font-size: clamp(22px, 2vw, 28px);
+  letter-spacing: -0.03em;
+  color: var(--a-ink);
+}
+#about .timeline-role {
+  font-size: 15px;
+  color: var(--a-accent);
+}
+#about .experience-timeline p {
+  margin: 12px 0 0;
+  max-width: 36em;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--a-muted);
+}
+
+/* Tools: tiles and the detail share the same dark glass. */
+#about .skills-workbench {
+  margin: 0;
+  padding: 0;
+}
+#about .skills-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+#about .skills-heading p {
+  margin: 0;
+  font-size: 15px;
+  color: var(--a-faint);
+}
+#about .skill-filters {
+  margin-bottom: 20px;
+}
+#about .skill-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+#about .skill-icon-grid {
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 10px;
+}
+#about .skill-tile {
+  gap: 12px;
+  padding: 18px 16px;
+  min-height: 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: var(--a-panel);
+  box-shadow: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+#about .skill-tile:hover {
+  background: #ffffff10;
+}
+#about .skill-tile.selected {
+  background: var(--a-light);
+  border-color: var(--a-light);
+  color: var(--a-on-light);
+}
+#about .skill-icon-bed img {
+  width: 40px;
+  height: 40px;
+}
+#about .skill-detail {
+  min-height: 0;
+  padding: 28px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--a-light);
+  color: var(--a-on-light);
+}
+#about .skill-detail-logo {
+  width: 48px;
+  height: 48px;
+  margin: 0 0 20px;
+}
+#about .skill-detail h4 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  color: var(--a-on-light);
+}
+#about .skill-detail p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #33475f;
+}
+#about .skill-context {
+  margin-top: 24px;
+  padding-top: 0;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #24496b;
+}
+#about .creative-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 0;
+}
+#about .creative-tools span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--a-edge);
+  border-radius: 6px;
+  font-size: 14px;
+  letter-spacing: 0;
+  color: var(--a-muted);
+}
+#about .creative-tools svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 900px) {
+  #about .about-lead,
+  #about .experience-layout,
+  #about .skill-workspace {
+    grid-template-columns: 1fr;
+  }
+  #about .experience-label {
+    position: static;
+  }
+  #about .about-facts {
+    margin-top: -36px;
+  }
+  #about .skill-detail {
+    min-height: 0;
+  }
+  #about .skill-detail-logo {
+    float: none;
+    margin: 0 0 16px;
+  }
+}
+@media (max-width: 640px) {
+  #about .about-facts {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 560px) {
+  #about .experience-timeline article > div {
+    grid-template-columns: 1fr;
+  }
+  #about .experience-timeline .eyebrow {
+    grid-row: auto;
+    padding: 0 0 6px;
+  }
+  #about .skills-heading {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+/* Active tab and focus rings pick up the same warm accent. */
+#about .skill-filters [data-slot='tabs-trigger'] {
+  color: var(--a-faint);
+}
+#about .skill-filters [data-slot='tabs-trigger'][data-active] {
+  color: var(--a-ink);
+}
+#about .skill-filters [data-slot='tabs-trigger']::after {
+  background: var(--a-accent);
+}
+#about :is(a, button):focus-visible {
+  outline-color: var(--a-accent);
 }
