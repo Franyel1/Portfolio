@@ -1117,7 +1117,7 @@ html:has(.motion-paused) {
   opacity: 1;
 }
 .sb-sakura {
-  --bloom: linear-gradient(to top, #4f7a45 0 22%, #c2577e 40%, #f19bbb 70%, #fbd0dd);
+  --bloom: linear-gradient(to top, #6b4a35 0 22%, #c2577e 40%, #f19bbb 70%, #fbd0dd);
   --src: url('/projects/drawing-selected/sakura.svg');
   --gap: 9.2%;
   width: clamp(84px, 12vw, 168px);
