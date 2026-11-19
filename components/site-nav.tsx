@@ -13,14 +13,14 @@ import {
 
 const navItems = [
   {
-    label: 'Projects',
-    href: '/#glass',
-    active: (current: string) => current === 'glass',
-  },
-  {
     label: 'Library',
     href: '/#canvas',
     active: (current: string) => current === 'canvas',
+  },
+  {
+    label: 'Projects',
+    href: '/#glass',
+    active: (current: string) => current === 'glass',
   },
   {
     label: 'About',
